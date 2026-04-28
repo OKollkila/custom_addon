@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="employee_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.inherit.employee.insurance</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="55"/>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+        <!-- <xpath expr="//div[@data-key='hr']" position="inside"> -->
+       <xpath expr="//app[@name='hr']//block[@name='work_organization_setting_container']" position="after">
+           <h2>Employee Insurance Expiry Reminder Days</h2>
+              <div class="row mt16 o_settings_container" name="purchase_setting_container">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <label for="employee_insurance_expire_days"/>
+                        <field name="employee_insurance_expire_days"/>
+
+                    </div>
+                         <div class="content-group">
+                           <div id="employee_insurance_expire_days"/>
+                      </div>
+                    </div>
+            </div>
+        </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+                      

@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem name="Ticket Types" id="menu_helpdesk_ticket_type" parent="helpdesk.helpdesk_menu_config" action="action_helpdesk_ticket_type"/>
+    </data>
+</odoo>

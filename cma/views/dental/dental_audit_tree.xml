@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <record id="view_dental_audit_tree" model="ir.ui.view">
+            <field name="name">dental_audit.tree</field>
+            <field name="model">clinizone.dental_audit</field>
+            <field name="arch" type="xml">
+                <list string="Dental Audit">
+                    <field name="treatment_doctor" optional="show"/>
+                    <field name="mdr" optional="show"/>
+                    <field name="patient_name" optional="show"/>
+                    <field name="mobile" optional="show"/>
+                    <field name="ortho" optional="show"/>
+                    <field name="bleaching" optional="show"/>
+                    <field name="scaling" optional="show"/>
+                    <field name="cf" optional="show"/>
+                    <field name="fixed" optional="show"/>
+                    <field name="rct" optional="show"/>
+                    <field name="rerct" optional="show"/>
+                    <field name="pedo" optional="show"/>
+                    <field name="ex" optional="show"/>
+                    <field name="surgical_ex" optional="show"/>
+                    <field name="surgery" optional="show"/>
+                    <field name="impaction" optional="show"/>
+                    <field name="apicectomy" optional="show"/>
+                    <field name="gingivectomy" optional="show"/>
+                    <field name="cr_lenthening" optional="show"/>
+                    <field name="denture" optional="show"/>
+                    <field name="implant" optional="show"/>
+                    <field name="ga" optional="show"/>
+                    <field name="perio" optional="show"/>
+                    <field name="x_ray" optional="show"/>
+                    <field name="tmj" optional="show"/>
+                    <field name="night_guard" optional="show"/>
+                    <field name="fixed2" optional="show"/>
+                    <field name="implant2" optional="show"/>
+                    <field name="maxillofacial" optional="show"/>
+                    <field name="next_visit" optional="show"/>
+                    <field name="branch_id" optional="show"/>
+                    <field name="prime_care_branch_id" optional="show"/>
+                    <field name="clinic" optional="show"/>
+                    <field name="notes" optional="show"/>
+                    <field name="lead_source" optional="show"/>
+                    <field name="campaign" optional="show"/>
+                    <field name="lead_id" optional="show"/>
+                    <field name="create_date" optional="show"/>
+                    <field name="create_uid" optional="show"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

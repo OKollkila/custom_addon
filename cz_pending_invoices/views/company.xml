@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="form_company" model="ir.ui.view">
+            <field name="name">Prime Care Missed Invoice</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page string="Prime Care Missed Invoices" name="prime_care_pending_invoices">
+                        <group>
+                            <field name="prime_care_pending_invoice_login_url"/>
+                            <field name="prime_care_pending_invoice_url"/>
+                            <field name="prime_care_pending_invoice_username"/>
+                            <field name="prime_care_pending_invoice_password"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

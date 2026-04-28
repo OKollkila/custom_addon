@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_configuration" name="Configuration" parent="survey.menu_surveys" sequence="999"/>
+    </data>
+</odoo>

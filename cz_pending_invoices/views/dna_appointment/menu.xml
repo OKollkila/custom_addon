@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_dna_appointment"
+            name="DNA Appointments"
+            action="action_dna_appointment"
+            parent="crm.crm_menu_root"
+            sequence="22"/>
+    </data>
+</odoo>
+

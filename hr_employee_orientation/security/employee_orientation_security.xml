@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="employee_orientation_checklist" model="ir.rule">
+            <field name="name">Employee Checklist</field>
+            <field name="model_id" ref="model_hr_orientation_checklist"/>
+            <field name="domain_force">[('responsible_user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        
+        <record id="hr_officer_orientation_checklist" model="ir.rule">
+            <field name="name">Officer Orientation Checklist</field>
+            <field name="model_id" ref="model_hr_orientation_checklist"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+        
+        <record id="employee_orientation_id" model="ir.rule">
+            <field name="name">Employee Orientation</field>
+            <field name="model_id" ref="model_hr_orientation"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        
+        <record id="hr_officer_employee_orientation" model="ir.rule">
+            <field name="name">Officer Orientation</field>
+            <field name="model_id" ref="model_hr_orientation"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <!--Multi Company Record rules-->
+
+        <record model="ir.rule" id="custom_hr_orientation_comp_rule">
+            <field name="name">Hr Orienation multi-company</field>
+            <field name="model_id" ref="model_hr_orientation"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="custom_hr_orientation_checklist_comp_rule">
+            <field name="name">Hr Orienation Checklist multi-company</field>
+            <field name="model_id" ref="model_hr_orientation_checklist"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+</odoo>

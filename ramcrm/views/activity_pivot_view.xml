@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_activity_pivot" model="ir.ui.view">
+            <field name="name">mail.activity</field>
+            <field name="model">mail.activity</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="write_date" type="row"/>
+                    <field name="call_result" type="col"/>
+                </pivot>
+            </field>
+        </record>
+    </data>
+</odoo>

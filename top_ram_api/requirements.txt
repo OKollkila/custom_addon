@@ -1,0 +1,3 @@
+# Python dependencies for TOP RAM API Integration module
+requests>=2.31.0
+

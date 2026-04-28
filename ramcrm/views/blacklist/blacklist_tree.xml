@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_blacklist_tree" model="ir.ui.view">
+            <field name="name">blacklist.tree</field>
+            <field name="model">clinizone.blacklist</field>
+            <field name="arch" type="xml">
+                <list string="Blacklist" editable="top">
+                    <field name="phone"/>
+                    <field name="blacklist_reason"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

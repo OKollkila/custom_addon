@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_top_goinfinito_config_manager,top.goinfinito.config.manager,model_top_goinfinito_config,base.group_system,1,1,1,1
+access_top_goinfinito_config_user,top.goinfinito.config.user,model_top_goinfinito_config,base.group_user,1,0,0,0
+access_top_goinfinito_template_manager,top.goinfinito.template.manager,model_top_goinfinito_template,base.group_system,1,1,1,1
+access_top_goinfinito_template_user,top.goinfinito.template.user,model_top_goinfinito_template,base.group_user,1,0,0,0
+

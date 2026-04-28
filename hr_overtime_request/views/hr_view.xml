@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_employee_form_inherit_overtime" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.overtime</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[3]" position="after">
+                    <page string="Overtime">
+                        <!-- <field name="overtime_ids"/> -->
+                        <field name="custom_emp_overtime_ids"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

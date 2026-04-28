@@ -1,0 +1,12 @@
+<odoo>
+    <record id="ir_cron_sync_his_mobile_appointments" model="ir.cron">
+        <field name="name">Sync HIS Mobile Appointments (Daily)</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_fetch_mobile_appointments()</field>
+        <field name="active">True</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now().replace(hour=2,minute=0,second=0,microsecond=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+    </record>
+</odoo>

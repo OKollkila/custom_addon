@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="template_stats2_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <h2>
+                                <strong>Leads Analysis</strong>
+                            </h2>
+                        </div>
+                        <div>
+                            <table style="margin: 15px;">
+                                <tr>
+                                    <td style="width: 200px; font-weight:bold; font-size:14px">Start Date</td>
+                                    <td style="width: 250px;" class="text-left"><span t-esc="from_date"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 200px; font-weight:bold; font-size:14px">End Date</td>
+                                    <td style="width: 250px;" class="text-left"><span t-esc="to_date"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <table class="table table-bordered" style="font-size: 11px; text-align: center;">
+                                <thead>
+                                    <tr style="background: #cccccc;">
+                                        <td>City</td>
+                                        <t t-foreach="lead_sources" t-as="s">
+                                            <td><span t-esc="s"/></td>
+                                        </t>
+                                        <td>Total</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="cities" t-as="c">
+                                        <tr>
+                                            <td style="background: #cccccc;"><span t-esc="c"/></td>
+                                            <t t-foreach="lead_sources" t-as="s">
+                                                <td t-if="c in details and s in details[c]">
+                                                    <t t-esc="details[c][s]"/>
+                                                </td>
+                                                <td t-else="">  </td>
+                                            </t>
+                                            <td style="background: #eeeeee; font-weight: bold;"><span t-esc="row_sums[c]"/></td>
+                                        </tr>
+                                    </t>
+                                    <tr style="font-weight:bold;">
+                                        <td style="background: #cccccc;">Total</td>
+                                        <t t-foreach="lead_sources" t-as="s">
+                                            <td style="background: #eeeeee;"><span t-esc="column_sums[s]"/></td>
+                                        </t>
+                                        <td style="background: #eeeeee; font-weight: bold;" ><span t-esc="total_sum"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+    </template>
+</odoo>

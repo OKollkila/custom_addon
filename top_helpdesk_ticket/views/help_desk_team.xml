@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="custom_helpdesk_ticket_view_form" model="ir.ui.view">
+            <field name="name">custom.helpdesk.ticket.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email_cc']" position="after">
+                    <field name="follow_up"/>
+                </xpath>
+
+
+
+               <xpath expr="//notebook" position="inside">
+
+
+                <page string="Creation Note">
+                    <field name="creation_note"
+                           widget="text"
+                            options="{'collaborative': true}"
+                           placeholder="Add creation note..."
+                           nolabel="1"/>
+                </page>
+
+               <field name="display_closing_note" invisible="1"/>
+
+             <page string="Closing Note" name="closing_note" invisible="not display_closing_note">
+                <field name="closing_note"
+                       widget="text"
+                       options="{'collaborative': true}"
+                       placeholder="Add closing note..."
+                       nolabel="1"/>
+             </page>
+
+            </xpath>
+
+
+            </field>
+        </record>
+    </data>
+</odoo>

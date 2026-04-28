@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record model="res.company" id="ramcrm.company_RAM">
+            <field name="prime_care_pending_invoice_login_url">http://15.184.10.121:8080/HISAdmin/api/auth/login</field>
+            <field name="prime_care_pending_invoice_url">http://15.184.10.121:8080/HISAdmin/api/invoice/findRejectedServicesByDateAndBranch</field>
+            <field name="prime_care_pending_invoice_username">clinizone</field>
+            <field name="prime_care_pending_invoice_password">Clinizone@123</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,21 @@
+id,name
+status_untouched,Untouched
+status_booked,Booked
+status_no_answer,No Answer
+status_call_again,Call Again
+status_out_of_service,Out of Service
+status_switched_off,Switched Off
+status_rescheduled,Rescheduled
+status_busy,Busy
+status_inquiry,Inquiry
+status_waiting_list,Waiting List
+status_satisfied,Satisfied
+status_lost_already_booked,"Lost, Already Booked"
+status_lost_not_interested,"Lost, Not Interested"
+status_lost_wrong_number,"Lost, Wrong Number"
+status_lost_duplicated,"Lost, Duplicated"
+status_lost_visited,"Lost, Visited"
+status_lost_hang_up_the_phone,"Lost, Hang up the phone"
+status_lost_complaint,"Lost, Complaint"
+status_lost_will_call_back,"Lost, Will call back"
+status_lost_price_issue,"Lost, Price issue"

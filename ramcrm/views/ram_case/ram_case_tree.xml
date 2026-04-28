@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="helpdesk_tickets_view_tree" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.tree.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="case_time"/>
+                    <field name="create_date" optional="show"/>
+                    <field name="create_uid" optional="show"/>
+                    <field name="case_no" optional="show"/>
+                    <field name="case_source_id" optional="hide"/>
+                    <field name="reporter_relation_with_patient"/>
+                    <field name="partner_name"/>
+                    <field name="patient_national_id" optional="hide"/>
+                    <field name="reporter_name"/>
+                    <field name="medical_file_no" optional="hide"/>
+                    <field name="partner_phone"/>
+                    <field name="partner_email" optional="hide"/>
+                    <field name="treating_physician_name" optional="hide"/>
+                    <field name="case_time" optional="hide"/>
+                    <field name="branch_id"/>
+                    <field name="section"/>
+                    <field name="ticket_type_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,86 @@
+<openerp>
+<data>
+    <!-- <report
+        id="visitor_process_report"
+        model="hr.visitor"
+        string="Visitor Report"
+        name="hr_visitor.visitor_report_view" 
+        file="hr_visitor.visitor_report_view"
+        report_type="qweb-pdf" /> -->
+
+    <record id="visitor_process_report" model="ir.actions.report">
+            <field name="name">Visitor Report</field>
+            <field name="model">hr.visitor</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_visitor.visitor_report_view</field>
+            <field name="report_file">hr_visitor.visitor_report_view</field>
+            <field name="binding_model_id" ref="model_hr_visitor"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    <template id="visitor_report_view">
+        <t t-call="web.html_container">  <!-- odoo9 <t t-call="report.html_container">-->
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div class="well">
+                        <h1 class="text-center">Visitor Pass</h1>
+                        <p><h2><span t-field="doc.name"/> - <span t-field="doc.state"/></h2></p><br/>
+                                <table class="table .table-striped">
+                                        <tr>
+                                            <td colspan="4"><h4><b>Visitor Information</b></h4></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Visitor Name</strong></td>
+                                            <td><span t-field="doc.visitor_name"/></td>
+                                            <td><strong>Visitor Company</strong></td>
+                                            <td><span t-field="doc.visitor_company_id"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Phone/Mobile</strong></td>
+                                            <td><span t-field="doc.mobile_number"/></td>
+                                            <td><strong>Email</strong></td>
+                                            <td><span t-field="doc.email"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Reason</strong></td>
+                                            <td colspan="3"><span t-field="doc.purpose"/></td>
+                                        </tr>
+                                        </table>
+                                        <table class="table .table-striped">
+                                        <tr>
+                                            <td colspan="2"><h4><b>In Out Detail</b></h4></td>
+                                            <td colspan="2"><h4><b>Contact Information</b></h4></td>
+                                        </tr>
+                                            <tr>
+                                            <td><strong>Date Time In</strong></td>
+                                            <td><span t-field="doc.in_datetime"/></td>
+                                            <td><strong>Employee</strong></td>
+                                            <td><span t-field="doc.partner_id"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Date Time Out</strong></td>
+                                            <td><span t-field="doc.out_datetime"/></td>
+                                            <td><strong>Department</strong></td>
+                                            <td><span t-field="doc.department_id"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><strong>Created By</strong></td>
+                                            <td><span t-field="doc.user_id"/></td>
+                                        </tr>
+                                    </table>
+                                
+                                <div class="text-right">
+                                        <p><strong>Date :</strong>____/_____/______</p>
+                                        <p><strong>Signature :</strong>___________</p>
+                                </div>
+                                </div>
+                   </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</data>
+</openerp>

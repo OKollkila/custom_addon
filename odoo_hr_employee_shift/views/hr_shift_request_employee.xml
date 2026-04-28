@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="edit_project_inherit_employee" model="ir.ui.view">
+            <field name="name">hr.request.shift</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <data>
+                  <xpath expr="//div[@name='button_box']" position="inside">
+                        <button class="oe_inline oe_stat_button" type="object" name="action_button_hr" 
+                            icon="fa-user" string="Shift Requests" >
+                         </button>
+                       
+                    </xpath>
+                </data>
+            </field>
+        </record> 
+    </data>
+</odoo>      
+
+
+
+
+
+
+
+

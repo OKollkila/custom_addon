@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="list_survey_team" model="ir.ui.view">
+            <field name="name">survey.team.list</field>
+            <field name="model">survey.team</field>
+            <field name="arch" type="xml">
+                <list string="survey.team.list">
+                    <field name="create_date"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

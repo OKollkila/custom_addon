@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_department_form" model="ir.ui.view">
+            <field name="name">department.form</field>
+            <field name="model">clinizone.department</field>
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <field name="name"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

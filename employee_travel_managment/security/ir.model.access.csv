@@ -1,0 +1,7 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+employee_travel_request_employee,employee_request,employee_travel_managment.model_employee_travel_request,base.group_user,1,1,1,1
+employee_travel_expense_employee,employee_expenses,employee_travel_managment.model_travel_expense_line,base.group_user,1,1,1,1
+employee_travel_advance_employee,employee_advance_payment,employee_travel_managment.model_travel_advance_payment,base.group_user,1,1,1,1
+employee_travel_request_officer,officer_request,employee_travel_managment.model_employee_travel_request,hr.group_hr_user,1,1,1,1
+employee_travel_expense_officer,officer_expenses,employee_travel_managment.model_travel_expense_line,hr.group_hr_user,1,1,1,1
+employee_travel_advance_officer,officer_advance_payment,employee_travel_managment.model_travel_advance_payment,hr.group_hr_user,1,1,1,1

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="orientation_seq" model="ir.sequence">
+            <field name="name">hr.orientation</field>
+            <field name="code">hr.orientation</field>
+            <field name="prefix">EMPLOYEE/ORIENTATION/</field>
+            <field name="padding">4</field>
+           <!-- <field name="orientation_number" eval="False"/>-->
+        </record>
+    </data>
+</odoo>

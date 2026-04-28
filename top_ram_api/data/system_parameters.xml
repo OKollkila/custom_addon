@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Default Bearer Token for RAM Prime Care API (outgoing calls) -->
+        <record id="ram_api_bearer_token" model="ir.config_parameter">
+            <field name="key">top_ram_api.bearer_token</field>
+            <field name="value">eyJraWQiOiJqd3QudGVjaG5hcy5rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMTE0Nzc5MzUgI2NsaW5pem9uZSIsInVwbiI6IjExMTQ3NzkzNSAjY2xpbml6b25lIiwiYXV0aF90aW1lIjoxNzQwMDUxMzMxLCJpc3MiOiJ0ZWNobmFzIiwiZ3JvdXBzIjpbXSwiZXhwIjoxNzQwMDY5MzMxMjA2LCJpYXQiOjE3NDAwNTEzMzF9.SDXYax1pqKcYqxWqN1yxY6MCBAQo2dqqI44Uc3S-R-pKnUEKkGdZkGT7-u1eUKPn_SEcIClasc_8bHqwDvCw390NGKTZaOcatFXey6NenfRHfNLk8wCkToCfTy1PxqlgutwBDwcA8dpJxsaECqH-DZagqo97N0ZwgrA27CQhizCQe-wvy9lSdx9ZVmSYVsOdsvRUXy-PTCkRPhhVatBpyELB2wRlID-78HO8YwcHsyXOtiXg727DvvqnMjRqktpSP-Dper1nOFqIbAqoDrcQ-nPcrzF6YBAT8g8AazZocOL7TPIDp4k2WKPYZ0XORjUBbm4Fsb8AcVX98mXgfqGaEQ</field>
+        </record>
+
+    </data>
+
+    <!-- API Access Token - noupdate=0 ensures it gets created on module install/upgrade -->
+    <data noupdate="0">
+        <!-- API Access Token for incoming API requests (Bearer token authentication) -->
+        <!-- IMPORTANT: Change this value in System Parameters after installation! -->
+        <record id="ram_api_access_token" model="ir.config_parameter">
+            <field name="key">top_ram_api.api_access_token</field>
+            <field name="value">ram_api_default_token_change_me_2026</field>
+        </record>
+    </data>
+</odoo>
+

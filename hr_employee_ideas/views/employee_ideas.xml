@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <record model="ir.ui.view" id="employee_ideas_form_view">
+            <field name="name">Ideas</field>
+            <field name="model">hr.ideas</field>
+            <field name="arch" type="xml">
+                <form string="Ideas Form">
+                    <header>
+                        <!-- <button string="Post Idea for Voting" type="object" name="action_voting_post"
+                                states="draft" class="oe_highlight"/>
+                        <button string="Give Vote" type="action" name="%(launch_hr_employee_ideas_wizard)d"
+                                states="open" class="oe_highlight"/>
+                        <button string="Approve" type="object" name="action_open"
+                                states="approval_pending" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button string="Reject" type="object" name="action_rejected"
+                                states="approval_pending" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button string="Close" type="object" name="action_cancel"
+                                states="open" class="oe_highlight"/> -->
+                        <button string="Post Idea for Voting" type="object" name="action_voting_post" invisible="state != 'draft'" class="oe_highlight"/>
+                        <button string="Give Vote" type="action" name="%(launch_hr_employee_ideas_wizard)d" invisible="state != 'open'" class="oe_highlight"/>
+                        <button string="Approve" type="object" name="action_open" invisible="state != 'approval_pending'" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button string="Reject" type="object" name="action_rejected" invisible="state != 'approval_pending'" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button string="Close" type="object" name="action_cancel" invisible="state != 'open'" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft, approval_pending, open, cancel"/>
+                    </header>
+                    <sheet>
+                       <!--  <div name="oe_button_box" class="oe_button_box">
+                            <button class="oe_stat_button" name="action_view_votes"
+                                    type="object" icon="fa-archive" attrs="{'invisible': [('state', '=', 'draft')]}">
+                            <field string="Votes" name="total_vote" widget="statinfo" />
+                            </button>
+                        </div> -->
+                        <div class="oe_button_box" name="button_box">
+                            <!-- <button name="action_view_votes" class="oe_stat_button" icon="fa-archive" type="object" attrs="{'invisible': [('state', '=', 'draft')]}"> -->
+                            <button name="action_view_votes" class="oe_stat_button" icon="fa-archive" type="object" invisible="state == 'draft'">
+                            <field string="Votes" name="total_vote" widget="statinfo" />
+                        </button>
+                    </div>
+                        <h1><field name="name" readonly="1"/></h1>
+                        <group>
+                            <group>
+                        <!-- <label for="title"/> <h1><field name="title" placeholder="Idea Name..." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}"/></h1> -->
+                        <label for="title"/> <h1><field name="title" placeholder="Idea Name..." readonly="state in ['approval_pending','open','cancel','rejected']"/></h1>
+
+                        </group>
+                        
+                        </group>
+                        <group>
+                            <group>
+                                 <!-- <field name="employee_id" placeholder="Select Employee.." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}"/>
+                                 <field name="created_date" placeholder="Created On..." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}"/>
+                                 <field name="company_id" placeholder="Company Name..." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}" readonly="1" groups="base.group_multi_company"/> -->
+                                <field name="employee_id" placeholder="Select Employee.." readonly="state in ['approval_pending','open','cancel','rejected']"/>
+                                <field name="created_date" placeholder="Created On..." readonly="state in ['approval_pending','open','cancel','rejected']"/>
+                                <field name="company_id" placeholder="Company Name..." readonly="state in ['approval_pending','open','cancel','rejected']" groups="base.group_multi_company"/>
+                             </group>
+                            <group>
+                                <!-- <field name="department_id" placeholder="Department..." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}"/>
+                                <field name="dead_line" placeholder="Deadline..." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}"/>
+                                <field name="idea_type_id" attrs="{'readonly':[('state','in',['open','cancel','rejected'])]}" /> -->
+                                <field name="department_id" placeholder="Department..." readonly="state in ['approval_pending','open','cancel','rejected']"/>
+                                <field name="dead_line" placeholder="Deadline..." readonly="state in ['approval_pending','open','cancel','rejected']"/>
+                                <field name="idea_type_id" readonly="state in ['open','cancel','rejected']"/>
+                            </group>
+                            <notebook colspan="4">
+                                <page string="Details">
+                                    <!-- <field name="detail" placeholder="Enter Idea details..." attrs="{'readonly':[('state','in',['approval_pending','open','cancel','rejected'])]}"/> -->
+                                    <field name="detail" placeholder="Enter Idea details..." readonly="state in ['approval_pending','open','cancel','rejected']"/>
+                                </page>
+                                 <page string="Employee Votes">
+                                    <!-- <field name="ideas_review_ids" attrs="{'readonly':[('state','in',['draft','approval_pending','open','cancel'])]}"> -->
+                                    <field name="ideas_review_ids" readonly="state in ['draft','approval_pending','open','cancel']">
+                                    <list string="Review" editable="bottom">
+                                        <field name="employee_id"/>
+                                        <field name="department_id"/>
+                                        <field name="comments"/>
+                                        <field name="rating"/>
+                                    </list>
+                                    </field>
+                                </page>
+                             </notebook>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="employee_ideas_list" model="ir.ui.view">
+            <field name="name">Ideas</field>
+            <field name="model">hr.ideas</field>
+                <field name="arch" type="xml">
+                    <list string="Employee Ideas">
+                        <field name="name"/>
+                        <field name="title"/>
+                        <field name="employee_id"/>
+                        <field name="department_id"/>
+                        <field name="created_date"/>
+                        <field name="dead_line"/>
+                        <field name="idea_type_id"/>
+                        <field name="company_id"/>
+                        <field name="state"/>
+                        <!--<field name="result"/>-->
+                  </list>
+                </field>
+        </record>
+        
+        <record model="ir.ui.view" id="employee_ideas_search_view">
+            <field name="name">Ideas</field>
+            <field name="model">hr.ideas</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name="title"/>
+                        <field name="employee_id"/>
+                        <field name="department_id"/>
+                        <field name="created_date"/>
+                        <field name="state"/>
+                        <field name="idea_type_id"/>
+                        <field name="dead_line"/>
+                            <group expand="0" string="Group By">
+                                <filter name="by_employee_name" string="Employee"
+                                        context="{'group_by': 'employee_id'}"/>
+                                <filter name="by_department_name" string="Dpartment"
+                                        context="{'group_by': 'department_id'}"/>
+                                <filter name="by_created_date" string="Create Date"
+                                        context="{'group_by': 'created_date'}"/>
+                                <filter name="by_state" string="State"
+                                        context="{'group_by': 'state'}"/>
+                                <filter name="by_idea_type_id" string="Idea Type"
+                                        context="{'group_by': 'idea_type_id'}"/>
+                                 <filter name="by_dead_line" string="End Date"
+                                        context="{'group_by': 'dead_line'}"/>
+                            </group>
+                    </search>
+                </field>
+        </record>
+        <record id="employee_ideas_calender_view" model="ir.ui.view">
+            <field name="name">Ideas</field>
+            <field name="model">hr.ideas</field>
+            <field name="arch" type="xml">
+                <calendar string="Employee Ideas" date_start="created_date" date_stop="dead_line" color="employee_id">
+                    <field name="employee_id"/>
+                    <field name="idea_type_id"/>
+                    <field name="title"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="employe_idea_list_action">
+            <field name="name">Ideas</field>
+            <field name="res_model">hr.ideas</field>
+            <field name="view_mode">list,form,calendar</field>
+        </record>
+        
+        <record model="ir.ui.view" id="employee_ideas_review_form_view">
+            <field name="name">Employee Review</field>
+            <field name="model">employee.idea.review</field>
+            <field name="arch" type="xml">
+                <form string="Ideas Form" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="department_id"/>
+                            <field name="comments"/>
+                            <field name="rating"/>
+                        </group>
+                        <group/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="employee_ideas_review_list" model="ir.ui.view">
+            <field name="name">Employee Ideas</field>
+            <field name="model">employee.idea.review</field>
+                <field name="arch" type="xml">
+                    <list string="Employee Ideas" create="false" edit="false">
+                        <field name="employee_id"/>
+                        <field name="department_id"/>
+                        <field name="comments"/>
+                        <field name="rating"/>
+                  </list>
+                </field>
+        </record>
+        
+        <record model="ir.ui.view" id="idea_type_form_view">
+            <field name="name">Idea Type</field>
+            <field name="model">hr.idea.type</field>
+            <field name="arch" type="xml">
+                <form string="Idea Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="idea_type"/>
+                                <field name="minimum_vote"/>
+                                <field name="maximum_vote"/>
+                                <field name="idea_limit"/>
+                            </group>
+                         <group/>
+                         </group>
+                         <notebook>
+                             <page string="Departments">
+                                 <field name="department_ids"/>
+                             </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="idea_type_list_view">
+            <field name="name">Idea Type</field>
+            <field name="model">hr.idea.type</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="idea_type"/>
+                    <field name="minimum_vote"/>
+                    <field name="maximum_vote"/>
+                    <field name="idea_limit"/>
+                </list>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_employe_idea_review">
+            <field name="name">Employee Ideas</field>
+            <field name="res_model">employee.idea.review</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="idea_type_list_action">
+            <field name="name">Idea Types</field>
+            <field name="res_model">hr.idea.type</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        
+        <menuitem id="main_hr_employee_ideas" name="Ideas"/>
+        <menuitem id="hr_employee_ideas_menu" name="Employee Ideas"
+                  parent="main_hr_employee_ideas"/>
+        <menuitem id="employee_ideas_menu" name="Ideas" parent="hr_employee_ideas_menu"
+                  action="employe_idea_list_action"/>
+        <menuitem id="hr_employee_ideas_configuration" name="Configurations"
+                  parent="main_hr_employee_ideas" groups="hr.group_hr_manager" />
+        <menuitem id="idea_type_menu" name="Idea Types" parent="hr_employee_ideas_configuration"
+                  action="idea_type_list_action" groups="hr.group_hr_manager" />
+    </data>
+</odoo>

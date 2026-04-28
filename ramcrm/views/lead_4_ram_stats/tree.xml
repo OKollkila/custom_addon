@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="view_lead_4_ram_stats_tree" model="ir.ui.view">
+            <field name="name">lead_4_ram_stats.tree</field>
+            <field name="model">clinizone.lead_4_ram_stats</field>
+            <field name="arch" type="xml">
+                <list string="Leads">
+                    <field name="lead_source_id"/>
+                    <field name="campaign"/>
+                    <field name="topic"/>
+                    <field name="city_id"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="service_id"/>
+                    <field name="ads"/>
+                    <field name="stage2"/>
+                    <field name="stage3"/>
+                    <field name="stage4_id"/>
+                    <field name="status_id"/>
+                    <field name="notes"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

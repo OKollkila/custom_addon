@@ -1,0 +1,4 @@
+id,name,prime_care_code,company_id:id,city_id:id,can_be_selected
+br_abu_bakr,Abu Bakr,Abu Bakr,ramcrm.company_RAM,ramcrm.CITY_1,1
+br_dar_ram,Dar Ram,Dar Ram,ramcrm.company_RAM,ramcrm.CITY_1,1
+br_doha_med_complex,Doha Medical Center,Doha Medical Complex,ramcrm.company_DOHA,ramcrm.CITY_1,1

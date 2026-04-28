@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_prime_care_branches" name="PrimeCare Branches" parent="menu_dental_setting" action="action_prime_care_branches" sequence="1"/>
+    <menuitem id="menu_prime_care_branches2" name="PrimeCare Branches" parent="menu_medical_setting" action="action_prime_care_branches" sequence="1"/>
+</odoo>

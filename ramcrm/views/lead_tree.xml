@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="view_lead_tree" model="ir.ui.view">
+            <field name="name">lead.tree</field>
+            <field name="model">crm.lead</field>
+            <field name="arch" type="xml">
+                <list string="Leads">
+                    <header>
+                        <button name="%(ramcrm.action_assign_agent_wizard)d" type="action" string="Assign Agent" class="btn btn-warning"/>
+                    </header>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="phone"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="crm_case_tree_view_opportunity" model="ir.ui.view">
+            <field name="name">crm.lead.tree.opportunity</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">18</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list[1]" position="attributes">
+                    <attribute name="decoration-danger">is_phone_blacklisted == True</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(crm.action_lead_mass_mail)d']" position="after">
+                    <button name="%(ramcrm.action_assign_agent_wizard)d" type="action" string="Assign Agent" class="btn btn-warning" groups="ramcrm.group_team_manager"/>
+                </xpath>
+                <xpath expr="//field[@name='message_needaction']" position="after">
+                    <field name="email_from" optional="show"/>
+                    <field name="topic" optional="show"/>
+                    <field name="stage_count"  optional="show" />
+                    <field name="treating_doctor" optional="show"/>
+                    <field name="city" optional="show"/>
+                    <field name="bu" optional="show"/>
+                    <field name="branch_id" optional="show"/>
+                    <field name="speciality" optional="show"/>
+                    <field name="campaign" optional="show"/>
+                    <field name="campaign_activity" optional="show"/>
+                    <field name="notes" optional="show"/>
+                    <field name="lead_source" optional="show"/>
+                    <field name="lead_source_id" optional="show"/>
+                    <field name="ads" optional="show"/>
+                    <field name="ad_set" optional="show"/>
+                    <field name="patient_id" optional="show"/>
+                    <field name="timestamp" optional="show"/>
+                    <field name="created_date" optional="show"/>
+                    <field name="installment" optional="show"/>
+                    <field name="business_category_id" optional="show"/>
+<!-- TODO:                    <field name="lost_reason" optional="show"/>-->
+                    <field name="create_uid" optional="show"/>
+                    <field name="write_date" optional="hide"/>
+                    <field name="write_uid" optional="hide"/>
+                    <field name="is_phone_blacklisted" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

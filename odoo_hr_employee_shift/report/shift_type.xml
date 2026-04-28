@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <report 
+            id="action_report_shift"
+            string="Shift Requests"
+            model="hr.approve.shift" 
+            report_type="qweb-pdf"
+            file="odoo_hr_employee_shift.shift_print_report_id" 
+            name="odoo_hr_employee_shift.shift_print_report_id"
+        /> -->
+
+        <record id="action_report_shift" model="ir.actions.report">
+            <field name="name">Shift Request</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">odoo_hr_employee_shift.shift_print_report_id</field>
+            <field name="report_file">odoo_hr_employee_shift.shift_print_report_id</field>
+            <field name="binding_model_id" ref="model_hr_approve_shift"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="shift_print_report_id">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <t t-call="web.html_container">
+                         <div class="page">
+                            <h3>
+                              <span t-field="doc.name"/>
+                            </h3> <br/>
+                             <h3>
+                              <span t-field="doc.employee_id"/>
+                            </h3> <br/>
+                            <table class="table table-sm table-bordered">
+                               <tr>
+                                   
+                                   
+                                   <td><strong>Shift Type: </strong></td><td><span t-field="doc.type_shift_id" /><br/></td>
+                                  
+                                   <td><strong>Shift Responsible :</strong> </td><td><span t-field="doc.shift_responsible_user_id"/></td>
+
+                               </tr>
+                               
+                                <tr>
+                                   <td><strong>Manager :</strong> </td><td><span t-field="doc.manager_id"/></td>
+                                   
+                                   <td><strong>Department  : </strong></td>
+                                   <td><span t-field="doc.department_id"/></td>
+
+                                </tr>
+
+                                 <tr>
+                                   <td><strong>Start Date: </strong></td><td><span t-field="doc.date_from"/></td>
+                                   <td><strong>End Date: </strong></td><td><span t-field="doc.date_to"/></td>
+                                </tr>
+                                
+                                <tr>
+                                  <td><strong>Company: </strong></td><td><span t-field="doc.company_id" /><br/></td>
+                                <td><strong>Status: </strong></td><td><span t-field="doc.state" /><br/></td>
+
+                                </tr>
+                            </table>
+                                <table>
+                                     <h3>Description : </h3>
+                                     <td><span t-field="doc.description" /><br/></td>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+               </t>
+        </template>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+
+from odoo import api, fields, models, _
+
+class HrExpense(models.Model):
+    _inherit = "hr.expense"
+    
+    advance_expense_id = fields.Many2one('advance.expense.line', string='Expense Advance', copy=False)
+    advance_amount = fields.Float(string='Advance Amount', readonly=True, store=True)
+    advance_currency_id = fields.Many2one('res.currency', string='Expense Advance Currency', related='advance_expense_id.currency_id')
+    
+    @api.multi
+    def submit_expenses(self): # Override Odoo method.
+        result = super(HrExpense, self).submit_expenses()
+        for rec in self:
+            if rec.advance_expense_id:
+                rec.advance_expense_id.reambursment = True
+        return result
+        
+    @api.onchange('advance_expense_id', 'advance_expense_id.total_amount')
+    def _onchange_advance_expense_id(self):
+        for rec in self:
+            rec.advance_amount = rec.advance_expense_id.total_amount
+                    
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

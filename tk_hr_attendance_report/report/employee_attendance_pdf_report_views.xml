@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="emp_attendance_report_template">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <table class="table table-borderless"
+                           style="margin: 0 auto; width: 50%; border: none;">
+                        <tr style="height: 25px; ">
+                            <td colspan="3"
+                                style="text-align: center; font-size: 22px; vertical-align: middle;background-color: #ebebeb;">
+                                Employees Attendance Report
+                            </td>
+                        </tr>
+                    </table>
+                    <t t-set="prev_employee_name" t-value="None"/>
+                    <t t-set="first_employee" t-value="True"/>
+                    <t t-foreach="employee_data_list" t-as="emp_data" t-index="index">
+                        <div style="text-align: center; margin: 20px; margin-top: 30px;">
+                            <!-- Page Break if it's a new employee -->
+                            <t t-if="emp_data['attendance_data'] or emp_data['leaves_data']">
+                                <t t-if="not first_employee and  prev_employee_name != emp_data['employee_name']">
+                                    <div style="page-break-before: always;">
+                                    </div>
+                                </t>
+                                <table style="width: 100%; text-align: left; border: 0; border-collapse: collapse;"
+                                       class="table table-borderless">
+                                    <tr>
+                                        <td style="padding: 9px; font-size: 18px;">
+                                            <div>
+                                                <i class="fa fa-user-o" style="margin-right">
+                                                </i>
+                                                <strong>Name :</strong>
+                                                <t t-esc="emp_data['employee_name']"/>
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-calendar" style="margin-right">
+                                                </i>
+                                                <strong>Time Period :</strong>
+                                                <t t-esc="from_date"/>
+                                                ->
+                                                <t t-esc="to_date"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <!-- Attendance Table -->
+                            <t t-if="emp_data['attendance_data']">
+                                <div style="font-size: 18px; color: black; margin-bottom: 8px; margin-top: 8px; text-align: left;">
+                                    <i class="fa fa-clock-o">
+                                    </i>
+                                    <strong>Attendance</strong>
+                                </div>
+                                <table style="width: 100%; table-layout: auto; margin: 0px auto;">
+                                    <tr style=" height: 25px;">
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Check In
+                                        </td>
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Check Out
+                                        </td>
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Work Duration
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="emp_data['attendance_data']" t-as="attendance">
+                                        <tr>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="attendance['check_in']"/>
+                                            </td>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="attendance['check_out']"/>
+                                            </td>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="attendance['worked_hours']"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr style=" height: 25px;">
+                                        <td colspan="2"
+                                            style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Total Working Hours
+                                        </td>
+                                        <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                            <t t-esc="emp_data['total_duration_str']"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+
+                            <!-- Leave Table -->
+                            <t t-if="emp_data['leaves_data']">
+                                <div style="font-size: 18px; color: black; margin-bottom: 8px; margin-top: 8px; text-align: left;">
+                                    <i class="fa fa-sign-out">
+                                    </i>
+                                    <strong>Leaves</strong>
+                                </div>
+                                <table style="width: 100%;margin: 0px auto;">
+                                    <tr style="height: 25px;">
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Type
+                                        </td>
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Start Date
+                                        </td>
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            End Date
+                                        </td>
+                                        <td style="text-align: center; font-size: 17px; vertical-align: middle; width: 10%; border: 1px solid black;">
+                                            Reason
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="emp_data['leaves_data']" t-as="leaves">
+                                        <tr>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="leaves['holiday_status_id']"/>
+                                            </td>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="leaves['request_date_from']"/>
+                                            </td>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="leaves['request_date_to']"/>
+                                            </td>
+                                            <td style="text-align: center; font-size: 14px; border: 1px solid black;height: 25px;vertical-align: middle;">
+                                                <t t-esc="leaves['name']"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </t>
+                        </div>
+                        <!-- Update prev_employee_name for next iteration -->
+                        <t t-set="prev_employee_name" t-value="emp_data['employee_name']"/>
+                        <t t-set="first_employee" t-value="False"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="employee_attendance_report_action" model="ir.actions.report">
+            <field name="name">Employee Attendance Report</field>
+            <field name="model">employee.attendance.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tk_hr_attendance_report.emp_attendance_report_template</field>
+            <field name="report_file">tk_hr_attendance_report.emp_attendance_report_template</field>
+            <field name="binding_model_id" ref="model_employee_attendance_report"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

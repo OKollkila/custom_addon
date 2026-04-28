@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_pending_referral"
+            name="Pending Referrals"
+            action="action_pending_referral"
+            parent="crm.crm_menu_root"
+            sequence="21"/>
+    </data>
+</odoo>
+

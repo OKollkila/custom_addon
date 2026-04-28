@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="edit_ot_type_tree">
+            <field name="name">shift.type</field>
+            <field name="model">shift.type</field>
+            <field name="arch" type="xml">
+                <list string="Shift Type">
+                    <field name="name"/>
+                    <field name="time_start" widget="float_time"/> 
+                    <field name="time_end" widget="float_time"/> 
+                </list>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="edit_ot_type_form">
+            <field name="name">shift.type.form</field>
+            <field name="model">shift.type</field>
+            <field name="arch" type="xml">
+                <form string="shift">
+                    <sheet>
+                        <div class="oe_title">
+                            <h3>
+                              <field name="name" placeholder="name"/>
+                            </h3>
+                        </div>
+                        <group>
+                            <group>
+                               <field name="time_start" widget="float_time"/> 
+                                <field name="time_end" widget="float_time"/>
+                            </group>
+                        </group>
+                        <group string="Internal Notes">
+                              <field name="internal_notes" placeholder="Internal notes" colspan="2" nolabel="1" /> 
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="request_shift_type_action_ot">
+            <field name="name">Shift Types</field>
+            <field name="res_model">shift.type</field>
+            <field name="view_mode">list,form</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="search_view_id" ref="edit_ot_type_tree" />
+        </record>
+    </data>
+</odoo>        

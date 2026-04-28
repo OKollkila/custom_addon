@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_root" name="Manage Local Users" groups="group_local_users_admin" sequence="9999"/>
+    <menuitem id="menu_users" name="Users" parent="menu_root" action="action_local_user" sequence="1"/>
+</odoo>

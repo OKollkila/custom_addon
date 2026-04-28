@@ -1,0 +1,16 @@
+<odoo>
+    <template id="portal_user_home" name="Portal User Home">
+        <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="/ramcrm/static/generated/main.css" />
+                <title>Agent Portal Access</title>
+            </head>
+            <body>
+                <div id="root"/>
+                <script src="/ramcrm/static/generated/bundle.min.js"/>
+            </body>
+        </html>
+    </template>
+</odoo>

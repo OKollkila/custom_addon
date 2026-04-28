@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="rule_helpdesk_ticket_refund_processor_assigned" model="ir.rule">
+            <field name="name">Refund Processor: See My Assigned Refunds</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="groups" eval="[(4, ref('top_ram_api.group_helpdesk_refund_processor'))]"/>
+            <field name="domain_force">[('refund_processor_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+
+    <function model="helpdesk.ticket" name="_update_old_refund_tickets"/>
+</odoo>

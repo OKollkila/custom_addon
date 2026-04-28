@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem name="Survey Teams" id="menu_survey_team" parent="menu_configuration" action="action_survey_team"/>
+    </data>
+</odoo>

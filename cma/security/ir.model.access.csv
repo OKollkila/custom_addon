@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_audit,access_medical_audit,model_clinizone_medical_audit,,1,1,1,0
+access_medical_audit_manager,access_medical_audit_manager,model_clinizone_medical_audit,group_medical_audit_manager,1,1,1,1
+access_dental_audit,access_dental_audit,model_clinizone_dental_audit,,1,1,1,0
+access_prime_care_branch,access_prime_care_branch,model_clinizone_prime_care_branch,,1,1,1,0
+access_dental_audit_manager,access_dental_audit_manager,model_clinizone_dental_audit,group_dental_audit_manager,1,1,1,1
+access_team,access_team,model_clinizone_team,,1,1,1,0

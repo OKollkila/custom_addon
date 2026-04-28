@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="menu_blacklist" name="Blacklist" parent="crm.crm_menu_config" action="action_blacklist" sequence="11"/>
+</odoo>

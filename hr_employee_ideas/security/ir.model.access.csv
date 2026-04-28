@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+hr_employee_ideas,hr_employee_idea,model_hr_ideas,base.group_user,1,1,1,0
+employee_ideas,employee_ideas,model_employee_idea_review,base.group_user,1,1,1,0
+employee_ideas_types,employee_idea_type,model_hr_idea_type,base.group_user,1,0,0,0
+manager_ideas_type,manager_idea_type,model_hr_idea_type,hr.group_hr_manager,1,1,1,1
+employee_ideas_comment_wizard,employee_commentwizard,model_ideas_comment,base.group_user,1,1,1,0

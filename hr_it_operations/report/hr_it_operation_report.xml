@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <!-- QWeb Reports -->
+        <!-- <report
+            id="hr_it_operations_report"
+            model="hr.it.operations"
+            menu="True"
+            report_type="qweb-pdf"
+            string="Print Equipment Request"
+            name="hr_it_operations.hr_it_operations_id"
+            file="hr_it_operations.hr_it_operations_id"
+           /> -->
+
+        <record id="hr_it_operations_report" model="ir.actions.report">
+            <field name="name">Print Equipment Request</field>
+            <field name="model">hr.it.operations</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_it_operations.hr_it_operations_id</field>
+            <field name="report_file">hr_it_operations.hr_it_operations_id</field>
+            <field name="binding_model_id" ref="model_hr_it_operations"/>
+            <field name="binding_type">report</field>
+        </record>
+        
+        <template id="hr_it_operations_id">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                    <t t-call="web.html_container">
+                         <div class="page">
+                             <div>
+                                 <h3>
+                                     <span t-field="doc.employee_id.name"/> - 
+                                     <span t-if="doc.state in ['draft','confirm','validate','approve','refuse','stock']"><span t-field="doc.state"/></span>
+                                 </h3>
+                             </div>
+                            <table class="table table-striped">
+                                <tr style="border: 2px solid Lightgrey;">
+                                   <td><strong>Created Date</strong></td>
+                                   <td><span t-field="doc.create_date"/></td>
+                                   <td><strong>Created By</strong></td>
+                                   <td> <span t-field="doc.create_uid.name"/></td>
+                               </tr>
+                                <tr style="border: 2px solid Lightgrey;">
+                                   <td><strong>Modified Date</strong></td>
+                                   <td><span t-field="doc.write_date"/></td>
+                                   <td><strong>Modified By</strong></td>
+                                   <td><span t-field="doc.write_uid.name"/></td>
+                               </tr>
+                                <tr style="border: 2px solid Lightgrey;">
+                                   <td><strong>Validate Date</strong></td>
+                                   <td><span t-field="doc.validated_date"/></td>
+                                   <td><strong>Validate By</strong></td>
+                                   <td><span t-field="doc.validated_by.name"/></td>
+                               </tr>
+                                <tr style="border: 2px solid Lightgrey;">
+                                   <td><strong>Approved Date</strong></td>
+                                   <td><span t-field="doc.approved_date"/></td>
+                                   <td><strong>Approved By</strong></td>
+                                   <td><span t-field="doc.approved_by.name"/></td>
+                               </tr>
+                            </table>
+
+
+                            <h3>Request Equipments</h3>
+                            <table class="table table-striped">
+                                <tr style="border: 2px solid Black;">
+                                   <td><strong>Product</strong> </td>
+                                   <td><strong>Description</strong> </td>
+                                   <td><strong>Quantity</strong></td>
+                                   <td><strong>Unit of Measure</strong></td>
+                               </tr>
+                               <t t-foreach="doc.product_lines" t-as="check">
+                                <tr style="border: 2px solid Black;">
+                                       <td><span t-field="check.product_id.name"/></td>
+                                       <td><span t-field="check.name"/></td>
+                                       <td><span t-field="check.quantity"/></td>
+                                       <td><span t-field="check.product_uom"/></td>
+                                   </tr>
+                               </t>
+                            </table>
+                            <h3>Damage Details</h3>
+                            <table class="table table-striped">
+                               <tr style="border: 2px solid black;">
+                                   <td><strong>Product</strong> </td>
+                                   <td><strong>Unit Price</strong></td>
+                                   <td><strong>Quantity</strong></td>
+                                   <td><strong>Description</strong> </td>
+                               </tr>
+                               <t t-foreach="doc.expense_lines" t-as="line">
+                                       <tr style="border: 2px solid black;">
+                                           <td><span t-field="line.product_id.name"/></td>
+                                           <td><span t-field="line.unit_amount"/></td>
+                                           <td><span t-field="line.quantity"/></td>
+                                           <td><span t-field="line.expense_note"/></td>
+                                       </tr>
+                               </t>
+                            </table>
+                            <t t-if="doc.expense_lines">
+                                <h3>Expenses List</h3>
+                                <table class="table table-responsive">
+                                   <tr style="border: 2px solid black;">
+                                       <td><strong>Date</strong> </td>
+                                       <td><strong>Expense Description</strong></td>
+                                       <td><strong>Employee</strong></td>
+                                       <!-- <td><strong>Analytic Account</strong></td> -->
+                                       <td><strong>Total</strong></td>
+                                       <td><strong>Status</strong></td>
+                                   </tr>
+                                   <t t-foreach="doc.expense_ids" t-as="line">
+                                       <tr style="border: 2px solid black;">
+                                           <td><span t-field="line.date"/></td>
+                                           <td><span t-field="line.name"/></td>
+                                           <td><span t-field="line.employee_id.name"/></td>
+                                           <!-- <td><span t-field="line.analytic_account_id.name"/></td> -->
+                                           <td><span t-field="line.total_amount"/></td>
+                                           <td><span t-field="line.state"/></td>
+                                       </tr>
+                                   </t>
+                                </table>
+                             </t>
+                             <div>
+                                    <strong>Description :</strong><span t-field="doc.description"/>
+                                </div>
+                        </div>
+                      </t>
+                </t>
+               </t>
+        </template>
+    </data>
+</openerp>

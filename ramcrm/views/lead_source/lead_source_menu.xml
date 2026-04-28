@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="menu_lead_sources" name="Lead Sources" parent="crm.crm_menu_config" action="action_lead_sources" sequence="1"/>
+</odoo>

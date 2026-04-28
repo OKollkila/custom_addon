@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+         <record id="ramcrm_activity_report_tree" model="ir.ui.view">
+            <field name="name">crm.activity.report.tree</field>
+            <field name="model">crm.activity.report</field>
+            <field name="arch" type="xml">
+                <list default_order="date desc">
+                    <field name="date"/>
+                    <field name="author_id"/>
+                    <field name="mail_activity_type_id"/>
+                    <field name="body"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="ramcrm_activity_report_search" model="ir.ui.view">
+            <field name="name">crm.activity.report</field>
+            <field name="model">crm.activity.report</field>
+            <field name="arch" type="xml">
+                <search string="Activities Analysis">
+                    <field name="date" string="Done Date"/>
+                    <filter string="Today" name="completion_today" domain="[('date','&lt;',context_today().strftime('%Y-%m-%d 23:59:59')), ('date','&gt;=',context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                    <filter string="Yesterday" name="completion_yesterday" domain="[('date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="ramcrm_activity_report_action" model="ir.actions.act_window">
+            <field name="name">Done Activities</field>
+            <field name="res_model">crm.activity.report</field>
+            <field name="view_mode">list</field>
+            <field name="context">{ 'search_default_completion_today': 1}</field>
+<!--            <field name="search_view_id" ref="ramcrm_activity_report_search"/>-->
+        </record>
+
+        <menuitem id="ramcrm_menu_activity_done" name="Done Activities" parent="crm.crm_menu_root"  action="ramcrm_activity_report_action" sequence="4" groups="ramcrm.group_agent"/>
+
+    </data>
+</odoo>

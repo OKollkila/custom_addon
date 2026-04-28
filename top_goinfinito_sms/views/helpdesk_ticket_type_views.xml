@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 
+    Form view inheritance disabled because correct external ID is unknown/conflicting.
+    Configuration can be done via the List view which is editable.
+    
+    <record id="view_helpdesk_ticket_type_form_inherit_sms" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.form.inherit.sms</field>
+        <field name="model">helpdesk.ticket.type</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[last()]" position="after">
+                <field name="disable_sms"/>
+            </xpath>
+        </field>
+    </record>
+    -->
+
+    <record id="view_helpdesk_ticket_type_tree_inherit_sms" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.tree.inherit.sms</field>
+        <field name="model">helpdesk.ticket.type</field>
+        <field name="inherit_id" ref="ramcrm.list_helpdesk_ticket_type"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="disable_sms" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>

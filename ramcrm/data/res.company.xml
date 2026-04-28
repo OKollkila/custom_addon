@@ -1,0 +1,10 @@
+<odoo>
+    <data noupdate="1">
+        <record model="res.company" id="company_RAM">
+            <field name="name">Ram</field>
+        </record>
+        <record model="res.company" id="company_DOHA">
+            <field name="name">Doha</field>
+        </record>
+    </data>
+</odoo>

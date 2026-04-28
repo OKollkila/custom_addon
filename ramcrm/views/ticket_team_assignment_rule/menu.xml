@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_ticket_team_assignment_rule" parent="helpdesk.helpdesk_menu_config" action="ramcrm.action_ticket_team_assignment_rules"/>
+    </data>
+</odoo>

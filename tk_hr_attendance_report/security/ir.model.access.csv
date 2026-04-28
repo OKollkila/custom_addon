@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+tk_hr_attendance_report.access_employee_attendance_report,access_employee_attendance_report,tk_hr_attendance_report.model_employee_attendance_report,base.group_user,1,1,1,1
+
+
+
+
+
+
+

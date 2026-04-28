@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SMS Menu -->
+    <menuitem id="menu_sms_root" name="SMS" parent="base.menu_administration" sequence="100"/>
+
+    <!-- Goinfinito Configuration Menu -->
+    <menuitem id="menu_top_goinfinito_config" 
+              name="Goinfinito Configuration" 
+              parent="menu_sms_root" 
+              action="action_top_goinfinito_config" 
+              sequence="10"/>
+
+    <!-- SMS Templates Menu -->
+    <menuitem id="menu_top_goinfinito_template" 
+              name="SMS Templates" 
+              parent="menu_sms_root" 
+              action="action_top_goinfinito_template" 
+              sequence="20"/>
+</odoo>
+

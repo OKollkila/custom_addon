@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="tree_ticket_team_assignment_rule" model="ir.ui.view">
+            <field name="name">clinizone.ticket_team_assignment_rule.tree</field>
+            <field name="model">clinizone.ticket_team_assignment_rule</field>
+            <field name="arch" type="xml">
+                <list string="Team Assignment Rules" editable="top">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="company_id" optional="hide"/>
+                    <field name="ticket_type_id"/>
+                    <field name="case_source_id"/>
+                    <field name="branch_is_defined"/>
+                    <field name="assignment_type"/>
+                    <field name="team_id"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

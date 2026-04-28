@@ -1,0 +1,17 @@
+<odoo>
+    <record model="ir.ui.menu" id="helpdesk.menu_helpdesk_root">
+        <field name="groups_id" eval="[(4, ref('ramcrm.group_helpdesk_reports_viewer'))]"/>
+    </record>
+    <record model="ir.ui.menu" id="helpdesk.helpdesk_menu_team_dashboard">
+        <field name="groups_id" eval="[(6, 0, {ref('helpdesk.group_helpdesk_user')})]"/>
+    </record>
+    <record model="ir.ui.menu" id="helpdesk.helpdesk_ticket_report_menu_main">
+        <field name="groups_id" eval="[(4, ref('ramcrm.group_helpdesk_reports_viewer'))]"/>
+    </record>
+    <record model="ir.ui.menu" id="helpdesk.helpdesk_ticket_report_menu">
+        <field name="groups_id" eval="[(4, ref('ramcrm.group_helpdesk_reports_viewer'))]"/>
+    </record>
+    <record model="ir.ui.menu" id="helpdesk.helpdesk_ticket_report_menu_ratings">
+        <field name="groups_id" eval="[(6, 0, {ref('helpdesk.group_helpdesk_manager')})]"/>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Add Allow Multi Attendance Location checkbox to employee work information tab -->
+        <record id="view_employee_form_multi_attendance_location" model="ir.ui.view">
+            <field name="name">hr.employee.form.multi.attendance.location</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <!-- Add checkbox after address_id field in work information tab -->
+                <xpath expr="//field[@name='address_id']" position="after">
+                    <field name="allow_multi_attendance_location" 
+                           string="Allow Multi Attendance Location"
+                           help="Enable multiple attendance locations from Partner Assignments"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

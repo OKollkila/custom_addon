@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <!-- Record Rule for Helpdesk Admin to see all tickets -->
+        <record id="rule_helpdesk_all_tickets" model="ir.rule">
+            <field name="name">Helpdesk Administrator - All Tickets</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="domain_force">[(1, '=', 1)]</field> <!-- Show all records -->
+            <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_manager'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="travel_request_form">
+            <field name="name">employee.travel.request.form</field>
+            <field name="model">employee.travel.request</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string='Travel Request form'>
+                    <header>
+                        <!-- <button name="create_expenses" type="object" string="Create Expenses" states="return"
+                            class='btn-primary' groups=" hr_expense.group_hr_expense_user"/> -->
+                        <button name="create_expenses" type="object" string="Create Expenses" invisible="state not in 'return'"
+                            class='btn-primary' groups=" hr_expense.group_hr_expense_user"/>
+                        <!-- <button name='set_draft' type="object" string='Reset to Draft' states='reject,cancel,return,expenses_submitted'
+                            groups="hr.group_hr_user"/> -->
+                        <button name='set_draft' type="object" string='Reset to Draft' invisible="state not in ('reject','cancel','return','expenses_submitted')"
+                            groups="hr.group_hr_user"/>
+                       <!--  <button name="set_confirm" type="object" string="Confirm" states="draft" class="btn-primary"
+                            groups="base.group_user"/> -->
+                        <button name="set_confirm" type="object" string="Confirm" invisible="state not in 'draft'" class="btn-primary" groups="base.group_user"/>
+                       <!--  <button name="set_approve" type="object" string="Approve" states="confirm" class="btn-primary"
+                            groups="hr.group_hr_user"/> -->
+                        <button name="set_approve" type="object" string="Approve" invisible="state not in 'confirm'" class="btn-primary" groups="hr.group_hr_user"/>
+                       <!--  <button name="set_reject" type="object" string="Reject" states="confirm" groups="hr.group_hr_user"/> -->
+                        <button name="set_reject" type="object" string="Reject" invisible="state not in 'confirm'" groups="hr.group_hr_user"/>
+                        <!-- <button name="set_cancel" type="object" string="Cancel" states="draft" groups="base.group_user"/> -->
+                        <button name="set_cancel" type="object" string="Cancel" invisible="state not in 'draft'" groups="base.group_user"/>
+                        <!-- <button name="set_returned" type="object" string="Return" states="approve" groups="
+                            hr.group_hr_user"/> -->
+                        <button name="set_returned" type="object" string="Return" invisible="state not in 'approve'" groups="
+                            hr.group_hr_user"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approved,return"/>
+                    </header>
+                    <sheet>
+                        <!-- <div class="oe_button_box" name="button_box" attrs="{'invisible': [('expence_sheet_id',
+                            '=', False)]}"> -->
+                        <div class="oe_button_box" name="button_box" invisible="not expence_sheet_id">
+                            <button name="action_view_expense_sheet" type="object" class="oe_stat_button" string="Expenses"
+                                icon="fa-pencil-square-o">
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="number"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <!-- <field name="employee_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="employee_id" readonly="state != 'draft'"/>
+                                <!-- <field name="manager_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="manager_id" readonly="state != 'draft'"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group>
+                                <!-- <field name="department_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="department_id" readonly="state != 'draft'"/>
+                               <!--  <field name="job_id" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="hr.group_hr_user"/> -->
+                                <field name="job_id" readonly="state != 'draft'" groups="hr.group_hr_user"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                            </group>
+                            <group>
+                                <!-- <field name="request_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="request_id" readonly="state != 'draft'"/>
+                                <field name="confirm_id"/>
+                                <field name="approve_id"/>
+                            </group>
+                            <group>
+                                <field name="request_date"/>
+                                <field name="confirm_date"/>
+                                <field name="approve_date"/>
+                                <field name="expence_sheet_id"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                                
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Travel Request Info">
+                                <group>
+                                    <!-- <field name="purpose_travel" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                    <field name="purpose_travel" readonly="state != 'draft'"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <!-- <field name="project_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                        <field name="project_id" readonly="state != 'draft'"/>
+                                        <!-- <field name="analytic_account_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                        <field name="analytic_account_id" readonly="state != 'draft'"/>
+                                    </group>
+                                </group>
+                                <group string="Travel Details">
+                                    <group>
+                                        <label for="street" string="From"/>
+                                        <div class="o_address_format">
+                                            <!-- <field name="from_city" placeholder="City" class="o_address_city" attrs="{'readonly':
+                                                [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="from_city" placeholder="City" class="o_address_city" readonly="state in['approve','return','expenses_submitted']"/>
+                                            <!-- <field name="from_state_id" class="o_address_state" placeholder="State" context="{'country_id':
+                                                country_id, 'zip': zip}" attrs="{'readonly':
+                                                [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="from_state_id" class="o_address_state" placeholder="State" context="{'country_id':
+                                                country_id, 'zip': zip}" readonly="state in ['approve','return','expenses_submitted']"/>
+                                            <!-- <field name="from_country_id" placeholder="Country" class="o_address_country" attrs="{'readonly':
+                                                [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="from_country_id" placeholder="Country" class="o_address_country" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <label for="street" string="To"/>
+                                        <div class="o_address_format">
+                                            <!-- <field name="street" placeholder="Street..." class="o_address_street" attrs="{'readonly':
+                                                [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="street" placeholder="Street..." class="o_address_street" readonly="state in ['approve','return','expenses_submitted']"/>
+                                           <!--  <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'readonly':
+                                                [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                             <field name="street2" placeholder="Street 2..." class="o_address_street" readonly="state in ['approve','return','expenses_submitted']"/>
+                                            <!-- <field name="city" placeholder="City" class="o_address_city" attrs="{'readonly': [('state',
+                                                'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="city" placeholder="City" class="o_address_city" readonly="state in ['approve','return','expenses_submitted']"/>
+                                            <!-- <field name="state_id" class="o_address_state" placeholder="State" context="{'country_id':
+                                                country_id}" attrs="{'readonly': [('state',
+                                                'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="state_id" class="o_address_state" placeholder="State" context="{'country_id':
+                                                country_id}" readonly="state in ['approve','return','expenses_submitted']"/>
+                                            <!-- <field name="zip" placeholder="ZIP" class="o_address_zip" attrs="{'readonly': [('state',
+                                                'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="zip" placeholder="ZIP" class="o_address_zip" readonly="state in ['approve','return','expenses_submitted']"/>
+                                            <!-- <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'readonly':
+                                                [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                            <field name="country_id" placeholder="Country" class="o_address_country" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <!-- <field name="departure_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                        <field name="departure_date" readonly="state != 'draft'"/>
+                                        <!-- <field name="return_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                        <field name="return_date" readonly="state != 'draft'"/>
+                                       <!--  <field name="mode_of_travel" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                        <field name="mode_of_travel" readonly="state != 'draft'"/>
+                                        <field name="days"/>
+                                    </group>
+                                    <group>
+                                        <!-- <field name="phone" widget="phone" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="phone" widget="phone" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        <!-- <field name="email" widget="email" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="email" widget="email" readonly="state in ['approve','return','expenses_submitted']"/>
+                                    </group>
+                                </group>
+                            </page>
+                            
+                            <page string="Other Info">
+                                <group>
+                                    <group>
+                                        <!-- <field name="available_departure_date" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="available_departure_date" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        <!-- <field name="departure_mode_of_travel" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="departure_mode_of_travel" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        <!-- <field name="visa_agent_id" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="visa_agent_id" readonly="state in ['approve','return','expenses_submitted']"/>
+                                    </group>
+                                    <group>
+                                        <!-- <field name="available_return_date" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="available_return_date" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        <!-- <field name="return_mode_of_travel" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="return_mode_of_travel" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        <!-- <field name="ticket_booking_agent_id" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="ticket_booking_agent_id" readonly="state in ['approve','return','expenses_submitted']"/>
+                                    </group>
+                                    <group string="Accounting Info">
+                                        <!-- <field name="bank_id" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="bank_id" readonly="state in ['approve','return','expenses_submitted']"/>
+                                        <!-- <field name="cheque_no" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"/> -->
+                                        <field name="cheque_no" readonly="state in ['approve','return','expenses_submitted']"/>
+                                    </group>
+                                </group>
+                            </page>
+                            
+                            <page string="Advance Payment Request">
+                                <!-- <field name="advance_payment_line_ids" attrs="{'readonly': [('state', 'in',['approve','return','expenses_submitted'])]}"> -->
+                                <field name="advance_payment_line_ids" readonly="state in ['approve','return','expenses_submitted']">
+                                    <list editable="bottom">
+                                        <field name="product_id" />
+                                        <field name="description" />
+                                        <field name="unit_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="quantity" />
+                                        <field name="product_uom_id"/>
+                                        <field name="currency_id" />
+                                        <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    </list>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <!-- <label for="paid_amount" attrs="{'readonly': ['|', ('state', '=', 'approve'),('state',
+                                            '=', 'return')]}"/> -->
+                                        <label for="paid_amount" readonly="state in 'approve' or state in 'return'"/>
+                                    </div>
+                                    <field name="paid_amount" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary'
+                                        options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        
+                                        
+                                    </group>
+                                </group>
+                            </page>
+                            
+                            <!-- <page string="Expenses" attrs="{'invisible': [('state', '!=', 'return'), ('state',
+                                '!=', 'expenses_submitted')]}"> -->
+                            <page string="Expenses" invisible="state not in ('return','expenses_submitted')">
+                                <!-- <field name="travel_expense_line_ids" attrs="{'readonly': [('state', 'in',['approve','expenses_submitted'])]}"> -->
+                                <field name="travel_expense_line_ids" readonly="state in ('approve','expenses_submitted')">
+                                    <list editable="bottom">
+                                        <field name="date"/>
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+                                        <field name="unit_price" widget="monetary"/>
+                                        <field name="quantity"/>
+                                        <field name="product_uom_id"/>
+                                        <field name="currency_id"/>
+                                        <field name="total_amount"/>
+                                    </list>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="total_expenses_amount" />
+                                    </div>
+                                    <field name="total_expenses_amount" nolabel="1" class="oe_subtotal_footer_separator"
+                                        widget='monetary' options="{'currency_field':
+                                        'currency_id'}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <field name="note" class="oe_inline" placeholder="Add notes...."/>
+                    </sheet>
+                    
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                    
+                </form>
+            </field>
+        </record>
+        <record id="travel_request_search" model="ir.ui.view">
+            <field name="name">travel.request.search</field>
+            <field name="model">employee.travel.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Travel Requests">
+                    <field name="number"/>
+                    <field name="purpose_travel"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="manager_id"/>
+                    <field name="project_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                    <filter string="Confirm Request" domain="[('state','=','confirm')]" name = 'confirm'/>
+                    <filter string="Approved Request" domain="[('state','=','approve')]" name = 'approve'/>
+                    <group expand="0" string="Group By">
+                        <filter string="Employee" context="{'group_by':'employee_id'}" name = 'employee_id'/>
+                        <filter string="Departure Date" context="{'group_by':'departure_date'}" name = 'departure_date'/>
+                        <filter string="Project" context="{'group_by':'project_id'}" name = 'project_id'/>
+                        <filter string="Manager" context="{'group_by':'manager_id'}" name = 'manager_id'/>
+                        <filter string="Job" context="{'group_by':'job_id'}" name = 'job_id'/>
+                        <filter string="Company" context="{'group_by':'company_id'}" name = 'company_id'/>
+                        <filter string="Visa Agent" context="{'group_by':'visa_agent_id'}" name = 'visa_agent_id'/>
+                        <filter string="Ticket Booking Agent" context="{'group_by':'ticket_booking_agent_id'}"
+                            name = 'ticket_booking_agent_id'/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="travel_request_calendar">
+            <field name="name">travel_request.calendar</field>
+            <field name="model">employee.travel.request</field>
+            <field name="arch" type="xml">
+                <calendar string="Travel Request" color="purpose_travel" date_start="request_date">
+                    <field name="employee_id"/>
+                    <field name="purpose_travel"/>
+                    <field name="departure_date"/>
+                </calendar>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="travel_request_tree">
+            <field name="name">travel.request List</field>
+            <field name="model">employee.travel.request</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <list string="Travel Request List">
+                    <field name="number"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="manager_id"/>
+                    <field name="currency_id" invisible="1" groups="base.group_multi_currency"/>
+                    <field name="paid_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="total_expenses_amount" widget='monetary' options="{'currency_field':
+                        'currency_id'}"/>
+                    <field name="project_id"/>
+                    <field name='company_id' groups="base.group_multi_company"/>
+                    <field name="state" nolabel="1" string="Status"/>
+                </list>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="travel_request_action">
+            <field name="name">Employee Travel Request</field>
+            <field name="res_model">employee.travel.request</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="view_mode">list,form,calendar</field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="confirm_travel_request_action">
+            <field name="name">Travel Requests To Approve</field>
+            <field name="res_model">employee.travel.request</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="domain">[('state', '=', 'confirm')]</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        
+        <menuitem id="menu_travel" name="Travel" groups="base.group_user"/>
+        <menuitem id="menu_travel_request" name="Travel Request" parent="menu_travel"/>
+        <menuitem id="menu_item_travel" name="Employee Travel Requests" parent="menu_travel_request"
+            action="travel_request_action"/>
+        <menuitem id="menu_item_confirm_travel" name="Travel Requests To Approve" parent="menu_travel_request"
+            action="confirm_travel_request_action" groups="hr.group_hr_user"/>
+        
+    </data>
+</odoo>

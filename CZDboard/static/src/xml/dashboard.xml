@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="CZDboard.MainTemplate" owl="1">
+        <div class="o_action_manager bg-light h-100 overflow-auto">
+            
+            <div class="o_control_panel p-3 border-bottom bg-view shadow-sm sticky-top">
+                <div class="d-flex flex-wrap align-items-end gap-3">
+                    
+                    <div class="dropdown custom-filter-dropdown" style="min-width: 180px;">
+                        <label class="fw-bold mb-1 text-secondary small d-block"><i class="fa fa-map-marker me-1"/>Cities</label>
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start bg-white shadow-sm" type="button" data-bs-toggle="dropdown">
+                            <t t-if="!state.selected.city_ids.length">All Cities</t>
+                            <t t-else=""><t t-esc="state.selected.city_ids.length"/> Selected</t>
+                        </button>
+                        <ul class="dropdown-menu shadow p-2 w-100" style="max-height: 300px; overflow-y: auto;">
+                            <t t-foreach="state.filterOptions.cities" t-as="ct" t-key="ct.id">
+                                <li class="px-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" t-att-id="'city_'+ct.id" t-att-checked="state.selected.city_ids.includes(ct.id)" t-on-change="(ev) => this.toggleItem('city_ids', ct.id, ev)"/>
+                                        <label class="form-check-label" t-att-for="'city_'+ct.id"><t t-esc="ct.name"/></label>
+                                    </div>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown custom-filter-dropdown" style="min-width: 180px;">
+                        <label class="fw-bold mb-1 text-secondary small d-block"><i class="fa fa-building-o me-1"/>Companies</label>
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start bg-white shadow-sm" type="button" data-bs-toggle="dropdown">
+                            <t t-if="!state.selected.company_ids.length">All Companies</t>
+                            <t t-else=""><t t-esc="state.selected.company_ids.length"/> Selected</t>
+                        </button>
+                        <ul class="dropdown-menu shadow p-2 w-100" style="max-height: 300px; overflow-y: auto;">
+                            <t t-foreach="state.filterOptions.companies" t-as="c" t-key="c.id">
+                                <li class="px-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" t-att-id="'comp_'+c.id" t-att-checked="state.selected.company_ids.includes(c.id)" t-on-change="(ev) => this.toggleItem('company_ids', c.id, ev)"/>
+                                        <label class="form-check-label" t-att-for="'comp_'+c.id"><t t-esc="c.name"/></label>
+                                    </div>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown custom-filter-dropdown" style="min-width: 180px;">
+                        <label class="fw-bold mb-1 text-secondary small d-block"><i class="fa fa-sitemap me-1"/>Branches</label>
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start bg-white shadow-sm" type="button" data-bs-toggle="dropdown">
+                            <t t-if="!state.selected.branch_ids.length">All Branches</t>
+                            <t t-else=""><t t-esc="state.selected.branch_ids.length"/> Selected</t>
+                        </button>
+                        <ul class="dropdown-menu shadow p-2 w-100" style="max-height: 300px; overflow-y: auto;">
+                            <t t-foreach="state.filterOptions.branches" t-as="b" t-key="b.id">
+                                <li class="px-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" t-att-id="'branch_'+b.id" t-att-checked="state.selected.branch_ids.includes(b.id)" t-on-change="(ev) => this.toggleItem('branch_ids', b.id, ev)"/>
+                                        <label class="form-check-label" t-att-for="'branch_'+b.id"><t t-esc="b.name"/></label>
+                                    </div>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+
+                    <div style="min-width: 150px;">
+                        <label class="fw-bold mb-1 text-secondary small">Period</label>
+                        <select class="form-select form-select-sm shadow-sm" t-on-change="onDatePresetChange">
+                            <option value="this_month">This Month</option>
+                            <option value="last_month">Last Month</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+
+                    <t t-if="state.showCustomDate">
+                        <div class="d-flex gap-1">
+                            <input type="date" class="form-control form-control-sm" t-att-value="state.selected.date_from" t-on-change="(ev) => state.selected.date_from = ev.target.value"/>
+                            <input type="date" class="form-control form-control-sm" t-att-value="state.selected.date_to" t-on-change="(ev) => state.selected.date_to = ev.target.value"/>
+                        </div>
+                    </t>
+
+                    <button class="btn btn-primary btn-sm px-4 fw-bold shadow-sm" t-on-click="onApplyFilters" t-att-disabled="state.loading">
+                        <t t-if="state.loading"><i class="fa fa-spinner fa-spin me-1"/> Loading...</t>
+                        <t t-else=""><i class="fa fa-search me-1"/> Filter</t>
+                    </button>
+                </div>
+            </div>
+
+            <div class="o_content p-4">
+                <t t-if="state.hasData">
+                    <t t-foreach="state.stats" t-as="dept" t-key="dept.name">
+                        <div class="card mb-5 border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                            <div class="card-header bg-dark text-white p-3 d-flex justify-content-between">
+                                <h5 class="mb-0 fw-bold text-white"><t t-esc="dept.name"/></h5>
+                                <t t-if="dept.is_sales_group"><span class="badge bg-primary">Sales Sector</span></t>
+                            </div>
+                            
+                            <div class="card-body bg-white">
+                                <t t-if="!dept.is_sales_group">
+                                    <t t-call="CZDboard.StatsRow">
+                                        <t t-set="target" t-value="dept"/>
+                                        <t t-set="chart_id" t-value="getSafeId('main_chart', dept.name)"/>
+                                    </t>
+                                    <t t-call="CZDboard.DataTable">
+                                        <t t-set="sources" t-value="dept.sources"/>
+                                        <t t-set="suffix" t-value="''"/>
+                                    </t>
+                                </t>
+
+                                <t t-else="">
+                                    <div class="mb-3">
+                                        <ul class="nav nav-pills bg-light p-1 rounded" role="tablist">
+                                            <t t-foreach="dept.levels" t-as="level" t-key="level.id">
+                                                <li class="nav-item">
+                                                    <button t-attf-class="nav-link border-0 fw-bold {{state.activeSalesTab == level.id ? 'active bg-primary' : 'text-secondary'}}" 
+                                                            t-on-click="() => this.changeSalesTab(level.id)">
+                                                        <t t-esc="level.name"/>
+                                                    </button>
+                                                </li>
+                                            </t>
+                                        </ul>
+                                    </div>
+                                    <t t-foreach="dept.levels" t-as="level" t-key="level.id">
+                                        <t t-if="state.activeSalesTab == level.id">
+                                            <div class="animate__animated animate__fadeIn">
+                                                <t t-call="CZDboard.StatsRow">
+                                                    <t t-set="target" t-value="level"/>
+                                                    <t t-set="chart_id" t-value="getSafeId('main_chart', dept.name + level.id)"/>
+                                                </t>
+                                                <t t-call="CZDboard.DataTable">
+                                                    <t t-set="sources" t-value="level.sources"/>
+                                                    <t t-set="suffix" t-value="level.id"/>
+                                                </t>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+                
+                <t t-else="">
+                    <div class="text-center mt-5 p-5 bg-white shadow-sm rounded border border-dashed">
+                        <i class="fa fa-line-chart fa-4x text-muted mb-3 opacity-25"/>
+                        <h4 class="text-muted fw-bold">CliniZone Intelligence Dash</h4>
+                        <p class="text-secondary">Configure filters and click Filter to see CRM performance analysis.</p>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="CZDboard.StatsRow" owl="1">
+        <div class="row align-items-center mb-4 g-3 p-3 bg-light rounded-3 mx-0 border">
+            <div class="col-xl-3 col-lg-4 d-flex justify-content-center border-end">
+                <div style="width: 180px; height: 180px; position: relative;">
+                    <div t-att-id="chart_id"></div>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
+                        <h3 class="mb-0 fw-bold text-dark"><t t-esc="target.avg_cr"/>%</h3>
+                        <small class="text-muted fw-bold" style="font-size: 10px;">AVG CR</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9">
+                <div class="row text-center g-2">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm rounded border-start border-primary border-4">
+                            <small class="text-muted d-block fw-bold small">TOTAL</small>
+                            <h4 class="fw-bold mb-0 text-primary"><t t-esc="target.total_count"/></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm rounded border-start border-warning border-4">
+                            <small class="text-muted d-block fw-bold small">UNTOUCHED</small>
+                            <h4 class="fw-bold mb-0 text-warning"><t t-esc="target.total_untouched"/></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm rounded border-start border-info border-4">
+                            <small class="text-muted d-block fw-bold small">REACHED</small>
+                            <h4 class="fw-bold mb-0 text-info"><t t-esc="target.total_reached"/></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm rounded border-start border-success border-4">
+                            <small class="text-muted d-block fw-bold small">BOOKED</small>
+                            <h4 class="fw-bold mb-0 text-success"><t t-esc="target.total_booked"/></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="CZDboard.DataTable" owl="1">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-light text-secondary small text-uppercase">
+                    <tr>
+                        <th class="text-start ps-4">Source / Branch</th>
+                        <th>Total</th>
+                        <th>Untouched</th>
+                        <th>Reached</th>
+                        <th>Booked</th>
+                        <th style="width: 100px;">Graph</th>
+                        <th>CR%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="sources" t-as="source" t-key="source.name">
+                        <tr t-attf-class="{{state.excluded_sources.includes(source.name) ? 'opacity-25' : ''}}">
+                            <td class="text-start ps-4 fw-bold">
+                                <i t-attf-class="fa {{state.excluded_sources.includes(source.name) ? 'fa-plus-circle text-success' : 'fa-minus-circle text-danger'}} me-2" 
+                                   style="cursor:pointer;" 
+                                   t-on-click="() => this.toggleSourceExclusion(source.name)"/>
+                                <t t-esc="source.name"/>
+                            </td>
+                            <td class="fw-bold"><t t-esc="source.total"/></td>
+                            <td><t t-esc="source.untouched"/></td>
+                            <td class="text-info fw-bold"><t t-esc="source.reached"/></td>
+                            <td class="text-success fw-bold"><t t-esc="source.booked"/></td>
+                            <td>
+                                <div t-att-id="getSafeId('chart_src', source.name + suffix)" style="width: 70px; height: 70px; margin: auto;"></div>
+                            </td>
+                            <td>
+                                <span t-attf-class="badge rounded-pill {{source.cr > 15 ? 'bg-success' : 'bg-danger'}} px-3 py-2">
+                                    <t t-esc="source.cr"/>%
+                                </span>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,7 @@
+id,name
+MEDICAL_COMPLAINT,Medical Complaint
+NON_MEDICAL_COMPLAINT,Non Medical Complaint
+INQUIRY,Inquiry
+INSURANCE_INQUIRY,Insurance Inquiry
+INSURANCE_COMPLAINT,Insurance Complaint
+INSURANCE_URGENT_COMPLAINT,Insurance Urgent Complaint

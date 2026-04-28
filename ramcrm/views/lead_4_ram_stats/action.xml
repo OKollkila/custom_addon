@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <record id="action_lead_4_ram_stats" model="ir.actions.act_window">
+            <field name="name">Leads</field>
+            <field name="res_model">clinizone.lead_4_ram_stats</field>
+            <field name="view_mode">list,graph,pivot</field>
+        </record>
+    </data>
+</odoo>

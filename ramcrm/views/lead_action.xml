@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="action_leads" model="ir.actions.act_window">
+            <field name="name">Leads</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">list,form,graph</field>
+            <field name="view_id" ref="view_lead_tree"/>
+            <field name="context">{'search_default_my_assigned_leads': 1}</field>
+        </record>
+    </data>
+</odoo>

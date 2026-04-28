@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_city_tree" model="ir.ui.view">
+            <field name="name">city.tree</field>
+            <field name="model">clinizone.city</field>
+            <field name="arch" type="xml">
+                <list string="Cities">
+                    <field name="code"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

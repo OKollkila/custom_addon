@@ -1,0 +1,6 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_employee_insurance_officer","access_employee_insurance_officers","employee_insurance_management.model_employee_insurance","employee_insurance_management.group_employee_insurance_officer",1,1,1,1
+"access_employee_insurance_property_officer","access_employee_insurance_property_officers","employee_insurance_management.model_employee_insurance_property","employee_insurance_management.group_employee_insurance_officer",1,0,0,0
+"access_employee_insurance_property_manager","access_employee_insurance_property_managers","employee_insurance_management.model_employee_insurance_property","employee_insurance_management.group_employee_insurance_officer_manager",1,1,1,1
+"access_employee_insurance_property_line_officer","access_employee_insurance_property_line_officers","employee_insurance_management.model_employee_insurance_property_line","employee_insurance_management.group_employee_insurance_officer",1,1,1,1
+access_employee_insurance_wizard,access.employee.insurance.wizard,model_employee_insurance_wizard,employee_insurance_management.group_employee_insurance_officer,1,1,1,0

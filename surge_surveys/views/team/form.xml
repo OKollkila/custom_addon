@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="form_survey_team" model="ir.ui.view">
+            <field name="name">survey.team.form</field>
+            <field name="model">survey.team</field>
+            <field name="arch" type="xml">
+                <form string="Survey Teams">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="create_date" readonly="True" invisible="id == False"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Members" name="members_users">
+                                <field name="member_ids" mode="kanban" class="w-100"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

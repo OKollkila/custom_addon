@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record model="res.groups" id="group_checkout_api">
+            <field name="name">Checkout Records API</field>
+            <field name="category_id" ref="ramcrm.module_management"/>
+        </record>
+    </data>
+</odoo>

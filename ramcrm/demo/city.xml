@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+        <record model="clinizone.city" id="CITY_1">
+            <field name="name">City 1</field>
+            <field name="code">C1</field>
+        </record>
+        <record model="clinizone.city" id="CITY_2">
+            <field name="name">City 2</field>
+            <field name="code">C2</field>
+        </record>
+    </data>
+</odoo>

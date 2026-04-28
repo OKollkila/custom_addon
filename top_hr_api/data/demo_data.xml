@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Demo Partner with Geolocation Data -->
+        <record id="demo_partner_with_geolocation" model="res.partner">
+            <field name="name">Demo Partner with Geolocation</field>
+            <field name="is_company">True</field>
+            <field name="partner_latitude">40.7128</field>
+            <field name="partner_longitude">-74.0060</field>
+            <field name="geolocation_accuracy_distance">5.0</field>
+            <field name="street">123 Main Street</field>
+            <field name="city">New York</field>
+            <field name="zip">10001</field>
+        </record>
+
+        <!-- Demo Partner with High Accuracy -->
+        <record id="demo_partner_high_accuracy" model="res.partner">
+            <field name="name">High Accuracy Partner</field>
+            <field name="is_company">False</field>
+            <field name="partner_latitude">40.712800</field>
+            <field name="partner_longitude">-74.006000</field>
+            <field name="geolocation_accuracy_distance">1.0</field>
+            <field name="street">456 Broadway</field>
+            <field name="city">New York</field>
+            <field name="zip">10013</field>
+        </record>
+
+        <!-- Demo Partner with Low Accuracy -->
+        <record id="demo_partner_low_accuracy" model="res.partner">
+            <field name="name">Low Accuracy Partner</field>
+            <field name="is_company">False</field>
+            <field name="partner_latitude">40.7</field>
+            <field name="partner_longitude">-74.0</field>
+            <field name="geolocation_accuracy_distance">1000.0</field>
+            <field name="street">789 Park Avenue</field>
+            <field name="city">New York</field>
+            <field name="zip">10021</field>
+        </record>
+
+    </data>
+</odoo>

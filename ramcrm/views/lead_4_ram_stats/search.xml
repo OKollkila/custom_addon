@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="view_lead_4_ram_stats_filter" model="ir.ui.view">
+            <field name="name">lead_4_ram_stats.filter</field>
+            <field name="model">clinizone.lead_4_ram_stats</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Created on" name="filter_creation_date" date="create_date"/> <!--TODO: default_period="this_month" has been removed-->
+                    <filter string="Landing Page" name="landing_page" domain="[('lead_source_id', 'in', [13, 14, 15])]"/>
+                    <filter string="Stage2" name="lost" context="{'group_by':'stage2'}"/>
+                    <filter string="Stage3" name="lost" context="{'group_by':'stage3'}"/>
+                    <filter string="Stage4" name="lost" context="{'group_by':'stage4_id'}"/>
+                    <filter string="Status" name="lost" context="{'group_by':'status_id'}"/>
+                    <filter string="Lead Source" name="source" context="{'group_by':'lead_source_id'}"/>
+                    <filter string="Level 1 Lead Source" name="source" context="{'group_by':'lead_source_level_1_id'}"/>
+                    <filter string="Level 2 Lead Source" name="source" context="{'group_by':'lead_source_level_2_id'}"/>
+                    <filter string="Campaign" name="source" context="{'group_by':'campaign'}"/>
+                    <filter string="Topic" name="source" context="{'group_by':'topic'}"/>
+                    <filter string="City" name="source" context="{'group_by':'city_id'}"/>
+                    <filter string="Branch" name="source" context="{'group_by':'branch_id'}"/>
+                    <filter string="Department" name="source" context="{'group_by':'department_id'}"/>
+                    <filter string="Service" name="source" context="{'group_by':'service_id'}"/>
+                    <filter string="Ads" name="source" context="{'group_by':'ads'}"/>
+                    <field name="lead_source_id" />
+                    <field name="campaign" />
+                    <field name="topic" />
+                    <field name="city_id" />
+                    <field name="branch_id" />
+                    <field name="department_id" />
+                    <field name="service_id" />
+                    <field name="ads" />
+                    <field name="create_date" />
+                    <field name="stage2" />
+                    <field name="stage3" />
+                    <field name="stage4_id" />
+                    <field name="status_id" />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

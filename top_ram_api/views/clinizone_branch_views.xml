@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view for branch workflow lines (model = clinizone.branch.workflow.line) -->
+    <record id="view_branch_workflow_line_tree" model="ir.ui.view">
+        <field name="name">clinizone.branch.workflow.line.tree</field>
+        <field name="model">clinizone.branch.workflow.line</field>
+        <field name="arch" type="xml">
+            <list string="Workflow level / User" editable="bottom" create="1" delete="1">
+                <field name="workflow_level_id"/>
+                <field name="user_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view for Branch: adds Workflow level / User lines inside the form -->
+    <record id="view_clinizone_branch_form_ram" model="ir.ui.view">
+        <field name="name">clinizone.branch.form.ram</field>
+        <field name="model">clinizone.branch</field>
+        <field name="priority" eval="5"/>
+        <field name="arch" type="xml">
+            <form string="Branch">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="city_id"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="helpdesk_team_id"/>
+                            <field name="medical_director_team_id"/>
+                            <field name="can_be_selected"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Workflow level / User" name="workflow_lines">
+                            <field name="workflow_line_ids" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

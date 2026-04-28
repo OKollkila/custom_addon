@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TOP RAM API Integration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        ul {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 TOP RAM API Integration</h1>
+        
+        <p style="font-size: 18px; color: #666;">
+            Seamlessly integrate your Odoo Helpdesk with RAM Prime Care API. 
+            Automatically sync ticket stage changes with your external systems.
+        </p>
+
+        <div style="margin: 30px 0;">
+            <span class="badge">Odoo 18</span>
+            <span class="badge">Helpdesk</span>
+            <span class="badge">API Integration</span>
+            <span class="badge">Auto-Sync</span>
+        </div>
+
+        <h2>✨ Key Features</h2>
+        
+        <div class="feature">
+            <strong>📊 Workflow Level Management</strong><br>
+            Add configurable workflow levels (1-10) to your helpdesk tickets for better categorization and tracking.
+        </div>
+
+        <div class="feature">
+            <strong>🔄 Automatic API Synchronization</strong><br>
+            Instantly notify external systems when ticket stages change - no manual intervention required.
+        </div>
+
+        <div class="feature">
+            <strong>🔔 Real-Time Toast Notifications</strong><br>
+            Get instant visual feedback with color-coded notifications: green for success, orange for warnings, red for errors.
+        </div>
+
+        <div class="feature">
+            <strong>🛡️ Robust Error Handling</strong><br>
+            Built-in error handling ensures ticket updates proceed even if API calls fail.
+        </div>
+
+        <div class="feature">
+            <strong>📝 Comprehensive Logging</strong><br>
+            Track all API interactions with detailed logging for debugging and monitoring.
+        </div>
+
+        <h2>🎯 How It Works</h2>
+        
+        <ol style="line-height: 2;">
+            <li>Set the <strong>Workflow Level</strong> on your helpdesk ticket (1-10)</li>
+            <li>Change the ticket's <strong>Stage</strong> (e.g., New → In Progress → Done)</li>
+            <li>The module automatically calls the RAM Prime Care API with:
+                <ul>
+                    <li>Ticket ID</li>
+                    <li>Workflow Level</li>
+                    <li>New Stage Name</li>
+                    <li>Update Timestamp</li>
+                </ul>
+            </li>
+            <li><strong>Toast notification appears</strong> showing sync status (✅ success / ⚠️ warning / 🚫 error)</li>
+            <li>External system receives real-time updates</li>
+        </ol>
+
+        <div class="highlight">
+            <strong>📡 API Endpoint:</strong><br>
+            <code>https://ramprimecare.com/HISAdmin/api/odooIntegration/updateRefundTask/{ticketId}/{workFlowLevel}/{status}/{updateTime}</code>
+        </div>
+
+        <h2>📦 Installation</h2>
+        
+        <ol>
+            <li>Install Python dependencies: <code>pip install requests</code></li>
+            <li>Copy module to your Odoo addons directory</li>
+            <li>Update Apps List in Odoo</li>
+            <li>Install "TOP RAM API Integration"</li>
+        </ol>
+
+        <h2>🔧 Dependencies</h2>
+        
+        <ul>
+            <li>Odoo Helpdesk module</li>
+            <li>Python requests library</li>
+        </ul>
+
+        <h2>💡 Benefits</h2>
+        
+        <ul>
+            <li>✅ Real-time synchronization with external systems</li>
+            <li>✅ Instant visual feedback with toast notifications</li>
+            <li>✅ Reduced manual data entry</li>
+            <li>✅ Better workflow visibility across platforms</li>
+            <li>✅ Audit trail through comprehensive logging</li>
+            <li>✅ Non-intrusive - works alongside existing helpdesk features</li>
+        </ul>
+
+        <h2>📞 Support</h2>
+        
+        <p>
+            For technical support, customization requests, or questions, 
+            please contact your Odoo development team.
+        </p>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+        
+        <p style="text-align: center; color: #999; font-size: 14px;">
+            <strong>License:</strong> LGPL-3 | 
+            <strong>Version:</strong> 18.0.1.0.0
+        </p>
+    </div>
+</body>
+</html>
+

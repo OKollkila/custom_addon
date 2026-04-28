@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="view_service_tree" model="ir.ui.view">
+            <field name="name">service.tree</field>
+            <field name="model">clinizone.service</field>
+            <field name="arch" type="xml">
+                <list string="Services">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="company_ids" />
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

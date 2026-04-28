@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr_it_operations_employee,hr.it.operations,model_hr_it_operations,base.group_user,1,1,1,1
+hr_it_operations_department,hr.it.operations.department,model_hr_it_operations,hr_it_operations.group_department_manager_it_operations,1,1,1,1
+hr_it_operations_line_employee,hr.it.operations.line,model_hr_it_operations_line,base.group_user,1,1,1,1
+hr_it_operations_expenses_employee,hr.it.operations.expenses,model_hr_it_operations_expenses,base.group_user,1,1,1,1
+hr_it_operations_employee_stock_move,hr.it.operations.stock.move,stock.model_stock_move,base.group_user,1,0,0,0
+hr_it_operations_employee_stock_picking,hr.it.operations.stock.picking,stock.model_stock_picking,base.group_user,1,0,0,0

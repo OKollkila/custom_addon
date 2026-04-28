@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="view_dental_audit_form" model="ir.ui.view">
+            <field name="name">dental_audit.form</field>
+            <field name="model">clinizone.dental_audit</field>
+            <field name="arch" type="xml">
+                <form string="Dental Audit">
+                    <sheet>
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <field name="treatment_doctor"/>
+                                    <field name="mdr"/>
+                                    <field name="patient_name"/>
+                                    <field name="mobile"/>
+                                    <field name="ortho"/>
+                                    <field name="bleaching"/>
+                                    <field name="scaling"/>
+                                    <field name="cf"/>
+                                    <field name="fixed"/>
+                                    <field name="rct"/>
+                                    <field name="rerct"/>
+                                    <field name="pedo"/>
+                                    <field name="ex"/>
+                                    <field name="surgical_ex"/>
+                                    <field name="surgery"/>
+                                    <field name="impaction"/>
+                                    <field name="apicectomy"/>
+                                    <field name="gingivectomy"/>
+                                    <field name="cr_lenthening"/>
+                                    <field name="denture"/>
+                                    <field name="implant"/>
+                                    <field name="ga"/>
+                                    <field name="perio"/>
+                                    <field name="x_ray"/>
+                                    <field name="tmj"/>
+                                    <field name="night_guard"/>
+                                    <field name="fixed2"/>
+                                    <field name="implant2"/>
+                                    <field name="maxillofacial"/>
+                                    <field name="next_visit"/>
+                                    <field name="branch_id"/>
+                                    <field name="prime_care_branch_id"/>
+                                    <field name="clinic"/>
+                                    <field name="notes"/>
+                                    <field name="lead_source"/>
+                                    <field name="campaign"/>
+                                    <field name="lead_id"/>
+                                    <field name="create_date"/>
+                                    <field name="create_uid"/>
+                                </group>
+                            </page>
+                            <page string="History">
+                                <div class="oe_chatter">
+                                    <field name="message_ids"/>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

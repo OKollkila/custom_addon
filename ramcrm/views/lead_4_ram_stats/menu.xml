@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem id="menu_lead_4_ram_stats" name="Leads" parent="crm.crm_menu_root" sequence="7" action="action_lead_4_ram_stats"/>
+    </data>
+</odoo>

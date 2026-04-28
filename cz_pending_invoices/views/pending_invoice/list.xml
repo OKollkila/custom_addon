@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="list_pending_invoice" model="ir.ui.view">
+            <field name="name">pending_invoice.list</field>
+            <field name="model">cz.pending_invoice</field>
+            <field name="arch" type="xml">
+                <list string="corr.stage.list">
+                    <field name="create_date"/>
+                    <field name="date"/>
+                    <field name="mrno"/>
+                    <field name="patient_name"/>
+                    <field name="mobile_no"/>
+                    <field name="department"/>
+                    <field name="department_id"/>
+                    <field name="branch"/>
+                    <field name="branch_id"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

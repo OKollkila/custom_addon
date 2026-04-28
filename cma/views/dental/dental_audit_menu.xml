@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="dental_audit_menu_root" name="Dental Audit" groups="group_dental_audit_manager" sequence="0"/>
+    <menuitem id="menu_dental_audits" name="Dental Audit" parent="dental_audit_menu_root" action="action_dental_audits" sequence="1"/>
+    <menuitem id="menu_dental_setting" name="Settings" parent="dental_audit_menu_root" sequence="2"/>
+    <menuitem id="menu_audit_teams2" name="Audit Teams" parent="menu_dental_setting" action="action_audit_teams" sequence="1"/>
+</odoo>

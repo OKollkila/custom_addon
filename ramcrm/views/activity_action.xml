@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="action_activity_pivot" model="ir.actions.act_window">
+            <field name="name">Agents Activity</field>
+            <field name="res_model">mail.activity</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="view_activity_pivot"/>
+            <field name="domain">[('res_model', '=', 'crm.lead')]</field>
+        </record>
+    </data>
+</odoo>

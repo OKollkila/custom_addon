@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_survey_team_all,access_survey_team_all,model_survey_team,,1,0,0,0
+access_survey_team_mgr,access_survey_team_mgr,model_survey_team,base.group_system,1,1,1,1

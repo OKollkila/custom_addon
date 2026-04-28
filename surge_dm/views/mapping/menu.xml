@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="surge_dm_menu_root" name="Data Maintenance" groups="base.group_system" sequence="1000" web_icon="surge_dm,static/surge_dm.png"/>
+    <menuitem id="menu_mapping" name="Mapping" parent="surge_dm_menu_root" action="surge_dm.action_mapping" sequence="1"/>
+</odoo>

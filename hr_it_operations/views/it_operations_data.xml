@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <openerp> -->
+<odoo>
+    <data noupdate="1">
+        <!--IT Operations related subtypes for messaging / Chatter -->
+        
+        <record id="mt_hr_it_operations_new" model="mail.message.subtype">
+            <field name="name">Request Created</field>
+            <field name="res_model">hr.it.operations</field>
+            <field name="default" eval="False"/>
+            <field name="description">Request Created</field>
+        </record>
+        <record id="mt_hr_it_operations_confirm" model="mail.message.subtype">
+            <field name="name">Request Confirmed</field>
+            <field name="res_model">hr.it.operations</field>
+            <field name="description">Request Confirmed</field>
+        </record>
+        <record id="mt_hr_it_operations_validate" model="mail.message.subtype">
+            <field name="name">Request Validated</field>
+            <field name="res_model">hr.it.operations</field>
+            <field name="default" eval="False"/>
+            <field name="description">Request Validated</field>
+        </record>
+        <record id="mt_hr_it_operations_approve" model="mail.message.subtype">
+            <field name="name">Request Approved</field>
+            <field name="res_model">hr.it.operations</field>
+            <field name="description">Request Approved</field>
+        </record>
+        <record id="mt_hr_it_operations_cancel" model="mail.message.subtype">
+            <field name="name">Request Refused</field>
+            <field name="res_model">hr.it.operations</field>
+            <field name="default" eval="False"/>
+            <field name="description">Request Refused</field>
+        </record>
+        <record id="mt_hr_it_operations_stage" model="mail.message.subtype">
+            <field name="name">Stage Changed</field>
+            <field name="res_model">hr.it.operations</field>
+            <field name="default" eval="False"/>
+            <field name="description">Stage changed</field>
+        </record>
+    </data>
+<!-- </openerp> -->
+</odoo>

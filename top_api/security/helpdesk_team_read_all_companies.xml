@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Group: can read helpdesk teams across companies -->
+    <record id="group_helpdesk_team_read_all_companies" model="res.groups">
+        <field name="name">Helpdesk Team Read All Companies</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <!-- Read-only access to all helpdesk teams -->
+    <record id="rule_helpdesk_team_read_all_companies" model="ir.rule">
+        <field name="name">Helpdesk Team: Read All Companies</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_team"/>
+        <field name="groups" eval="[(4, ref('top_api.group_helpdesk_team_read_all_companies'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>
+

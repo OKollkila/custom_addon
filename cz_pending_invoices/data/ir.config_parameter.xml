@@ -1,0 +1,48 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Above Amount Invoice API Configuration -->
+        <record id="config_above_amount_invoice_url" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.above_amount_invoice_url</field>
+            <field name="value">Https://ramprimecare.com/HISAdmin/api/invoice/invoicesAboveAnAmount</field>
+        </record>
+
+        <record id="config_above_amount_invoice_token" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.above_amount_invoice_token</field>
+            <field name="value">eyJraWQiOiJqd3QudGVjaG5hcy5rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5NzkwMTYxOCAjc2hlcmluZSIsImF1ZCI6InRlY2huYXNfYXVkaWVuY2UiLCJ1cG4iOiI5NzkwMTYxOCAiLCJhdXRoX3RpbWUiOjE3NTM3OTc3OTQsImlzcyI6InRlY2huYXMiLCJncm91cHMiOltdLCJleHAiOjE3NTM4MTU3OTQ1MzMsImlhdCI6MTc1Mzc5Nzc5NH0.WWRYXmThQj90wKgfWQwmzLo9KrouOtjBa366N1UjdogdGpD50rxghtFiPmAI47PQXtKvaCtUHqt04zEo4GjkT3OS4SzMgAyEEg0Km7gd1wUPAvfjfB0QpljdaQIKDUoOV3ZWkTHHIHSGrrD_dxZzNLOz_xddnI8VvbnaCnx9KStncCOpEp-l5mKLtUUiiv4YKHcmSSy8-p7IjtRqyD7HPTZnmeK-VHLoYw2dZm9Wsz-xupgJ81Qj7RKBG6FbjhCjhSdm2QUU3hq-uzYDbfexpqy6tX6Dt49lp7fdbYHqgUSV2kpzYZVqRt9ywo6Bwun-46AwIaIVDfikrxfSPsLEIg</field>
+        </record>
+
+        <!-- Pending Referral API Configuration -->
+        <record id="config_pending_referral_url" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.pending_referral_url</field>
+            <field name="value">Https://ramprimecare.com/HISAdmin/api/referral/findPendingAndRejectedReferrals</field>
+        </record>
+
+        <record id="config_pending_referral_token" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.pending_referral_token</field>
+            <field name="value">eyJraWQiOiJqd3QudGVjaG5hcy5rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5NzkwMTYxOCAjc2hlcmluZSIsImF1ZCI6InRlY2huYXNfYXVkaWVuY2UiLCJ1cG4iOiI5NzkwMTYxOCAiLCJhdXRoX3RpbWUiOjE3NTM3OTc3OTQsImlzcyI6InRlY2huYXMiLCJncm91cHMiOltdLCJleHAiOjE3NTM4MTU3OTQ1MzMsImlhdCI6MTc1Mzc5Nzc5NH0.WWRYXmThQj90wKgfWQwmzLo9KrouOtjBa366N1UjdogdGpD50rxghtFiPmAI47PQXtKvaCtUHqt04zEo4GjkT3OS4SzMgAyEEg0Km7gd1wUPAvfjfB0QpljdaQIKDUoOV3ZWkTHHIHSGrrD_dxZzNLOz_xddnI8VvbnaCnx9KStncCOpEp-l5mKLtUUiiv4YKHcmSSy8-p7IjtRqyD7HPTZnmeK-VHLoYw2dZm9Wsz-xupgJ81Qj7RKBG6FbjhCjhSdm2QUU3hq-uzYDbfexpqy6tX6Dt49lp7fdbYHqgUSV2kpzYZVqRt9ywo6Bwun-46AwIaIVDfikrxfSPsLEIg</field>
+        </record>
+
+        <!-- DNA Appointment API Configuration -->
+        <record id="config_dna_appointment_url" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.dna_appointment_url</field>
+            <field name="value">Https://ramprimecare.com/HISAdmin/api/appointment/findAllDNAAppointmentsByDateAndBranch</field>
+        </record>
+
+        <record id="config_dna_appointment_token" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.dna_appointment_token</field>
+            <field name="value">eyJraWQiOiJqd3QudGVjaG5hcy5rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5NzkwMTYxOCAjc2hlcmluZSIsImF1ZCI6InRlY2huYXNfYXVkaWVuY2UiLCJ1cG4iOiI5NzkwMTYxOCAiLCJhdXRoX3RpbWUiOjE3NTM3OTc3OTQsImlzcyI6InRlY2huYXMiLCJncm91cHMiOltdLCJleHAiOjE3NTM4MTU3OTQ1MzMsImlhdCI6MTc1Mzc5Nzc5NH0.WWRYXmThQj90wKgfWQwmzLo9KrouOtjBa366N1UjdogdGpD50rxghtFiPmAI47PQXtKvaCtUHqt04zEo4GjkT3OS4SzMgAyEEg0Km7gd1wUPAvfjfB0QpljdaQIKDUoOV3ZWkTHHIHSGrrD_dxZzNLOz_xddnI8VvbnaCnx9KStncCOpEp-l5mKLtUUiiv4YKHcmSSy8-p7IjtRqyD7HPTZnmeK-VHLoYw2dZmKLtUUiiv4YKHcmSSy8-p7IjtRqyD7HPTZnmeK-VHLoYw2dZm9Wsz-xupgJ81Qj7RKBG6FbjhCjhSdm2QUU3hq-uzYDbfexpqy6tX6Dt49lp7fdbYHqgUSV2kpzYZVqRt9ywo6Bwun-46AwIaIVDfikrxfSPsLEIg</field>
+        </record>
+ 
+        <!-- Booked Appointment API Configuration -->
+        <record id="config_booked_appointment_url" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.booked_appointment_url</field>
+            <field name="value">Https://ramprimecare.com/HISAdmin/api/appointment/findAllBookedAppointmentsByDateAndBranch</field>
+        </record>
+
+        <record id="config_booked_appointment_token" model="ir.config_parameter">
+            <field name="key">cz_pending_invoices.booked_appointment_token</field>
+            <field name="value">eyJraWQiOiJqd3QudGVjaG5hcy5rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5NzkwMTYxOCAjc2hlcmluZSIsImF1ZCI6InRlY2huYXNfYXVkaWVuY2UiLCJ1cG4iOiI5NzkwMTYxOCAiLCJhdXRoX3RpbWUiOjE3NTM3OTc3OTQsImlzcyI6InRlY2huYXMiLCJncm91cHMiOltdLCJleHAiOjE3NTM4MTU3OTQ1MzMsImlhdCI6MTc1Mzc5Nzc5NH0.WWRYXmThQj90wKgfWQwmzLo9KrouOtjBa366N1UjdogdGpD50rxghtFiPmAI47PQXtKvaCtUHqt04zEo4GjkT3OS4SzMgAyEEg0Km7gd1wUPAvfjfB0QpljdaQIKDUoOV3ZWkTHHIHSGrrD_dxZzNLOz_xddnI8VvbnaCnx9KStncCOpEp-l5mKLtUUiiv4YKHcmSSy8-p7IjtRqyD7HPTZnmeK-VHLoYw2dZm9Wsz-xupgJ81Qj7RKBG6FbjhCjhSdm2QUU3hq-uzYDbfexpqy6tX6Dt49lp7fdbYHqgUSV2kpzYZVqRt9ywo6Bwun-46AwIaIVDfikrxfSPsLEIg</field>
+        </record>
+    </data>
+</odoo>
+

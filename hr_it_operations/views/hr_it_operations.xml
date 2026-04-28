@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <openerp> -->
+<odoo>
+    <data>
+        <record id="view_hr_it_operations_tree" model="ir.ui.view">
+            <field name="name">hr.it.operations.list</field>
+            <field name="model">hr.it.operations</field>
+            <field name="arch" type="xml">
+                <list string="IT Operations">
+                    <field name="type"/>
+                    <field name="employee_id"/>
+                    <field name="job_id"/>
+                    <field name="department_id"/>
+                    <field name="create_date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_hr_it_operations_form" model="ir.ui.view">
+            <field name="name">hr.it.operations.form</field>
+            <field name="model">hr.it.operations</field>
+            <field name="arch" type="xml">
+                <form string="IT Operations">
+                    <header>
+                        <button name="confirm_it_operations" string="Confirm" invisible="state != 'draft'" type="object" class="oe_highlight"/>
+                        <button name="validate_it_operations" string="Department Approve" invisible="state != 'confirm'" type="object" class="oe_highlight" groups="hr_it_operations.group_department_manager_it_operations"/>
+                        <button name="approve_it_operations" string="HR Approve" invisible="state != 'validate'" type="object" class="oe_highlight" groups="hr.group_hr_user"/>
+                        <button name="reject_it_operations" string="Reject" invisible="state not in ('validate','confirm')" type="object" groups="hr.group_hr_user,hr_it_operations.group_department_manager_it_operations"/>
+                        <button name="create_picking" string="Create Internal Transfer" invisible="state != 'approve'" type="object" groups="stock.group_stock_user"/>
+                        <button name="view_internal_transfer" string="View Internal Transfer"  invisible="state != 'stock'" type="object" class="oe_highlight" />
+                        <button name="generate_expense" string="Generate Expense" groups="hr.group_hr_user" type="object" class="oe_highlight" invisible="expense_generated == True or is_damage == False"/>
+                        <button name="view_expense" string="View Expense" type="object" class="oe_highlight" invisible="state not in ('approve','refuse') or is_damage == False"/>
+                        <button name="set_to_draft" string="Set To Draft" invisible="state != 'reject'" type="object" groups="hr.group_hr_user" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate,validate,approve,stock"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="view_expense"
+                               type="object"
+                               string="Expenses"
+                               class="oe_stat_button"
+                               icon="fa-pencil-square-o"
+                               invisible="is_damage == False" 
+                               >
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="type" class="oe_edit_only"/>
+                            <h1><field name="type" class="oe_inline" placeholder="Type of Request" readonly="state != 'draft'"/></h1>
+                        </div>
+                        <!-- <group> -->
+                            <!-- <group string="Type of Request">
+                                <field name="type" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group> -->
+                            <!-- <group> -->
+                            <!-- </group> -->
+                            <group string="Employee Details">
+                                <group>
+                                    <!-- <field name="employee_id" on_change="onchange_employee_id(employee_id)" class="oe_inline" placeholder="Select Employee" attrs="{'readonly': [('state','!=','draft')]}"/> -->
+                                    <field name="employee_id" on_change="onchange_employee_id(employee_id)" placeholder="Select Employee" readonly="state != 'draft'"/>
+                                    <field name="department_id" readonly="state != 'draft'"/>
+                                    <field name="job_id" readonly="state != 'draft'"/>
+                                    <field name="user_id" readonly="state != 'draft'"/>
+                                </group>
+                                <group>
+                                    <field name="is_damage"  invisible="type == 'software'"/>
+                                    <field name="expense_generated" invisible="1"/>
+                                    <field name="location_src_id" groups="stock.group_stock_user"/>
+                                    <field name="location_dest_id" groups="stock.group_stock_user"/>
+                                    <field name="picking_created" groups="stock.group_stock_user" readonly='1' invisible='1'/>
+                                    <field name="company_id" readonly="state != 'draft'" groups="base.group_multi_company"/>
+                                </group>
+                            </group>
+                            <!-- <group> -->
+                            <!-- </group> -->
+                        <!-- </group> -->
+                        <notebook>
+                            <page string="Request Equipments">
+                                <group>
+                                    <field name="product_lines" nolabel='1' readonly="state in ('approve','stock')" colspan="2">
+                                        <list editable="top">
+                                            <field name="product_id"/>
+                                            <field name="name" />
+                                            <field name="quantity" />
+                                            <field name="product_uom" />
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Damage Details"  invisible="is_damage == False">
+                                <group>
+                                    <field name="expense_lines" nolabel='1' readonly="state in ('approve','stock')" colspan="2">
+                                        <list editable="top">
+                                            <field name="product_id"/>
+                                            <field name="product_uom_id" column_invisible='True'/>
+                                            <field name="unit_amount" />
+                                            <field name="quantity" />
+                                            <field name="expense_note" />
+                                            <field name="expense_created" column_invisible='True'/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Internal Orders">
+                                <group name="Picking Information" groups="stock.group_stock_user" colspan="2">
+                                    <field name="picking_ids" readonly='1' nolabel='1' colspan="2"/>
+                                </group>
+                            </page>
+                            <page string="Expenses" invisible="is_damage == False" >
+                                <!-- <group name="Expense Information" col="4" groups="base.group_hr_user"> -->
+                                <group name="Expense Information" groups="hr.group_hr_user" > <!-- odoo13 -->
+                                    <!-- <field name="expense_ids" readonly='1' nolabel='1'/> -->
+                                    <field name="expense_ids" readonly='1' 
+                                        nolabel='1' widget="section_and_note_one2many" mode="list" colspan="2">
+                                        <list>
+                                            <field name="date"/>
+                                            <field name="name"/>
+                                            <field name="employee_id"/>
+                                            <field name="total_amount"/>
+                                            <field name="state"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Extra Information">
+                                <group name="extra_info" col="4">
+                                    <field name="create_uid" />
+                                    <field name="create_date" />
+                                    <field name="write_uid" />
+                                    <field name="write_date" />
+                                    <field name="validated_by"  invisible="validated_by == False"/>
+                                    <field name="validated_date" invisible="validated_date == False"/>
+                                    <field name="approved_by" invisible="approved_by == False"/>
+                                    <field name="approved_date" invisible="approved_date == False"/>
+                                    <field name="refused_by" invisible="refused_by == False"/>
+                                    <field name="refused_date" invisible="refused_date == False"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group  string="Request Description">
+                            <field name="description" placeholder="Request Description" nolabel="1" readonly="state != 'draft'"  colspan="2"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_hr_it_operations_filter" model="ir.ui.view">
+            <field name="name">hr.it.operations.filter</field>
+            <field name="model">hr.it.operations</field>
+            <field name="arch" type="xml">
+                <search string="Search IT operations">
+                                            
+                    <field name="employee_id"/>
+                    <separator/>
+                    <filter icon="terp-check" name="To Approve" domain="[('state','=','draft')]" string="To Approve"/>
+                    <filter icon="terp-camera_test" domain="[('state','=','confirm')]" string="Confirm" name="approved"/>
+                    <separator/>
+                    <filter string="My Operations" icon="terp-personal" name="my_operations" domain="[('employee_id.user_id','=',
+                        uid)]" help="My Operations"/>
+                    <separator/>
+                    <filter string="My Department Operations" name="To Approve" icon="terp-personal+" help="My Department Operations"
+                        domain="[('department_id.manager_id','=',uid)]"/>
+                    <field name="department_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter name="group_employee" string="Employee" domain="[]" context="{'group_by':'employee_id'}"/>
+                        <filter name="group_type" string="Type" icon="terp-personal" domain="[]"
+                            context="{'group_by':'type'}"/>
+                        <filter name="group_department" string="Department" icon="terp-personal+" domain="[]" context="{'group_by':'department_id','set_visible':True}"/>
+                        <filter name="group_status" string="Status" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                        <filter name="Create Date" string="Create Date" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'create_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_it_operations">
+            <field name="name">Equipment Requests</field>
+            <field name="res_model">hr.it.operations</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_my_operations':1}</field>
+        </record>
+        <record model="ir.actions.act_window" id="action_it_operations_approvedept">
+            <field name="name">Equipment Requests</field>
+            <field name="res_model">hr.it.operations</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state','=','confirm')]</field>
+        </record>    
+        <record model="ir.actions.act_window" id="action_it_operations_approvehr">
+            <field name="name">Equipment Requests</field>
+            <field name="res_model">hr.it.operations</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state','=','validate')]</field>
+        </record> 
+        <record model="ir.actions.act_window" id="action_it_operations_approvestock">
+            <field name="name">Equipment Requests</field>
+            <field name="res_model">hr.it.operations</field>
+            <!-- <field name="view_type">form</field> --> <!-- odoo13 -->
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state','=','approve')]</field>
+        </record> 
+        
+        <!--<menuitem name="Equipments"
+            id="menu_equipments_root"
+            groups="hr.group_hr_user,base.group_user" 
+            icon="fa-user"
+            web_icon="hr,static/description/icon.png"
+            sequence="78"/>-->
+
+        <menuitem name="Equipments"
+            id="menu_equipments_root"
+            groups="hr.group_hr_user,base.group_user" 
+            web_icon="hr_it_operations,static/description/icon.png"
+            sequence="78"/>
+         
+         <menuitem id="menu_it_operations" name="Equipments" sequence="10"
+            parent="menu_equipments_root" />
+            
+        <menuitem id="menu_child_of_it_operations" name="My Equipment Requests" parent="menu_it_operations"
+            sequence="1" action="action_it_operations" />
+        
+        <menuitem id="menu_child_of_it_operations_approve" name="Department Equipment Requests to Approve" parent="menu_it_operations"
+            sequence="1" action="action_it_operations_approvedept" groups="hr_it_operations.group_department_manager_it_operations" /> 
+        <menuitem id="menu_child_of_it_operations_approvehr"  name="HR Equipment Requests to Approve" parent="menu_it_operations"
+            sequence="1" action="action_it_operations_approvehr" groups="hr.group_hr_user" /> 
+        <menuitem id="menu_child_of_it_operations_approvestock"  name="Stock Equipment Requests to Approve" parent="menu_it_operations"
+            sequence="1" action="action_it_operations_approvestock" groups="stock.group_stock_user" />                 
+    </data>
+<!-- </openerp> -->
+</odoo>

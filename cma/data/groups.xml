@@ -1,0 +1,10 @@
+<odoo>
+    <record model="res.groups" id="group_medical_audit_manager">
+        <field name="name">Medical Audit Manager</field>
+        <field name="category_id" ref="ramcrm.module_management"/>
+    </record>
+    <record model="res.groups" id="group_dental_audit_manager">
+        <field name="name">Dental Audit Manager</field>
+        <field name="category_id" ref="ramcrm.module_management"/>
+    </record>
+</odoo>

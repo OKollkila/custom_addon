@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="view_local_users_tree" model="ir.ui.view">
+            <field name="name">local.users.tree</field>
+            <field name="model">local_users_admin.user</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="selected_group_ids" widget="many2many_tags"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<odoo>
+    <record id="ir_cron_create_leads_from_medical_audit_from_next_visit_date" model="ir.cron">
+        <field name="name">Create Leads from Medical Audit (Batch)</field>
+        <field name="model_id" ref="model_clinizone_medical_audit"/>
+        <field name="state">code</field>
+        <field name="code">model._create_leads_from_next_visit_date()</field>
+
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+
+<!--        <field name="numbercall">-1</field>-->
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_create_leads_from_medical_audit_from_lttp_date" model="ir.cron">
+        <field name="name">Create Leads from Medical Audit records (From lttp_date)</field>
+        <field name="model_id" ref="model_clinizone_medical_audit"/>
+        <field name="state">code</field>
+        <field name="code">model._create_leads_from_lttp_date()</field>
+        <field name="interval_number">1</field>
+<!--        <field name="numbercall">-1</field>-->
+        <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=2) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+        <field name="interval_type">days</field>
+<!--  TODO:      <field name="doall">False</field>-->
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_create_leads_from_dental_audit" model="ir.cron">
+        <field name="name">Create Leads from Dental Audit records</field>
+        <field name="model_id" ref="model_clinizone_dental_audit"/>
+        <field name="state">code</field>
+        <field name="code">model._create_leads()</field>
+        <field name="interval_number">1</field>
+<!--        <field name="numbercall">-1</field>-->
+        <field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+        <field name="interval_type">days</field>
+<!--  TODO:      <field name="doall">False</field>-->
+        <field name="active">True</field>
+    </record>
+</odoo>

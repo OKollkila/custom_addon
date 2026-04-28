@@ -1,0 +1,66 @@
+<section class="oe_container">
+    <div class="oe_row">
+        <h2 class="oe_slogan">Company Visitor Pass - Human Resource</h2>
+        <p class="oe_mt32">
+            This module allow you to create and generate the visitor pass and maintain details of company visitors.  
+            <p><b> Menus Available: </b></p>
+            <ul>
+                <li>Visitors</li>
+                <li>Visitors/Company Visitors</li>
+                <li>Visitors/Company Visitors/Visitors</li>
+            </ul>
+        </p>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row">
+        <h2 class="oe_slogan">Enter Visitor Details</h2>
+        <p>
+            <div class="oe_demo oe_screenshot">
+                <img src="visitor1.png">
+            </div>
+        </p>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row">
+        <h2 class="oe_slogan">Print Visitor Pass</h2>
+        <p>
+            <div class="oe_demo oe_screenshot">
+                <img src="visitor2.png">
+            </div>
+        </p>
+    </div>
+</section>
+<section class="oe_container">
+    <div class="oe_row">
+        <p>
+            <div class="oe_demo oe_screenshot">
+                <img src="visitor3.png">
+            </div>
+        </p>
+    </div>
+</section>
+
+<section class="oe_container" >
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <div class="oe_picture" style="margin: 25px 10%;">
+                <a href="http://www.probuse.com/">
+                    <img src="logo.png">
+                </a>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <p class="oe_mt32">
+                If you need any help or want more additional features,<br/> you may contact us through:<br/>
+                Email: <a href="mailto:contact@probuse.com">contact@probuse.com</a> <br/>
+                Website: <a href="http://www.probuse.com/" target='new'><u>www.probuse.com</u></a> <br/>
+                Skype: mustufa_probuse<br/>
+            </p>
+        </div>
+    </div>
+</section>
+ 

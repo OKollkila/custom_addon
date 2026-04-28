@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="view_lead_source_tree" model="ir.ui.view">
+            <field name="name">lead_source.tree</field>
+            <field name="model">clinizone.lead_source</field>
+            <field name="arch" type="xml">
+                <list string="Lead Sources" editable="top">
+                    <field name="name"/>
+                    <field name="level_1_id"/>
+                    <field name="level_2_id"/>
+                    <field name="can_be_selected"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

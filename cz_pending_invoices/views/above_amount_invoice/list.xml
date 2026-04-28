@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <record id="view_above_amount_invoice_list" model="ir.ui.view">
+            <field name="name">Above Amount Invoice List</field>
+            <field name="model">cz.above_amount_invoice</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Invoices Above Amount">
+                    <field name="date"/>
+                    <field name="invoice_number"/>
+                    <field name="invoice_date"/>
+                    <field name="patient_name"/>
+                    <field name="patient_id"/>
+                    <field name="amount"/>
+                    <field name="branch"/>
+                    <field name="department"/>
+                    <field name="consultant_name"/>
+                    <field name="payment_status"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_above_amount_invoice_form" model="ir.ui.view">
+            <field name="name">Above Amount Invoice Form</field>
+            <field name="model">cz.above_amount_invoice</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Above Amount">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="invoice_number"/>
+                                <field name="invoice_date"/>
+                                <field name="patient_name"/>
+                                <field name="patient_id"/>
+                                <field name="amount"/>
+                            </group>
+                            <group>
+                                <field name="branch"/>
+                                <field name="branch_id"/>
+                                <field name="department"/>
+                                <field name="department_id"/>
+                                <field name="consultant_name"/>
+                                <field name="payment_status"/>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" nolabel="1" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_above_amount_invoice_search" model="ir.ui.view">
+            <field name="name">Above Amount Invoice Search</field>
+            <field name="model">cz.above_amount_invoice</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Invoices">
+                    <field name="invoice_number"/>
+                    <field name="patient_name"/>
+                    <field name="patient_id"/>
+                    <field name="branch"/>
+                    <field name="department"/>
+                    <field name="consultant_name"/>
+                    <filter string="Today" name="today" 
+                            domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="This Week" name="week" 
+                            domain="[('date', '&gt;=', (context_today()-datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'branch'}"/>
+                        <filter string="Department" name="group_department" context="{'group_by': 'department'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>
+

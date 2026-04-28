@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="medical_audit_menu_root" name="Medical Audit" groups="group_medical_audit_manager" sequence="0"/>
+    <menuitem id="menu_medical_audits" name="Medical Audit" parent="medical_audit_menu_root" action="action_medical_audits" sequence="1"/>
+    <menuitem id="menu_medical_setting" name="Settings" parent="medical_audit_menu_root" sequence="2"/>
+    <menuitem id="menu_audit_teams" name="Audit Teams" parent="menu_medical_setting" action="action_audit_teams" sequence="1"/>
+</odoo>

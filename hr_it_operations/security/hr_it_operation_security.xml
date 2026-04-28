@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- Department Manager -->
+        <record model="res.groups" id="group_department_manager_it_operations">
+            <field name="name">IT Operation Department Manager</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="rule_it_operation_req_employee" model="ir.rule">
+            <field name="name">IT Operation Request - Employee</field>
+            <field name="model_id" ref="model_hr_it_operations"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+
+        <record id="rule_it_operation_req_department" model="ir.rule">
+            <field name="name">IT Operation Request - Department Manager</field>
+            <field name="model_id" ref="model_hr_it_operations"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_department_manager_it_operations'))]"/>
+        </record>
+
+        <record id="rule_it_operation_req_hr" model="ir.rule">
+            <field name="name">HR User</field>
+            <field name="model_id" ref="model_hr_it_operations"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+        </record>
+        
+        <record id="rule_it_operation_req_stock" model="ir.rule">
+            <field name="name">Stock User</field>
+            <field name="model_id" ref="model_hr_it_operations"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+        </record>
+
+        <record model="ir.rule" id="hr_it_operations_multi_comp_rule">
+            <field name="name">HR It Operations multi-company</field>
+            <field name="model_id" ref="model_hr_it_operations"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+       
+    </data>
+</openerp>

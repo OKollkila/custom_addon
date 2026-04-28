@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Server Action to print Attendance XLSX directly -->
+    <record id="action_print_attendance_xlsx" model="ir.actions.server">
+        <field name="name">Print Attendance Report</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="binding_view_types">tree</field>
+        <field name="state">code</field>
+       <field name="code"><![CDATA[
+active_ids = env.context.get('active_ids', [])
+action = env['report.employee_attendance_xlsx'].action_print_xlsx()
+]]>
+       </field>
+
+    </record>
+
+    <!-- Add button in employee attendance tree -->
+    <record id="hr_employee_tree_attendance_report" model="ir.ui.view">
+        <field name="name">hr.employee.tree.attendance.report</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button
+                        name="%(action_print_attendance_xlsx)d"
+                        string="Print Attendance Report"
+                        type="action"
+                        class="btn-primary"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

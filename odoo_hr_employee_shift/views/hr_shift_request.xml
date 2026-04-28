@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="edit_ot_request_tree">
+            <field name="name">hr.shift.list</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="arch" type="xml">
+                <list string="Shift">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/> 
+                    <field name="type_shift_id"/>
+                    <field name="state" />
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </list>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="edit_ot_request_form">
+            <field name="name">Shift Requests Approve Form</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="arch" type="xml">
+                <form string="Shift Type">
+                    <header>
+
+                        <!-- <button string="Confirm" class="oe_highlight" name="action_confirm" type="object" states="draft" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user,base.group_user"  /> -->
+                        <button string="Confirm" class="oe_highlight" name="action_confirm" type="object" invisible="state not in 'draft'" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user,base.group_user"  />
+                        <!-- <button string="Approve" class="oe_highlight" groups="odoo_hr_employee_shift.group_shift_user" states="confirm" name="hr_approval" type="object" /> -->
+                        <button string="Approve" class="oe_highlight" groups="odoo_hr_employee_shift.group_shift_user" invisible="state not in 'confirm'" name="hr_approval" type="object" />
+                        <!-- <button string="Reject" name="action_refuse" states="confirm" type="object" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user" />
+ -->
+                        <button string="Reject" name="action_refuse" invisible="state not in 'confirm'" type="object" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user" />
+
+                        <!-- <button string="Set to Draft" name="set_to_draft" states="reject,cancel,approve" type="object" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user" /> -->
+                        <button string="Set to Draft" name="set_to_draft" invisible="state not in ('reject','cancel','approve')" type="object" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user" />
+                        <!-- <button string="Cancel" name="action_cancel" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user,base.group_user" states="draft" type="object" /> -->
+                        <button string="Cancel" name="action_cancel" groups="odoo_hr_employee_shift.group_shift_manager,odoo_hr_employee_shift.group_shift_user,base.group_user" invisible="state not in 'draft'" type="object" />
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve"/>
+                    </header>
+                    <sheet>
+                          <div class="oe_title">
+                        <h2>
+                            <field name="name" readonly="1"/>
+                        </h2>
+                    </div>
+                       <div class="oe_title">
+                            <h2>
+                                <field name="employee_id" placeholder="Employee's Name"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="sequence" invisible="1"/>
+                                <!-- <field name="type_shift_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="type_shift_id" readonly="state != 'draft'"/>
+                                <!-- <field name="manager_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="manager_id" readonly="state != 'draft'"/>
+
+                                <!-- <field name="date_from" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="date_from" readonly="state != 'draft'"/>
+                            </group>
+                            <group>
+                              <!--   <field name="shift_responsible_user_id" attrs="{'readonly': [('state', '!=', 'draft')]}" widget="selection"/> -->
+                                <field name="shift_responsible_user_id" readonly="state != 'draft'" widget="selection"/>
+                                <!-- <field name="department_id" attrs="{'readonly': [('state', '!=', 'draft')]}" widget="selection"/> -->
+                                <field name="department_id" readonly="state != 'draft'" widget="selection"/>
+                               <!--  <field name="date_to" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" /> -->
+                                <field name="date_to" required="1" readonly="state != 'draft'" />
+                                <!-- <field name="company_id" groups="base.group_multi_company" widget="selection" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="company_id" groups="base.group_multi_company" widget="selection" readonly="state != 'draft'"/>
+
+                            </group>
+                        </group>
+                                   <group string="Description"/>
+                                      <!--  <field name="description" attrs="{'readonly': [('state', '=', 'approve')]}" placeholder="Description....." nolabel="1"/> -->
+                                       <field name="description" readonly="state in 'approve'" placeholder="Description....." nolabel="1"/>
+                                   <!-- </group> -->
+                                <group string="Internal Notes"/>
+                                   <!--  <field name="internal_notes" attrs="{'readonly': [('state', '=', 'approve')]}" placeholder="Internal notes....." nolabel="1"/> -->
+                                    <field name="internal_notes" readonly="state in 'approve'" placeholder="Internal notes....." nolabel="1"/>
+                                 <!-- </group> -->
+                        </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers" />
+                            <field name="message_ids" widget="mail_thread" />
+                        </div>
+                    </form>
+                </field>
+            </record>
+
+        <record id="view_shift_type_filter" model="ir.ui.view">
+            <field name="name">Shift Requests Approve Seacrch</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="arch" type="xml">
+                <search string="Search Shift">
+                    <group string="Filters..">
+                       
+                        <filter name="hr_approves" icon="terp-gtk-media-pause" string="Approved" domain="[('state','=','approve')]" />
+                        <filter name="hr_confirm" icon="terp-gtk-media-pause" string="To Approve" domain="[('state','=','confirm')]" />
+                        <filter name="hr_reject" icon="terp-gtk-media-pause" string="Rejected" domain="[('state','=','reject')]" />
+                        <separator orientation="vertical" />
+                        <field name="employee_id" />
+                        <field name="department_id" widget="selection" />
+                        <field name="state" />
+                    </group>
+                    <group expand="0" string="Group By...">
+                        <filter name="employee_id" string="Employee" icon="terp-personal"  context="{'group_by':'employee_id'}" />
+                        <filter name="manager_id" string="Manager" icon="terp-personal"  context="{'group_by':'manager_id'}" />
+                        <filter name="shift_responsible_user_id" string="Shift Responsible" icon="terp-personal"  context="{'group_by':'shift_responsible_user_id'}" />
+                        <filter name="department_id" string="Department" icon="terp-personal+"  context="{'group_by':'department_id'}" />
+                        <filter name="company_id" string="Company"  groups="base.group_multi_company" icon="terp-go-home" context="{'group_by':'company_id'}"/>
+                        <filter name="state" string="Status"  icon="terp-stock_effects-object-colorize" context="{'group_by':'state'}" />
+                        <filter name="type_shift_id" string="Shift Type" icon="terp-personal+"  context="{'group_by':'type_shift_id'}" />
+                        <filter name="Start Date" icon="terp-go-month" domain="[]" context="{'group_by':'date_from'}" />
+                        <filter name="End Date" icon="terp-go-month" domain="[]" context="{'group_by':'date_to'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_ot_shift_calendar" model="ir.ui.view">
+            <field name="name">Shift Requests Approve Calender</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="arch" type="xml">
+                <calendar string="Shift Request" color="employee_id" date_start="date_from" date_stop="date_to"><field name="employee_id"/><field name="type_shift_id" /> 
+                </calendar>
+            </field>
+        </record>
+
+        <record id="edit_ot_type_tree_report_pivot_view" model="ir.ui.view">
+            <field name="name">Shift Requests Approve Pivot</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="arch" type="xml">
+                <pivot string="Job Costing Volumn Trends">
+                    <field name="employee_id"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="edit_ot_type_tree_report_form_view" model="ir.ui.view">
+            <field name="name">Shift Requests Approve Pivot</field>
+            <field name="model">hr.approve.shift</field>
+            <field name="arch" type="xml">
+                <graph string="Shift Requests Approve " type="bar">
+                    <field name="employee_id" type="col"/>                 
+                 </graph>
+             </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="request_shift_action_ot">
+            <field name="name">My Shift Requests</field>
+            <field name="res_model">hr.approve.shift</field>
+            <field name="view_mode">list,form,calendar,pivot,graph</field>
+            <field name="domain">[('employee_id.user_id', '!=', False),('employee_id.user_id', '=', uid)]</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="search_view_id" ref="view_shift_type_filter" />
+        </record>     
+
+
+        <record model="ir.actions.act_window" id="request_shift_all_action_ot">
+            <field name="name">All Shift Requests</field>
+            <field name="res_model">hr.approve.shift</field>
+            <field name="view_mode">list,form,calendar,pivot,graph</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="search_view_id" ref="view_shift_type_filter" />
+        </record>
+
+             <record model="ir.actions.act_window" id="request_shift_action_ot">
+            <field name="name">My Shift Requests</field>
+            <field name="res_model">hr.approve.shift</field>
+            <field name="view_mode">list,form,calendar,pivot,graph</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="search_view_id" ref="view_shift_type_filter" />
+        </record>
+
+           <record model="ir.actions.act_window" id="request_shift_action_approve">
+            <field name="name">Shift Request to Approve</field>
+            <field name="res_model">hr.approve.shift</field>
+            <!-- <field name="context">{'search_default_hr_confirm': 1}</field> -->
+            <field name="domain">[('state', '=', 'confirm')]</field>
+            <field name="view_mode">list,form,calendar,pivot,graph</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="search_view_id" ref="view_shift_type_filter" />
+        </record>
+      
+        <menuitem id="menu_hr_shift_root" name="Shifts" sequence="76"/>
+        <menuitem name="Requests" parent="menu_hr_shift_root" id="menu_shift_hr_request" sequence="1" />
+        <menuitem name="My Shift Requests" parent="menu_shift_hr_request" id="menu_shift_type_hr_request" action="request_shift_action_ot"  sequence="1" />
+     
+        <menuitem name="Shift Request to Approve" parent="menu_shift_hr_request" id="menu_shift_request_approve_hr_request" groups="odoo_hr_employee_shift.group_shift_user" action="request_shift_action_approve"  sequence="2" />
+
+        <menuitem name="All Shift Requests" parent="menu_shift_hr_request" id="menu_shift_request_all_approve_hr_request" groups="odoo_hr_employee_shift.group_shift_user" action="request_shift_all_action_ot"  sequence="3" />
+
+        <menuitem name="Configuration" parent="menu_hr_shift_root" id="menu_shift_hr_request_configuration" groups="odoo_hr_employee_shift.group_shift_manager" sequence="2" />
+
+        <menuitem name="Shift Types" parent="menu_shift_hr_request_configuration" id="menu_shift_type_configu_hr_request" action="request_shift_type_action_ot" groups="odoo_hr_employee_shift.group_shift_manager" sequence="1" />
+    </data>
+</odoo>        

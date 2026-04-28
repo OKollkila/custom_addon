@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_insurance_property_form_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Property View</field>
+            <field name="model">employee.insurance.property</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>     
+                            <group>
+                                <field name='name'/>    
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_employee_insurance_property_tree_view" model="ir.ui.view">
+                <field name="name">Employee hr.menu_human_resources_configuration
+                    Insurance Property Tree View</field>
+                <field name="model">employee.insurance.property</field>
+                <field name="arch" type="xml">
+                    <list>
+                       <field name='name'/>
+                    </list>
+                </field>
+        </record>
+
+        
+        <record model="ir.actions.act_window" id="action_employee_insurance_property_view">
+            <field name="name">Employee Insurance Property</field>
+            <field name="res_model">employee.insurance.property</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_employee_insurance_property_line_form_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Property View</field>
+            <field name="model">employee.insurance.property.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                           <group>     
+                            <group>
+                                <field name='property_id'/>  
+                                <field name='value'/>
+                                <field name='insurance_id' invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_employee_insurance_property_line_tree_view" model="ir.ui.view">
+                <field name="name">Employee Insurance Property Line Tree View</field>
+                <field name="model">employee.insurance.property.line</field>
+                <field name="arch" type="xml">
+                    <list editable="bottom">
+                        <field name='property_id'/>  
+                        <field name='value'/>
+                        <field name='insurance_id' invisible="1"/>
+                    </list>
+                </field>
+        </record>
+
+     <menuitem
+        id="menu_employee_insurance_property_form"
+        name="Employee Insurance Property"
+        parent="hr.menu_human_resources_configuration"
+        action="action_employee_insurance_property_view"
+        sequence="20"/>
+    </data>
+</odoo>
+
+

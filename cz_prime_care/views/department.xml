@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="form_department" model="ir.ui.view">
+            <field name="name">clinizone.department.form</field>
+            <field name="model">clinizone.department</field>
+            <field name="inherit_id" ref="ramcrm.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="prime_care_code"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

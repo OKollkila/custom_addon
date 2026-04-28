@@ -1,0 +1,13 @@
+<odoo>
+    <record id="ir_cron_escalate_tickets" model="ir.cron">
+        <field name="name">Escalate Tickets</field>
+        <field name="model_id" ref="model_helpdesk_ticket"/>
+        <field name="state">code</field>
+        <field name="code">model._escalate()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+<!--   TODO:     <field name="numbercall">-1</field>-->
+<!--        <field name="doall">False</field>-->
+        <field name="active">True</field>
+    </record>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Add Geolocation Accuracy Distance field to partner form -->
+        <record id="view_partner_form_geolocation_accuracy" model="ir.ui.view">
+            <field name="name">res.partner.form.geolocation.accuracy</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- 
+                GENERAL XPATH OPTIONS (choose one):
+                
+                1. Add to first notebook page, first group:
+                   <xpath expr="//notebook//page[1]//group[1]" position="inside">
+                
+                2. Add to any group in the form:
+                   <xpath expr="//group[1]" position="inside">
+                
+                3. Add to the main sheet/form:
+                   <xpath expr="//sheet" position="inside">
+                
+                4. Add to any page (notebook or not):
+                   <xpath expr="//page[1]" position="inside">
+                
+                5. Add to the form root:
+                   <xpath expr="//form" position="inside">
+                
+                6. Add after any field (most flexible):
+                   <xpath expr="//field[last()]" position="after">
+                
+                7. Add to the end of the form:
+                   <xpath expr="//form" position="replace">
+                     <form>
+                       <field name="geolocation_accuracy_distance"/>
+                     </form>
+                   </xpath>
+                -->
+                
+                <!-- Add to the same page that contains partner_latitude field -->
+                <xpath expr="//field[@name='partner_latitude']/ancestor::page//group[1]" position="inside">
+                    <field name="geolocation_accuracy_distance" 
+                           string="Geolocation Accuracy Distance (meters)"
+                           help="Distance in meters indicating the accuracy of the geolocation coordinates"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

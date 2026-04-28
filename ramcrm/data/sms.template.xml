@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+        <record model="sms.template" id="sms_template_ticket_created">
+            <field name="name">Ticket Created</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="body"><![CDATA[Dear customer, your inquiry/complaint number #{{ object.case_no }} has been registered, and we will contact you within the next 24 hours]]></field>
+        </record>
+        <record model="sms.template" id="sms_template_ticket_resolved">
+            <field name="name">Ticket Resolved</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="body"><![CDATA[Dear customer, we would like to inform you that your issue/inquiry number #{{ object.case_no }} has been resolved, and we are always honored to serve you]]></field>
+        </record>
+    </data>
+</odoo>

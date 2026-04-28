@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="list_helpdesk_ticket_type" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.type.list</field>
+            <field name="model">helpdesk.ticket.type</field>
+            <field name="arch" type="xml">
+                <list string="helpdesk.ticket.type.list" editable="top">
+                    <field name="create_date"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

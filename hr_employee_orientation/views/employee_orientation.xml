@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    
+        <!-- Orientation Checklist -->
+        <record id="main_checklist_config_form_view" model="ir.ui.view">
+            <field name="name">main.checklist.config</field>
+            <field name="model">main.checklist.config</field>
+            <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group> 
+                            <field name="department_id" />
+                            <field name="active_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="checklist_configuration" string="Orientation Checklist Lines">
+                            <field name="main_checklist_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="responsible_user_id" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+        
+        <record id="main_checklist_config_tree_view" model="ir.ui.view">
+            <field name="name">main.checklist.config</field>
+            <field name="model">main.checklist.config</field>
+            <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="department_id" />
+            </list>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_main_checklist">
+            <field name="name">Orientation Checklist</field>
+            <field name="res_model">main.checklist.config</field>
+            <field name="view_mode">list,form</field>
+           <!-- <field name="view_type">form</field>-->
+        </record>
+        
+        <!-- Employee Orientation -->
+        <record id="employee_orientation_form_view" model="ir.ui.view">
+            <field name="name">hr.orientation.form.view</field>
+            <field name="model">hr.orientation</field>
+            <field name="arch" type="xml">
+            <form>
+                 <header>
+                    <!-- <button string="Mark Confirm" groups="hr.group_hr_user" name="get_confirm" states="draft" type="object" class="oe_highlight"/> -->
+                    <button string="Mark Confirm" groups="hr.group_hr_user" name="get_confirm" invisible="state not in 'draft'" type="object" class="oe_highlight"/>
+                    <!-- <button string="Reset To Draft" groups="hr.group_hr_manager" name="get_reset_to_draft" states="cancel" type="object" class="oe_highlight"/> -->
+                    <button string="Reset To Draft" groups="hr.group_hr_manager" name="get_reset_to_draft" invisible="state not in 'cancel'" type="object" class="oe_highlight"/>
+                    <!-- <button string="Mark Done" groups="hr.group_hr_manager" name="get_done" states="confirm" type="object" class="oe_highlight"/> -->
+                    <button string="Mark Done" groups="hr.group_hr_manager" name="get_done" invisible="state not in 'confirm'" type="object" class="oe_highlight"/>
+                    <!-- <button string="Cancel" groups="hr.group_hr_manager" name="get_cancel" states="draft" type="object" class="oe_highlight"/> -->
+                    <button string="Cancel" groups="hr.group_hr_manager" name="get_cancel" invisible="state not in 'draft'" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" colspan="2"/>
+                </header>
+                <sheet>
+                    <h1><field name="name" readonly="1"/></h1>
+                    <group>
+                        <group>
+                            <!-- <field name="employee_id" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"/> -->
+                            <field name="employee_id" readonly="state in ['confirm','cancel','done']"/>
+                            <!-- <field name="orientation_date" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"/> -->
+                            <field name="orientation_date" readonly="state in ['confirm','cancel','done']"/>
+                            <!-- <field name="user_id" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"/> -->
+                            <field name="user_id" readonly="state in ['confirm','cancel','done']"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <!-- <field name="department_id" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"/> -->
+                            <field name="department_id" readonly="state in ['confirm','cancel','done']"/>
+                            <!-- <field name="job_id" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"/> -->
+                            <field name="job_id" readonly="state in ['confirm','cancel','done']"/>
+                            <!-- <field name="parent_id" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"/> -->
+                            <field name="parent_id" readonly="state in ['confirm','cancel','done']"/>
+                            <!-- <field name="main_configuration_id" attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}" 
+                                   domain="[('department_id','=',department_id)]"/> -->
+                            <field name="main_configuration_id" readonly="state in ['confirm','cancel','done']" domain="[('department_id','=',department_id)]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="checklist" string="Orientation Checklist Requests">
+                            <!-- <field name='checklist_ids' attrs="{'readonly': [('state', 'in', ['confirm','cancel','done'])]}"> -->
+                            <field name='checklist_ids' readonly="state in ['confirm','cancel','done']">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="responsible_user_id" />
+                                    <field name="checklist_date" invisible="1"/>
+                                    <field name="expected_date" />
+                                    <field name="checklist_state" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="notes" string="Notes" >
+                            <field name="note" placeholder="Add your notes......" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+            </field>
+        </record>
+       
+        <record id="employee_orientation_tree_view" model="ir.ui.view">
+            <field name="name">hr.orientation.list.view</field>
+            <field name="model">hr.orientation</field>
+            <field name="arch" type="xml">
+                 <list>
+                    <field name="name" />
+                    <field name="employee_id" />
+                    <field name="department_id" />
+                    <field name="job_id" />
+                    <field name="orientation_date" />
+                    <field name="main_configuration_id" />
+                    <field name="user_id" />
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state" />
+                 </list>
+            </field>
+        </record>
+        
+        <record id="employee_orientation_search_view" model="ir.ui.view">
+            <field name="name">hr.orientation.search.view</field>
+            <field name="model">hr.orientation</field>
+            <field name="arch" type="xml">
+                <search string="Employee Orientation" >
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="department_id" />
+                    <field name="job_id" />
+                    <field name="orientation_date" />
+                    <field name="main_configuration_id" />
+                    <field name="user_id" />
+                    <field name="state" />
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <group expand="0" string="Group By">
+                        <filter name="Employee" domain="[]" context="{'group_by':'employee_id'}"/>
+                        <filter name="Department" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter name="Job Title" domain="[]" context="{'group_by':'job_id'}"/>
+                        <filter name="Orientation Date" domain="[]" context="{'group_by':'orientation_date'}"/>
+                        <filter name="Status" domain="[]" context="{'group_by':'state'}"/>
+                        <filter name="Company" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                        <filter name="Responsible User" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter name="Orientation Checklist" domain="[]" context="{'group_by':'main_configuration_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_employee_orientation">
+            <field name="name">Employee Orientation</field>
+            <field name="res_model">hr.orientation</field>
+            <field name="view_mode">list,form</field>
+           <!-- <field name="view_type">form</field>-->
+        </record>
+        
+        <!-- Checklist Configuration-->
+       <record id="checklist_form_view" model="ir.ui.view">
+            <field name="name">hr.orientation.checklist.form.view</field>
+            <field name="model">hr.orientation.checklist.config</field>
+            <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="responsible_user_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+        
+        <record id="checklist_tree_view" model="ir.ui.view">
+            <field name="name">hr.orientation.checklist.list.view</field>
+            <field name="model">hr.orientation.checklist.config</field>
+            <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="responsible_user_id" />
+            </list>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_checklist">
+            <field name="name">Orientation Checklist Line</field>
+            <field name="res_model">hr.orientation.checklist.config</field>
+            <field name="view_mode">list,form</field>
+           <!-- <field name="view_type">form</field>-->
+        </record>
+        
+        <record id="checklist_line_form_view" model="ir.ui.view">
+            <field name="name">hr.orientation.checklist.form</field>
+            <field name="model">hr.orientation.checklist</field>
+            <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="checklist_state" widget="statusbar" statusbar_visible="new,done" colspan="2" clickable="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="orientation_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="employee_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="responsible_user_id" />
+                            <field name="checklist_date" />
+                            <field name="expected_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="attachment" string="Attachments" >
+                            <group>
+                                <field name="attachment_ids1"/>
+                                <field name="attachment_ids2"/>
+                                <field name="attachment_ids3"/>
+                            </group>
+                        </page>
+                        <page name="notes" string="Notes" >
+                            <field name="note" placeholder="Add your notes......" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+            </field>
+        </record>
+        
+        <record id="checklist_line_view" model="ir.ui.view">
+            <field name="name">hr.orientation.checklist.list.view</field>
+            <field name="model">hr.orientation.checklist</field>
+            <field name="arch" type="xml">
+            <list>
+                <field name="orientation_id"/>
+                <field name="name" />
+                <field name="responsible_user_id" />
+                <field name="checklist_date" />
+                <field name="expected_date" />
+                <field name="checklist_state"/>
+                <field name="company_id" invisible='1' groups="base.group_multi_company"/>
+            </list>
+            </field>
+        </record>
+
+        <record id="checklist_line_search_view" model="ir.ui.view">
+            <field name="name">hr.orientation.checklist.search.view</field>
+            <field name="model">hr.orientation.checklist</field>
+            <field name="arch" type="xml">
+                <search string="Orientation Checklist" >
+                    <field name="orientation_id"/>
+                    <field name="name" />
+                    <field name="responsible_user_id" />
+                    <field name="orientation_id" />
+                    <field name="checklist_state" />
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <group expand="0" string="Group By">
+                        <filter name="Responsible User" domain="[]" context="{'group_by':'responsible_user_id'}"/>
+                        <filter name="Orientation" domain="[]" context="{'group_by':'orientation_id'}"/>
+                        <filter name="State" domain="[]" context="{'group_by':'checklist_state'}"/>
+                        <filter name="Company" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_checklist_line">
+            <field name="name">Orientation Checklists Requests</field>
+            <field name="res_model">hr.orientation.checklist</field>
+            <field name="view_mode">list,form</field>
+           <!-- <field name="view_type">form</field>-->
+        </record>
+
+        <menuitem name="Orientations" id="menu_orientation"/>
+        <menuitem name="Employee Orientations" id="menu_employee_orientation" action="action_employee_orientation" parent="menu_orientation" sequence="1"/>
+        <menuitem name="Orientation Checklists Requests" id="menu_checklists_line" action="action_checklist_line" parent="menu_orientation" sequence="50"/>
+        <menuitem name="Configurations" id="menu_configuration" parent="menu_orientation" groups="hr.group_hr_manager" sequence="70"/>
+        <menuitem name="Orientation Checklists" id="menu_main_checklist_config" action="action_main_checklist" parent="menu_configuration" sequence="100"/>
+        <menuitem name="Orientation Checklists Lines" id="menu_checklist_name" action="action_checklist" parent="menu_configuration" sequence="200"/>
+        
+    </data>
+</odoo>

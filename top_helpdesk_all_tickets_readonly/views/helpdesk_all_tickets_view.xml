@@ -1,0 +1,100 @@
+<odoo>
+    <!-- Tree View -->
+     <record id="view_helpdesk_ticket_all_tree" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.all.tree</field>
+        <field name="model">helpdesk.ticket.all</field>
+        <field name="arch" type="xml">
+            <list string="All Helpdesk Tickets" create="false" delete="false" edit="false">
+                <field name="ticket_ref" string="ID"/>
+                <field name="priority" widget="priority"/>
+                <field name="name"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="team_id" optional="show" string="Helpdesk Team"/>
+                <field name="partner_id"/>
+<!--                <field name="activity_ids" widget="activity"/>-->
+                <field name="stage_id"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_all_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.all.form</field>
+        <field name="model">helpdesk.ticket.all</field>
+        <field name="arch" type="xml">
+            <form string="All Helpdesk Ticket" edit="false" create="false" delete="false">
+                <div class="oe_chatter">
+                    <div class="o_statusbar_status" style="text-align: right;">
+                        <field name="stage_id" widget="statusbar" options="{'clickable': False}" nolabel="1"/>
+                    </div>
+                </div>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="case_no"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="team_id"/>
+                            <field name="ticket_type_id"/>
+                            <field name="case_no"/>
+                            <field name="user_id"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="stage_id"/>
+                            <field name="create_date"/>
+<!--                            <field name="reporter_relation_with_patient"/>-->
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="national_id"/>
+                            <field name="medical_file_no"/>
+<!--                            <field name="physician_name"/>-->
+                            <field name="case_time"/>
+<!--                            <field name="branch_id"/>-->
+<!--                            <field name="city_final"/>-->
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                   <group>
+                        <separator string="Communication Log" colspan="2"/>
+                    </group>
+
+                    <div class="oe_chatter" name="chatter_div" style="margin-top: 15px; padding: 10px; border-top: 1px solid #d3d3d3;">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+
+
+                </form>
+            </field>
+    </record>
+
+
+    <record id="action_helpdesk_ticket_all" model="ir.actions.act_window">
+        <field name="name">All Tickets (Read Only)</field>
+        <field name="res_model">helpdesk.ticket.all</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_helpdesk_ticket_all_tree"/>
+    </record>
+
+   <menuitem id="menu_helpdesk_ticket_all"
+          name="All Tickets (Read Only)"
+          parent="helpdesk.menu_helpdesk_root"
+          action="action_helpdesk_ticket_all"
+          sequence="50"/>
+
+</odoo>

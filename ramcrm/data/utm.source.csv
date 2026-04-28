@@ -1,0 +1,19 @@
+id,name
+dr_form,Dr Form
+installment_company_form,Installment Company Form
+online_form,Online Form
+lp_for_dr,LP For Dr
+lp_for_offer,LP For Offer
+lp_insurance_company,LP Insurance Company
+doha_dr_form,Doha Dr Form
+doha_lp_installment_company_form,Doha LP Installment Company Form
+doha_lp,Doha LP
+doha_online_form,Doha Online Form
+doha_lp_insurance_company,Doha LP Insurance Company
+UTM_SOURCE_HELPDESK,Helpdesk Ticket
+UTM_SOURCE_MEDICAL_AUDIT,Medical Audit
+UTM_SOURCE_DENTAL_AUDIT,Dental Audit
+UTM_SOURCE_WHATSAPP_CHATBOT,WhatsApp Chatbot
+UTM_SOURCE_WHATSAPP_CHECKOUT_SURVEY_BAD,WhatsApp Checkout Bad Survey
+UTM_SOURCE_CORPORATE,Corporate
+UTM_SOURCE_ZAPIER,Zapier

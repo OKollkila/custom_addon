@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="list_checkout" model="ir.ui.view">
+            <field name="name">checkout.list</field>
+            <field name="model">clinizone.checkout</field>
+            <field name="arch" type="xml">
+                <list string="clinizone.checkout.list">
+                    <field name="create_date" optional="hide"/>
+                    <field name="date" optional="show"/>
+                    <field name="mrno" optional="show"/>
+                    <field name="patient_name" optional="show"/>
+                    <field name="mobile_number" optional="show"/>
+                    <field name="department_id" optional="show"/>
+                    <field name="department" optional="show"/>
+                    <field name="branch_id" optional="show"/>
+                    <field name="branch" optional="show"/>
+                    <field name="branch_ar" optional="show"/>
+                    <field name="doctor_name" optional="hide"/>
+                    <field name="doctor_name_en" optional="hide"/>
+                    <field name="machine_name" optional="hide"/>
+                    <field name="technician_name" optional="hide"/>
+                    <field name="payment_type_string" optional="show"/>
+                    <field name="review_message_sent_date_whatsapp" optional="show"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

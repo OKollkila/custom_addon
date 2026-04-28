@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem name="Checkout Records" id="menu_checkout" parent="surge_surveys.menu_configuration" action="action_checkout" groups="survey.group_survey_manager"/>
+    </data>
+</odoo>

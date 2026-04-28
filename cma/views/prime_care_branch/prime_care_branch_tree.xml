@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_prime_care_branch_tree" model="ir.ui.view">
+            <field name="name">prime_care_branch.tree</field>
+            <field name="model">clinizone.prime_care_branch</field>
+            <field name="arch" type="xml">
+                <list string="PrimeCare Branch">
+                    <field name="name" optional="show"/>
+                    <field name="branch_id" optional="show"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="visitor_form_view">
+            <field name="name">Visitor Form</field>
+            <field name="model">hr.visitor</field>
+            <field name="arch" type="xml">
+                <form string="Visitor Form">
+                    <header>
+                        <button string="Print" type="object" class="btn btn-info" name="print_visitor_card" groups="hr.group_hr_user"/>
+
+                        <!-- <button string="Confirm" type="object" name="action_confirm"
+                        states="draft" class="oe_highlight" groups="hr.group_hr_user"/> -->
+                        <button string="Confirm" type="object" name="action_confirm"
+                        invisible="state not in ('draft')" class="oe_highlight" groups="hr.group_hr_user"/>
+
+                        <!-- <button string="Cancel" type="object" name="action_cancel"
+                        states="draft" class="oe_highlight" groups="hr.group_hr_user"/> -->
+
+                        <button string="Cancel" type="object" name="action_cancel"
+                        invisible="state not in ('draft')" class="oe_highlight" groups="hr.group_hr_user"/>
+
+                        <!-- <button string="Reset To Draft" type="object" name="action_reset_to_draft"
+                        states="exit" groups="hr.group_hr_user"/> -->
+
+                        <button string="Reset To Draft" type="object" name="action_reset_to_draft"
+                        invisible="state not in ('exit')" groups="hr.group_hr_user"/>
+
+                        <!-- <button string="Exit" type="object" name="action_exit"
+                        states="confirm" class="oe_highlight" groups="hr.group_hr_user"/> -->
+
+                        <button string="Exit" type="object" name="action_exit"
+                        invisible="state not in ('confirm')" class="oe_highlight" groups="hr.group_hr_user"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft, confirm, exit"/>
+                    </header>
+                    <sheet>
+                            <h1><field name="name" readonly="1"/></h1>
+                            <group string="Visitor Information">
+                                <group>
+                                    <!-- <field name="visitor_name" placeholder="Visitor Name..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+
+                                    <field name="visitor_name" placeholder="Visitor Name..." readonly="state in ('confirm','exit','cancel')"/>
+
+                                    <!-- <field name="mobile_number" placeholder="Contact Number..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+                                    <field name="mobile_number" placeholder="Contact Number..." readonly="state in ('confirm','exit','cancel')"/>
+                                </group>
+                                <group>
+                                    <!-- <field name="visitor_company_id" placeholder="Company Name..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}" /> -->
+
+                                    <field name="visitor_company_id" placeholder="Company Name..." readonly="state in ('confirm','exit','cancel')" />
+
+                                    <!-- <field name="email" placeholder="E mail..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+
+                                    <field name="email" placeholder="E mail..." readonly="state in ('confirm','exit','cancel')"/>
+                                </group>
+                            </group>
+                            <group>
+                                <!-- <field name="purpose" placeholder="Purpose..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+                                 <field name="purpose" placeholder="Purpose..." readonly="state in ('confirm','exit','cancel')"/>
+                            </group>
+                            <group>
+                                <group string="In Out Details">
+                                    <!-- <field name="in_datetime" placeholder="In Time.." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+
+                                    <field name="in_datetime" placeholder="In Time.." readonly="state in ('confirm','exit','cancel')"/>
+
+                                    <!-- <field name="out_datetime" placeholder="Out Time..." attrs="{'readonly':[('state','in',['exit','cancel'])]}"/> -->
+
+                                    <field name="out_datetime" placeholder="Out Time..." readonly="state in ('exit','cancel')"/>
+
+
+                                </group>
+                                <group string="Contact Information">
+                                    <!-- <field name="partner_id" placeholder="Contact Person Name..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+
+                                    <field name="partner_id" placeholder="Contact Person Name..." readonly="state in ('confirm','exit','cancel')"/>
+
+                                    <!-- <field name="department_id" placeholder="Department..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}"/> -->
+
+                                    <field name="department_id" placeholder="Department..." readonly="state in ('confirm','exit','cancel')"/>
+
+
+                                    <!-- <field name="user_id" placeholder="Created By..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}" readonly="1"/> -->
+
+                                    <field name="user_id" placeholder="Created By..." readonly="state in ('confirm','exit','cancel')"/>
+
+
+                                    <!-- <field name="company_id" placeholder="Company..." attrs="{'readonly':[('state','in',['confirm','exit','cancel'])]}" readonly="1" groups="base.group_multi_company"/> -->
+                                    <field name="company_id" placeholder="Company..." readonly="state in ('confirm','exit','cancel')" groups="base.group_multi_company"/>
+                                </group>
+                            </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="visitor_process_list" model="ir.ui.view">
+            <field name="name">Visitor list</field>
+            <field name="model">hr.visitor</field>
+                <field name="arch" type="xml">
+                    <list string="Visitor Process">
+                        <field name="name"/>
+                        <field name="visitor_name"/>
+                        <field name="mobile_number"/>
+                        <field name="email"/>
+                        <field name="in_datetime"/>
+                        <field name="out_datetime"/>
+                        <field name="partner_id"/>
+                        <field name="department_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="user_id"/>
+                        <field name="state"/>
+                  </list>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="visitor_process_search_view">
+            <field name="name">Visitor Search</field>
+            <field name="model">hr.visitor</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <field name="visitor_name"/>
+                        <field name="partner_id"/>
+                        <field name="in_datetime"/>
+                        <field name="out_datetime"/>
+                        <field name="department_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="user_id"/>
+                        <field name="state"/>
+                        <group string="Group By">
+                            <filter name="by_visitor_name" string="Visitor"
+                                    context="{'group_by': 'visitor_name'}"/>
+                            <filter name="by_patnar_id" string="Employee"
+                                    context="{'group_by': 'partner_id'}"/>
+                            <filter name="by_visitor_user" string="User"
+                                    context="{'group_by': 'user_id'}"/>
+                            <filter name="by_visitor_state" string="State"
+                                    context="{'group_by': 'state'}"/>
+                            <filter name="by_visitor_department" string="Department"
+                                    context="{'group_by': 'department_id'}"/>
+                            <filter name="by_visitor_in" string="Date Time In"
+                                    context="{'group_by': 'in_datetime'}"/>
+                            <filter name="by_visitor_out" string="Date Time Out"
+                                    context="{'group_by': 'out_datetime'}"/>
+                        </group>
+                    </search>
+                </field>
+        </record>
+         <record id='visitor_process_kanban' model='ir.ui.view'>
+            <field name="name">visitor.process.kanban</field>
+            <field name="model">hr.visitor</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column">
+                     <field name="visitor_name"/>
+                        <field name="partner_id"/>
+                        <field name="in_datetime"/>
+                        <field name="out_datetime"/>
+                        <field name="department_id"/>
+                        <field name="user_id"/>
+                     <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_title">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div>
+                                        <field name="visitor_name"/>
+                                    </div>
+                                    <div>
+                                        <field name="in_datetime"/>
+                                    </div>
+                                    <div>
+                                        <field name="out_datetime"/>
+                                        <img t-att-src="kanban_image('hr.employee', 'image_128', record.partner_id.raw_value)" t-att-title="record.partner_id.value" t-att-alt="record.partner_id.value" class="oe_kanban_avatar o_image_24_cover mr4" options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}" style="float: right;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+         <record id="visitor_process_pivot" model="ir.ui.view">
+            <field name="name">visitor.process.pivot</field>
+            <field name="model">hr.visitor</field>
+            <field name="arch" type="xml">
+                <pivot string="HR Visitors">
+                    <field name="visitor_name" type="row"/>
+                    <field name="state" type="col"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <record id="visitor_process_graph" model="ir.ui.view">
+            <field name="name">visitor.process.graph</field>
+            <field name="model">hr.visitor</field>
+            <field name="arch" type="xml">
+                <graph string="HR Visitors">
+                    <field name="visitor_name"/>
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        
+        <record id="visitor_process_calendar" model="ir.ui.view">
+            <field name="name">visitor.process.calendar</field>
+            <field name="model">hr.visitor</field>
+            <field name="arch" type="xml">
+                <calendar string="HR Visitors" date_start="in_datetime" color="state">
+                    <field name="visitor_name"/>
+                    <field name="state"/>
+                    <field name="partner_id" avatar_field="image_128"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="visitor_list_action">
+            <field name="name">Visitors</field>
+            <field name="res_model">hr.visitor</field>
+<!--            <field name="view_type">form</field-->            <!--   #odoo13  -->
+            <field name="view_mode">kanban,list,calendar,form,pivot,graph</field>
+        </record>
+
+        <menuitem id="main_hr_visitor_process" name="Visitors" groups="base.group_user,hr.group_hr_user"/>
+        <menuitem id="hr_visitor_process_menu"   name="Company Visitors"
+                  parent="main_hr_visitor_process"/>
+        <menuitem id="visitor_menu" name="Visitors"   parent="hr_visitor_process_menu"
+                  action="visitor_list_action"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="1">
+        <record model="clinizone.service" id="SERVICE_1">
+            <field name="name">Service 1</field>
+            <field name="department_id" ref="ramcrm.DEPARTMENT_1"/>
+        </record>
+    </data>
+</odoo>

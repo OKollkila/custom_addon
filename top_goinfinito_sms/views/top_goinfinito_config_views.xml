@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Goinfinito Configuration Form View -->
+    <record id="view_top_goinfinito_config_form" model="ir.ui.view">
+        <field name="name">top.goinfinito.config.form</field>
+        <field name="model">top.goinfinito.config</field>
+        <field name="arch" type="xml">
+            <form string="Goinfinito SMS Configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" options="{'no_create': True}"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="api_token" widget="password" required="1"/>
+                            <field name="sender_name" placeholder="e.g., SDCdental" 
+                                   help="IMPORTANT: Sender name must be registered and approved with Goinfinito before use. Contact Goinfinito support to register your sender name."/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Goinfinito Configuration Tree View -->
+    <record id="view_top_goinfinito_config_tree" model="ir.ui.view">
+        <field name="name">top.goinfinito.config.tree</field>
+        <field name="model">top.goinfinito.config</field>
+        <field name="arch" type="xml">
+            <list string="Goinfinito SMS Configurations">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="sender_name"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Goinfinito Configuration Action -->
+    <record id="action_top_goinfinito_config" model="ir.actions.act_window">
+        <field name="name">Goinfinito SMS Configuration</field>
+        <field name="res_model">top.goinfinito.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Goinfinito SMS Configuration
+            </p>
+            <p>
+                Configure your Goinfinito SMS API settings here. You need to provide
+                your API token and sender name.
+            </p>
+        </field>
+    </record>
+</odoo>
+

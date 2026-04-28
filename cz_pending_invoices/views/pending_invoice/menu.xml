@@ -1,0 +1,5 @@
+<odoo>
+    <data>
+        <menuitem name="Missed Invoices" id="menu_cz_pending_invoice" action="action_cz_pending_invoice" sequence="1"/>
+    </data>
+</odoo>

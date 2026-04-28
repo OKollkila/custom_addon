@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <data>
+        <!--Email template -->
+        <record id="email_template_employee_orientation1" model="mail.template">
+            <field name="name">Employee Orientation - Send by Email</field>
+            <field name="email_from">{{(object.company_id.email and '%s &lt;%s&gt;' % (object.company_id.name, object.company_id.email) or '')}}</field>
+            <field name="subject">{{object.company_id.name}} - Employee Orientation - (Ref {{object.name or ''}})</field>
+            <field name="email_to">{{object.responsible_user_id.email}}</field>
+            <field name="model_id" ref="hr_employee_orientation.model_hr_orientation_checklist"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+            <div>
+            <p>Hello <!-- ${object.responsible_user_id.name} --><t t-out="object.responsible_user_id.name"></t>,  </p>
+            <p>You are request to prepare below checklist.</p>
+            <p>Check Line :- <t t-out="object.name"></t><!-- ${object.name} --></p>
+            <p>Employee :- 
+                <t t-out="object.orientation_id.employee_id.name"></t>
+            <p>
+                <t t-if="object.expected_date">
+                    <t t-out="object.expected_date or ''"></t>
+                </t>
+            </p>
+            <p>Responsible User :- 
+                 <!-- ${object.responsible_user_id.name} --><t t-out="object.responsible_user_id.name"></t></p>
+            <p>Thank you for choosing <t t-out="object.company_id.name or 'us'"></t><!-- ${object.company_id.name or 'us'}! --></p>
+            <br/>
+            <!-- FOOTER -->
+              <!-- <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="middle" align="left">
+                    ${object.company_id.name}
+                </td></tr>
+                <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                    ${object.company_id.phone}
+                    % if object.company_id.email
+                        | <a href="'mailto:%s' % ${object.company_id.email}" style="text-decoration:none; color: #454748;">${object.company_id.email}</a>
+                    % endif
+                    % if object.company_id.website
+                        | <a href="'%s' % ${object.company_id.website}" style="text-decoration:none; color: #454748;">
+                        ${object.company_id.website}
+                    </a>
+                    % endif
+                </td></tr>
+            </table>
+        </td>
+        </tr> -->
+        <tr><td valign="middle" align="left">
+                    <t t-out="object.company_id.name or ''">YourCompany</t>
+                </td></tr>
+                <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                    <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+                    <t t-if="object.company_id.email">
+                        | <a t-attf-href="'mailto:%s' % {{ object.company_id.email }}" style="text-decoration:none; color: #454748;" t-out="object.company_id.email or ''">info@yourcompany.com</a>
+                    </t>
+                    <t t-if="object.company_id.website">
+                        | <a t-attf-href="'%s' % {{ object.company_id.website }}" style="text-decoration:none; color: #454748;" t-out="object.company_id.website or ''">http://www.example.com</a>
+                    </t>
+                </td></tr>
+</tbody>
+</table>
+</td></tr>]]>
+            </field>
+        </record>
+    </data>
+</odoo>

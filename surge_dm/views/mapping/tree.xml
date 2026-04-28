@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_mapping_tree" model="ir.ui.view">
+            <field name="name">mapping.tree</field>
+            <field name="model">dm.mapping</field>
+            <field name="arch" type="xml">
+                <list string="Mapping">
+                    <field name="old_name"/>
+                    <field name="new_name"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="action_services" model="ir.actions.act_window">
+            <field name="name">Services</field>
+            <field name="res_model">clinizone.service</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_service_tree"/>
+        </record>
+    </data>
+</odoo>

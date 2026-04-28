@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="action_branches" model="ir.actions.act_window">
+            <field name="name">Branches</field>
+            <field name="res_model">clinizone.branch</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_branch_tree"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_audit_teams_tree" model="ir.ui.view">
+            <field name="name">audit_teams.tree</field>
+            <field name="model">clinizone.team</field>
+            <field name="arch" type="xml">
+                <list string="Audit Teams" editable="top">
+                    <field name="name"/>
+                    <field name="member_ids" widget="many2many_tags"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

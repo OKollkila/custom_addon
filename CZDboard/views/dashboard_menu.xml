@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_czdboard_main" model="ir.actions.client">
+        <field name="name">CZDboard Analytics</field>
+        <field name="tag">CZDboard.main</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_czdboard_root" 
+              name="CZDboard" 
+              groups="CZDboard.group_cz_dashboard_viewer" 
+              web_icon="fa fa-line-chart,#FFFFFF,#004c99"
+              sequence="1"/>
+
+    <menuitem id="menu_czdboard_dash" 
+              name="Dashboard" 
+              parent="menu_czdboard_root" 
+              action="action_czdboard_main" 
+              groups="CZDboard.group_cz_dashboard_viewer" 
+              sequence="1"/>
+</odoo>

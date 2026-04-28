@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="menu_branches" name="Branches" parent="crm.crm_menu_config" action="action_branches" sequence="1"/>
+</odoo>

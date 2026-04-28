@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_shift_emplo_user,hr_approve_shift_user,model_hr_approve_shift,hr.group_hr_user,1,1,1,0
+access_hr_shift_emplo_type_user,hr_approve_shift_type_user,model_hr_approve_shift,hr.group_hr_manager,1,1,1,1
+access_hr_shift_type_employee,hr.shift.emp,model_hr_approve_shift,base.group_user,1,0,0,0
+
+access_hr_shift_request_manager,shift_request_manager,model_hr_approve_shift,odoo_hr_employee_shift.group_shift_manager,1,1,1,1
+access_hr_shift_request_user,shift_request_user,model_hr_approve_shift,odoo_hr_employee_shift.group_shift_user,1,1,1,1
+access_hr_shift_request_employee,shift_request_employee,model_hr_approve_shift,base.group_user,1,1,1,0
+
+access_hr_shift_group_employee,hr.shift.emp.group,model_shift_type,odoo_hr_employee_shift.group_shift_manager,1,1,1,1
+access_hr_shift_user_employee,hr.shift.emp.user.group,model_shift_type,odoo_hr_employee_shift.group_shift_user,1,0,0,0
+access_hr_shift_emplo_type_shift_user,hr_shift_type_user,model_shift_type,base.group_user,1,1,1,0

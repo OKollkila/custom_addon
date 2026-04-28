@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <record id="action_allowed_groups" model="ir.actions.act_window">
+            <field name="name">Allowed Groups</field>
+            <field name="res_model">local_users_admin.allowed_group</field>
+            <field name="view_mode">list</field>
+        </record>
+    </data>
+</odoo>

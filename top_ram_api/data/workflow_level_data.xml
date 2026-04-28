@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="workflow_level_1" model="workflow.level">
+        <field name="code">1</field>
+        <field name="name">Level 1</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="workflow_level_2" model="workflow.level">
+        <field name="code">2</field>
+        <field name="name">Level 2</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="workflow_level_3" model="workflow.level">
+        <field name="code">3</field>
+        <field name="name">Level 3</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="workflow_level_4" model="workflow.level">
+        <field name="code">4</field>
+        <field name="name">Level 4</field>
+        <field name="sequence">4</field>
+    </record>
+
+</odoo>

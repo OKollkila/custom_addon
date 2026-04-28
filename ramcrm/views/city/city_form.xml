@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="view_city_form" model="ir.ui.view">
+            <field name="name">city.form</field>
+            <field name="model">clinizone.city</field>
+            <field name="arch" type="xml">
+                <form string="Branch">
+                    <sheet>
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

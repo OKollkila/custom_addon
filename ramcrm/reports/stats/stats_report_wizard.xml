@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="view_stats_report_wizard" model="ir.ui.view">
+        <field name="name">Detailed Leads Analysis</field>
+        <field name="model">ramcrm.stats_report_wizard</field>
+        <field name="arch" type="xml">
+            <form delete="0" string="Detailed Leads Analysis">
+                <group col="2">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                </group>
+                <footer>
+                    <button name="make_report" string="OK" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stats_report_wizard" model="ir.actions.act_window">
+        <field name="name">Detailed Leads Analysis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ramcrm.stats_report_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stats_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_stats_report_wizard" name="Detailed Leads Analysis" parent="menu_statistics" action="action_stats_report_wizard" sequence="20" groups="ramcrm.group_detailed_leads_analysis_report"/>
+
+    <record id="paperformat_landscape" model="report.paperformat">
+        <field name="name">Detailed Leads Analysis Landscape</field>
+        <field name="orientation">Landscape</field>
+    </record>
+
+    <record id="action_stats_report_pdf" model="ir.actions.report">
+        <field name="name">Detailed Leads Analysis</field>
+        <field name="model">ramcrm.stats_report_wizard</field>
+        <field name="report_type">qweb-pdf</field><!--qweb-html-->
+        <field name="report_name">ramcrm.template_stats_report</field>
+        <field name="report_file">ramcrm.template_stats_report</field>
+        <field name="print_report_name">'Stats Report'</field>
+        <field name="binding_model_id" ref="model_ramcrm_stats_report_wizard"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="ramcrm.paperformat_landscape"/>
+    </record>
+
+ </odoo>

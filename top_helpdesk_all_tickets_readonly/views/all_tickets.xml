@@ -1,0 +1,14 @@
+<odoo>
+    <record id="action_helpdesk_tickets_readonly" model="ir.actions.act_window">
+        <field name="name">Tickets Readonly</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False, 'readonly': True}</field>
+    </record>
+
+    <menuitem id="menu_helpdesk_tickets_readonly"
+              name="Tickets Readonly"
+              parent="helpdesk.menu_helpdesk_root"
+              action="action_helpdesk_tickets_readonly"
+              sequence="51"/>
+</odoo>

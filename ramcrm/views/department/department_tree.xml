@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="view_department_tree" model="ir.ui.view">
+            <field name="name">department.tree</field>
+            <field name="model">clinizone.department</field>
+            <field name="arch" type="xml">
+                <list string="Departments">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

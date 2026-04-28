@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+hr_visitor_process_user,hr_visitor_process_user,model_hr_visitor,hr.group_hr_user,1,1,1,1
+hr_visitor_process_employee,hr_visitor_process_employee,model_hr_visitor,base.group_user,1,0,0,0

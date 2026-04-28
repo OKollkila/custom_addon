@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="menu_services" name="Services" parent="crm.crm_menu_config" action="action_services" sequence="1"/>
+</odoo>

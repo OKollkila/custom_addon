@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="view_allowed_group_tree" model="ir.ui.view">
+            <field name="name">view.allowed.group.tree</field>
+            <field name="model">local_users_admin.allowed_group</field>
+            <field name="arch" type="xml">
+                <list editable="top">
+                    <field name="group_id"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

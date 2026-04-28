@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_ideas_form_view">
+            <field name="name">Employee Ideas</field>
+            <field name="model">ideas.comment</field>
+                <field name="arch" type="xml">
+                    <form string="Employee Votes">
+                                <group string="Give Your Ratings">
+                                    <!-- <div class="container, text-primary"> -->
+                                        <h2>Rating</h2><field name="rating" widget="priority" nolabel="1"/>
+                                    <!-- </div> -->
+                                </group>
+                                <group/>
+                                    <div class="container, text-primary">
+                                        <h2>Your Comments</h2><field name="comments" placeholder="Post your comments here..."/>
+                                    </div>
+                                 <group/>
+                                <group/>
+                            <button name="create_employee_review" string="Vote" type="object" class="oe_highlight" /> Or 
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                    </form>
+                </field>
+        </record>
+
+        <!-- <act_window id="launch_hr_employee_ideas_wizard"
+                    name="Employee Votes"
+                    res_model="ideas.comment"
+                    binding_model="hr.ideas"
+                    view_mode="form"
+                    target="new"
+                    /> -->
+        
+        <record id="launch_hr_employee_ideas_wizard" model="ir.actions.act_window">
+            <field name="name">Employee Votes</field>
+            <field name="res_model">ideas.comment</field>
+            <field name="binding_model_id" ref="model_hr_ideas"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+   </data>
+</odoo>

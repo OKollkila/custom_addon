@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="form_checkout" model="ir.ui.view">
+            <field name="name">checkout.form</field>
+            <field name="model">clinizone.checkout</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="patient_name"/>
+                            <h1>
+                                <field name="patient_name" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="create_date" readonly="True" invisible="id == False"/>
+                                <field name="mrno" readonly="id != False"/>
+                                <field name="date" readonly="id != False"/>
+                                <field name="mobile_number" readonly="id != False"/>
+                                <field name="department_id" readonly="id != False"/>
+                                <field name="department" readonly="id != False"/>
+                                <field name="branch_id" readonly="id != False"/>
+                                <field name="branch" readonly="id != False"/>
+                                <field name="branch_ar" readonly="id != False"/>
+                                <field name="doctor_name" readonly="id != False"/>
+                                <field name="doctor_name_en" readonly="id != False"/>
+                                <field name="machine_name" readonly="id != False"/>
+                                <field name="technician_name" readonly="id != False"/>
+                                <field name="payment_type_string" readonly="id != False"/>
+                                <field name="review_message_sent_date_whatsapp" readonly="True" invisible="id == False"/>
+                                <field name="review_message_whatsapp_response" readonly="True" invisible="id == False"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

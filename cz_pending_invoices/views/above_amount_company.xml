@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="form_company_above_amount" model="ir.ui.view">
+            <field name="name">Above Amount Invoice Settings</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="priority" eval="9"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page string="Above Amount Invoices" name="above_amount_invoices">
+                        <group>
+                            <group>
+                                <field name="above_amount_invoice_url"/>
+                            </group>
+                            <group>
+                                <field name="above_amount_invoice_token"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+        <record id="view_helpdesk_ticket_view_form" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <data>
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <button name="action_escalate" string="Escalate" type="object" class="oe_highlight"/>
+                    <button name="action_convert_to_lead" string="Create Lead" type="object" class="oe_highlight" invisible="lead_id >  0 or id == False"/>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="before">
+                    <field name="ticket_type_id"/>
+                    <field name="case_no"/>
+                    <field name="lead_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="partner_name" required="1"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="reporter_relation_with_patient"/>
+                    <field name="reporter_name" invisible="reporter_relation_with_patient == 'SELF'" required="reporter_relation_with_patient != 'SELF'"/>
+                    <field name="partner_email" required="0" string="Email"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_phone']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email_cc']" position="before">
+                    <field name="patient_national_id"/>
+                    <field name="medical_file_no"/>
+                    <field name="treating_physician_name"/>
+                    <field name="case_time"/>
+                    <field name="branch_id"/>
+                    <field name="insurance_company_id"/>
+                    <field name="insurance_policy"/>
+                    <field name="city_final" readonly="1"/>
+                    <field name="section"/>
+                    <field name="case_source_id"/>
+                    <field name="source" readonly="1"/>
+                    <field name="lead_id"/>
+                    <field name="create_uid"/>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="invisible">id == False</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">id == False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email_cc']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

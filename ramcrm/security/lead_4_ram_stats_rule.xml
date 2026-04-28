@@ -1,0 +1,7 @@
+<odoo>
+    <record id="lead_4_ram_stats_company" model="ir.rule">
+        <field name="name">No access except from the allowed companies</field>
+        <field name="model_id" ref="ramcrm.model_clinizone_lead_4_ram_stats"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+</odoo>

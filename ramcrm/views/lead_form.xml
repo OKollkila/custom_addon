@@ -1,0 +1,220 @@
+<odoo>
+    <data>
+        <record id="view_lead_form" model="ir.ui.view">
+            <field name="name">lead.form</field>
+            <field name="model">crm.lead</field>
+            <field name="arch" type="xml">
+                <form string="Lead">
+                    <header>
+                        <button name="action_no_answer" string="No Answer" type="object" class="btn-warning" invisible="stage_id not in ['untouched,call_again,out_of_service,switched_off,no_answer']"/>
+                        <button name="action_call_again" string="Call Again" type="object" class="btn-warning" invisible="stage_id not in ['untouched,no_answer,out_of_service,switched_off,call_again']"/>
+                        <button name="action_out_of_service" string="Out of Service" type="object" class="btn-warning" invisible="stage_id not in ['untouched,no_answer,call_again,switched_off,out_of_service']"/>
+                        <button name="action_switched_off" string="Switched Off" type="object" class="btn-warning" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_inquiry" string="Inquiry" type="object" class="btn-danger" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_already_booked" string="Already Booked" type="object" class="btn-danger" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_not_interested" string="Not Interested" type="object" class="btn-danger" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_wrong_number" string="Wrong Number" type="object" class="btn-danger" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_duplicated" string="Duplicated" type="object" class="btn-danger" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_visited" string="Visited" type="object" class="btn-danger" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_booked" string="Booked" type="object" class="btn-success" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off']"/>
+                        <button name="action_rescheduled" string="Rescheduled" type="object" class="btn-success" invisible="stage_id not in ['untouched,no_answer,call_again,out_of_service,switched_off,already_booked']"/>
+                        <field name="stage_id" invisible="True" />
+                        <field name="team_id" invisible="True" />
+                        <field name="company_id" invisible="True" />
+                    </header>
+                    <sheet>
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <field name="id" readonly="1"/>
+                                    <field name="create_date"/>
+                                    <field name="create_uid"/>
+                                    <field name="write_date"/>
+                                    <field name="write_uid"/>
+                                    <field name="name"/>
+                                    <field name="phone"/>
+                                    <field name="email_from"/>
+                                    <field name="topic"/>
+                                    <field name="treating_doctor"/>
+                                    <field name="city"/>
+                                    <field name="bu"/>
+                                    <field name="speciality"/>
+                                    <field name="campaign"/>
+                                    <field name="campaign_activity"/>
+                                    <field name="notes"/>
+                                    <field name="lead_source"/>
+                                    <field name="business_category_id"/>
+                                    <field name="ads"/>
+                                    <field name="ad_set"/>
+                                    <field name="patient_id"/>
+                                    <field name="timestamp"/>
+                                    <field name="created_date"/>
+                                    <field name="installment"/>
+                                </group>
+                            </page>
+                            <page string="History">
+                                <div class="oe_chatter">
+                                    <field name="message_ids"/>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="crm_lead_view_form" model="ir.ui.view">
+            <field name="name">crm.lead.view.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">5</field>
+            <field name="active">true</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']" position="replace">
+                    <field name="probability" invisible="1"/>
+                    <label for="name" string="Lead" invisible="type == 'opportunity'"/>
+                    <label for="name" invisible="type == 'lead'"/>
+                    <h1><field class="text-break" name="name" placeholder="e.g. Lead Name"/></h1>
+                    <group>
+                        <field name="email_from" placeholder="e.g. abc@hotmail.com" style="width: 40%"/>
+                    </group>
+                    <group>
+                        <field name="phone" required="1" style="width: 40%"/>
+                    </group>
+                    <group>
+                        <field name="is_phone_blacklisted"/>
+                    </group>
+                </xpath>
+                <xpath expr="//group[@name='opportunity_partner']" position="replace">
+                    <field name="partner_id" invisible="1"/>
+                    <field name="mobile_blacklisted" invisible="1"/>
+                </xpath>
+                <xpath expr="//group[@name='lead_partner']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">Agent</attribute>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="string">Team</attribute>
+                </xpath>
+                <xpath expr="//group[@name='lead_info']" position="before">
+                    <newline/>
+                    <notebook>
+                        <page string="Lead Details">
+                            <group>
+                                <field name="create_uid"/>
+                                <field name="topic"/>
+                                <field name="treating_doctor"/>
+                                <field name="doctor_reservation_no"/>
+                                <field name="city"/>
+                                <field name="city_id"/>
+                                <field name="bu"/>
+                                <field name="branch_id" domain="[('can_be_selected', '=', True)]"/>
+                                <field name="speciality"/>
+                                <field name="campaign"/>
+                                <field name="campaign_activity"/>
+                                <field name="notes"/>
+                                <field name="lead_source_id" domain="[('can_be_selected', '=', True)]"/>
+                                <field name="lead_source" readonly="1"/>
+                                <field name="source_id"/>
+                                <field name="ads"/>
+                                <field name="ad_set"/>
+                                <field name="installment_company"/>
+                                <field name="patient_id"/>
+                                <field name="timestamp"/>
+                                <field name="created_date"/>
+                                <field name="installment"/>
+                                <field name="business_category_id"/>
+                                <field name="service_id"/>
+                            </group>
+                            <group invisible="related_lead_ids == False">
+                                <field name="related_lead_ids" invisible="related_lead_ids == []">
+                                    <list string="Related Leads">
+                                        <field name="name"/>
+                                        <field name="email_from"/>
+                                        <field name="phone"/>
+                                        <field name="topic"/>
+                                        <field name="city"/>
+                                        <field name="bu"/>
+                                        <field name="branch_id"/>
+                                        <field name="speciality"/>
+                                        <field name="stage_id"/>
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                    <newline/>
+                </xpath>
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
+                    <button name="%(ramcrm.action_blacklisted_wizard)d" type="action" string="Add to Blacklist" class="btn btn-warning"/>
+                </xpath>
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                    <attribute name="string">Booked</attribute>
+                    <attribute name="class">btn-success</attribute>
+                </xpath>
+                <xpath expr="//widget[@name='web_ribbon']" position="after">
+                    <widget name="web_ribbon" title="Blacklisted" bg_color="bg-warning" invisible="is_phone_blacklisted != True"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm.quick_create_opportunity_form" model="ir.ui.view">
+            <field name="name">crm.lead.form.quick_create</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">1000</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name" />
+                        <field name="phone" string="Phone" required="1"/>
+                        <field name="email_from" string="Email" />
+                        <field name="company_currency" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="user_id" invisible="1"/>
+                        <field name="user_company_ids" invisible="1"/>
+                        <field name="team_id" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="partner_name" invisible="1"/>
+                        <field name="contact_name" invisible="1"/>
+                        <field name="country_id" invisible="1"/>
+                        <field name="state_id" invisible="1"/>
+                        <field name="city" invisible="1"/>
+                        <field name="street" invisible="1"/>
+                        <field name="street2" invisible="1"/>
+                        <field name="zip" invisible="1"/>
+                        <field name="mobile" invisible="1"/>
+                        <field name="website" invisible="1"/>
+                        <field name="function" invisible="1"/>
+                        <field name="title" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="crm.crm_menu_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('group_team_manager')])]"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="crm.crm_lead_action_pipeline">
+            <field name="name">Leads</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">kanban,list,graph,pivot,form,calendar,activity</field>
+            <field name="domain">[('type','=','opportunity')]</field>
+            <field name="context">{
+                    'default_type': 'opportunity',
+                    'search_default_assigned_to_me': 1
+            }</field>
+            <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>
+        </record>
+
+<!--        <delete model="ir.ui.menu" id="crm.res_partner_menu_customer" />-->
+<!--        <delete model="ir.ui.menu" id="crm.sales_team_menu_team_pipeline" />-->
+<!--        <delete model="ir.ui.menu" id="crm.crm_menu_sales" />-->
+
+        <menuitem id="crm.crm_lead_menu_my_activities" name="My Activities" parent="crm.crm_menu_root" action="crm.crm_lead_action_my_activities" sequence="2" groups="ramcrm.group_agent"/>
+        <menuitem id="crm.menu_crm_opportunities" name="My Leads" parent="crm.crm_menu_root" action="crm.action_your_pipeline" sequence="1"/>
+        <menuitem id="crm.crm_opportunity_report_menu" name="Leads" parent="crm.crm_menu_report" action="crm.crm_opportunity_report_action" sequence="3"/>
+    </data>
+</odoo>

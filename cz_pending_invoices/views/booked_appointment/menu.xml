@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_booked_appointment"
+            name="Booked Appointments"
+            action="action_booked_appointment"
+            parent="crm.crm_menu_root"
+            sequence="23"/>
+    </data>
+</odoo>
+

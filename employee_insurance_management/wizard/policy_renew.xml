@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wiz_action_create_emp_policy_renew" model="ir.ui.view">
+            <field name="name">employee.insurance.wizard</field>
+            <field name="model">employee.insurance.wizard</field>
+                <field name="arch" type="xml">
+                    <form string="Insurance">
+                        <group>
+                            <group>
+                                <field name="start_date"/>
+                            </group>
+                            <group>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_create_renew" type="object" string="Update" class="btn-primary"/>
+                            or
+                            <button string="_Cancel" class="oe_link" special="cancel" />
+                        </footer>
+                    </form>
+                </field>
+        </record>
+        
+        <record id="action_wiz_insurance_create_emp_policy_renew" model="ir.actions.act_window">
+            <field name="name">Employee Insurance Renew</field>
+            <field name="res_model">employee.insurance.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wiz_action_create_emp_policy_renew"/>
+            <!-- <field name="view_type">form</field> -->
+            <field name="target">new</field>
+        </record>
+   </data>
+</odoo>
+
+

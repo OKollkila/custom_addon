@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_insurance_form_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Form View</field>
+            <field name="model">employee.insurance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- <button string="Renew Insurance Now" name="%(action_wiz_insurance_create_emp_policy_renew)d"  type="action" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['to_expired','expired'])]}"/> -->
+                        <button string="Renew Insurance Now" name="%(action_wiz_insurance_create_emp_policy_renew)d"  type="action" class="oe_highlight" invisible="state not in ['to_expired','expired']"/>
+                        <!-- <button string="Confirm" class="oe_highlight" name="action_confirm" type="object" states="draft"/> -->
+                        <button string="Confirm" class="oe_highlight" name="action_confirm" type="object" invisible="state not in 'draft'"/>
+                        <!-- <button string="In Progress" class="oe_highlight" name="action_progress" type="object" states="confirm"/> -->
+                        <button string="In Progress" class="oe_highlight" name="action_progress" type="object" invisible="state not in 'confirm'"/>
+                        <!-- <button string="Cancel" name="action_cancel" states="draft" type="object" /> -->
+                        <button string="Cancel" name="action_cancel" invisible="state not in 'draft'" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,in_progress,to_expired,expired,close"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                                <button class="oe_inline oe_stat_button" type="object" name="action_button_equipment"
+                                icon="fa-user-circle" string="Employee">
+                                </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <!-- <field name="name" string="Name" placeholder="Name" attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name="name" string="Name" placeholder="Name" readonly="state != ('draft','confirm')"/>
+                            </h1>
+                        </div>
+
+                            <group>
+                            <group>
+                                <!-- <field name="partner_id" widget="res_partner_many2one" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <!-- <field name="partner_id" widget="res_partner_many2one"  context="{ 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name="partner_id" widget="res_partner_many2one"  context="{ 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' readonly="state not in ('draft','confirm')"/>
+                                <!-- <field name='policy_no' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/>   -->
+                                <field name='policy_no' readonly="state not in ('draft','confirm')"/>    
+                                <!-- <field name='policy_taken' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/>
+ -->
+                                <field name='policy_taken' readonly="state not in ('draft','confirm')"/>
+
+                                <!-- <field name='start_date' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name='start_date' readonly="state not in ('draft','confirm')"/>
+                                <!-- <field name='end_date'
+                                attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name='end_date' readonly="state not in ('draft','confirm')"/>
+                                <!-- <field name='employee_id' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/>
+ -->
+                                <field name='employee_id' readonly="state not in ('draft','confirm')"/>
+
+                                <!-- <field name='amount' widget="monetary" attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name='amount' widget="monetary" readonly="state not in ('draft','confirm')"/>
+                               <!--  <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency" attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency" readonly="state not in ('draft','confirm')"/>
+
+                            </group>
+                            <group>
+                                <!-- <field name='policy_company_id' widget="res_partner_many2one" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <!-- <field name='policy_company_id' widget="res_partner_many2one"  context="{ 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name='policy_company_id' widget="res_partner_many2one"  context="{ 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' readonly="state not in ('draft','confirm')"/>
+                               <!--  <field name='contact_person' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name='contact_person' readonly="state not in ('draft','confirm')"/>
+                               <!--  <field name='phone' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/>
+ -->
+                                 <field name='phone' readonly="state not in ('draft','confirm')"/>
+
+                                <!-- <field name='email' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                <field name='email' readonly="state not in ('draft','confirm')"/>
+
+                                <field name='parent_id'/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                         <page string="Insurance Details" name="property">
+                            <!-- <group> -->
+                                <field name="property_line_ids" nolabel="1"/>
+                            <!-- </group> -->
+                            <!-- <group string="Internal Notes"> -->
+                            <separator string="Internal Notes"/>
+                                    <field name="internal_notes" placeholder="Internal notes....." nolabel="1"/>
+                                 <!-- </group> -->
+                        </page>
+                        <page string="Other Info" name="other_info">
+                            <group>
+                                <group>
+                                    <!-- <field name="company_id" groups="base.group_multi_company" attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                    <field name="company_id" groups="base.group_multi_company" readonly="state not in ('draft','confirm')"/>
+                                    <!-- <field name='responsible_user_id' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                    <field name='responsible_user_id' readonly="state not in ('draft','confirm')"/>
+                                </group>
+                                <group>
+                                    <field name="create_date" readonly="1"/>
+                                     <!-- <field name='user_id' attrs="{'readonly': [('state', '!=', 'draft'),('state', '!=', 'confirm')]}"/> -->
+                                    <field name='user_id' readonly="state not in ('draft','confirm')"/>
+                                </group>
+                            </group>
+                            
+                        </page>
+                        
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_employee_insurance_tree_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Tree View</field>
+            <field name="model">employee.insurance</field>
+            <field name="arch" type="xml">
+                <list>
+                   <field name='name'/>
+                   <field name="policy_no"/>
+                   <field name="partner_id"/>
+                   <field name='policy_company_id'/>
+                   <field name='start_date'/> 
+                   <field name='end_date'/>
+                   <field name='employee_id'/>
+                   <field name='state'/>
+                   <field name="company_id" groups="base.group_multi_company"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_employee_insurance_kanban_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Kanban View</field>
+            <field name="model">employee.insurance</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by='state'>
+                    <field name="name"/>
+                    <field name='property_line_ids'/>
+                    <field name='user_id'/>
+                    <field name="contact_person"/>
+                    <field name="policy_no"/>
+                    <field name="policy_company_id"/>
+                    <field name="policy_taken"/>
+                    <field name="employee_id"/>
+                    <field name="responsible_user_id"/>
+                    <field name="message_needaction_counter"/>
+                    <field name="activity_ids" />
+                    <field name="activity_state" />
+                    <templates>
+                    <t t-name="kanban-tooltip">
+                       <ul class="oe_kanban_tooltip">
+                          <li><b>Policy No:</b> <field name="policy_no"/></li>
+                          <li><b>Policy namemployee_insurance_management.action_wiz_insurance_create_policy_renewe:</b> <field name="name"/></li>
+                       </ul>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color)} oe_kanban_card oe_kanban_global_click oe_semantic_html_override">
+                            <div class="o_dropdown_kanban dropdown">
+
+                                <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit...</a></t>
+                                    <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_content" tooltip="kanban-tooltip">
+                                <div class="o_kanban_record_top">
+                                    <b class="o_kanban_record_title"><field name="name"/></b>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <span name="user_id" t-if="record.user_id">Policy No: <field name="policy_no"/><br/></span>
+                                    <span name="user_id" t-if="record.user_id">Insurance Holder Name: <field name="partner_id"/><br/></span>
+                                    
+                                    <span class="oe_grey" t-if="record.employee_id"><field name="employee_id"/><br/></span>
+                                    <span class="oe_grey" t-if="record.policy_taken"><field name="policy_taken"/><br/></span>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <div class="o_kanban_inline_block ml4 mr4">
+                                            <field name="activity_ids" widget="kanban_activity" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oe_clear"></div>
+                        </div>
+                    </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_employee_insurance_graph_view" model="ir.ui.view">
+        <field name="name">Employee Insurance Graph View</field>
+        <field name="model">employee.insurance</field>
+        <field name="arch" type="xml">
+            <graph string="Insurance">
+                <field name="employee_id"/>
+                <field name="policy_no"/>
+            </graph>
+        </field>
+        </record>
+
+        <record id="view_employee_insurance_pivot_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Pivot View</field>
+            <field name="model">employee.insurance</field>
+            <field name="arch" type="xml">
+                <pivot string="Insurance">
+                    <field name="employee_id"/>
+                    <field name="state"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_employee_insurance_search_view" model="ir.ui.view">
+            <field name="name">Employee Insurance Search View</field>
+            <field name="model">employee.insurance</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name='name'/>
+                    <field name='start_date'/> 
+                    <field name='end_date'/>
+                    <group string="Filters..">
+                        <filter name="policy_new" icon="terp-gtk-media-pause" string="New" domain="[('state','=','draft')]"/>
+                        <filter name="confirm" icon="terp-gtk-media-pause" string="Confirmed" domain="[('state','=','confirm')]"/>
+                        <filter name="policy_in_progress" icon="terp-gtk-media-pause" string="In Progress" domain="[('state','=','in_progress')]"/>
+                        <filter name="policy_to_expire" icon="terp-gtk-media-pause" string="Expire Soon" domain="[('state','=','to_expired')]"/>
+                        <filter name="policy_expired" icon="terp-gtk-media-pause" string="Expired" domain="[('state','=','expired')]"/>
+                    </group>
+
+                    <group  expand='0' string='Group by...'>
+                        
+                        <filter string='Insurance Holder Name' name="partner_id" domain="[]" context="{'group_by': 'partner_id'}"/>
+                        <filter string='Equipment' name="employee_id" domain="[]" context="{'group_by': 'employee_id'}"/>
+                        <filter string='Company' name="company_id" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+
+                        <filter string='Responsible User' name="responsible_user_id" domain="[]" context="{'group_by': 'responsible_user_id'}"/>
+
+                        <filter string='Parent' name="parent_id" domain="[]" context="{'group_by': 'parent_id'}"/>
+
+
+                        <filter string='Start Date' name="start_date" domain="[]" context="{'group_by': 'start_date'}"/>
+                        <filter string='End Date' name="end_date" domain="[]" context="{'group_by': 'end_date'}"/>
+
+                        <filter string='State' name="state" domain="[]" context="{'group_by': 'state'}"/>
+                     </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_employee_insurance_view">
+            <field name="name">Employee Insurance</field>
+            <field name="res_model">employee.insurance</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="view_mode">kanban,list,form,search,pivot,graph</field>
+        </record>
+
+     <menuitem
+        id="menu_employee_insurance_request_form"
+        name="Employee Insurances"
+        parent="hr.menu_hr_root"
+        action="action_employee_insurance_view"
+        sequence="3"/>
+   
+    </data>
+</odoo>
+
+

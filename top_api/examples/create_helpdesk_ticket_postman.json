@@ -1,0 +1,16 @@
+{
+  "name": "postman3",
+  "partner_name": "Abdulrahman",
+  "partner_phone": "01011827324",
+  "patient_national_id": "21212121214",
+  "company_id": 5,
+  "branch_id": 45,
+  "creation_note": "note",
+  "description": "DMC test",
+  "ticket_type_id": 28,
+  "team_id": 452,
+  "invid": "INV-D-TEC-5test250",
+  "ram_id": "postman",
+  "workflow_level_id": 1,
+  "stage_id": 2
+}

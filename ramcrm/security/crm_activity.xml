@@ -1,0 +1,9 @@
+<odoo>
+<!--    <delete model="ir.rule" id="crm.crm_activity_report_rule_personal_activities"/>-->
+    <record id="crm_activity_report_rule_personal_activities" model="ir.rule">
+        <field name="name">Own Activities</field>
+        <field ref="crm.model_crm_activity_report" name="model_id"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+    </record>
+</odoo>

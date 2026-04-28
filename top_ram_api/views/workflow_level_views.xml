@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="workflow_level_view_tree" model="ir.ui.view">
+        <field name="name">workflow.level.tree</field>
+        <field name="model">workflow.level</field>
+        <field name="arch" type="xml">
+            <list string="Workflow Levels" create="1" delete="1" edit="1">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="escalation_hours"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="workflow_level_view_form" model="ir.ui.view">
+        <field name="name">workflow.level.form</field>
+        <field name="model">workflow.level</field>
+        <field name="arch" type="xml">
+            <form string="Workflow Level">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="e.g. 1, 2, 3, 4"/>
+                            <field name="name" placeholder="e.g. Level 1"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="escalation_hours" placeholder="e.g. 72 (0 = no auto-escalation)"/>
+                            <field name="escalation_action"/>
+                            <field name="escalation_email_user_id" invisible="escalation_action == 'upgrade_only'"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu: Helpdesk > Configuration > Workflow Levels -->
+    <record id="workflow_level_menu_action" model="ir.actions.act_window">
+        <field name="name">Workflow Levels</field>
+        <field name="res_model">workflow.level</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create workflow levels (e.g. Level 1, Level 2, Level 3, Level 4).
+            </p>
+            <p>
+                Each level has a <strong>Code</strong> (string ID used in API) and <strong>Name</strong> (display name).
+            </p>
+        </field>
+    </record>
+
+    <!-- Parent: main Helpdesk menu (works when helpdesk.menu_helpdesk_configuration is missing, e.g. on Odoo.com) -->
+    <menuitem id="workflow_level_menu"
+              name="Workflow Levels"
+              parent="helpdesk.menu_helpdesk_root"
+              action="workflow_level_menu_action"
+              sequence="50"/>
+
+</odoo>

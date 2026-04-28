@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="view_crm_case_opportunities_filter" model="ir.ui.view">
+            <field name="name">crm.lead.search.opportunity</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='assigned_to_me']" position="attributes">
+                    <attribute name="string">My assigned Leads</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='open_opportunities']" position="attributes">
+                    <attribute name="string">Open Leads</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='open_opportunities']" position="after">
+                    <filter string="Today" name="today" domain="[('create_date','&lt;',context_today().strftime('%Y-%m-%d 23:59:59')), ('create_date','&gt;=',context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                    <filter string="Include Archived" name="archived" domain="['|', ('active', '=', True), ('active', '=', False)]"/>
+                </xpath>
+                <xpath expr="//filter[@name='salesperson']" position="attributes">
+                    <attribute name="string">Agent</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='saleschannel']" position="attributes">
+                    <attribute name="string">Team</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='compaign']" position="attributes">
+                    <attribute name="context">{'group_by':'campaign'}</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='stage']" position="after">
+                    <filter string="Stage2" name="stats" context="{'group_by':'stage2'}"/>
+                    <filter string="Speciality" name="speciality" context="{'group_by':'speciality'}"/>
+                    <filter string="BU" name="bu" context="{'group_by':'bu'}"/>
+                    <filter string="City (Canonical)" name="city" context="{'group_by':'city_id'}"/>
+                    <filter string="Branch" name="branch" context="{'group_by':'branch_id'}"/>
+                    <filter string="Department" name="department" context="{'group_by':'department_id'}"/>
+                    <filter string="Service" name="service" context="{'group_by':'service_id'}"/>
+                    <filter string="Lead Source (Canonical)" name="service" context="{'group_by':'lead_source_id'}"/>
+                    <filter string="Lead Source Level 1" name="service" context="{'group_by':'lead_source_level_1_id'}"/>
+                    <filter string="Lead Source Level 2" name="service" context="{'group_by':'lead_source_level_2_id'}"/>
+                    <field name="speciality" />
+                    <field name="stage_id" />
+                    <field name="bu" />
+                    <field name="city_id" />
+                    <field name="branch_id" />
+                    <field name="department_id" />
+                    <field name="service_id" />
+                    <field name="create_date" />
+                    <field name="source_id" />
+                    <field name="lead_source_id" />
+                    <field name="lead_source_level_1_id" />
+                    <field name="lead_source_level_2_id" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

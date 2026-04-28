@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+
+# Part of Probuse Consulting Service Pvt. Ltd. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': "Employee Ideas",
+    'summary':  "Human Resource - Employee Ideas & Votes",
+    'description': """
+        HR Employee Ideas Modules:
+        - Employee can post the idea and also employees vote for this idea.
+
+Tags:
+Employee ideas
+employee votes
+ideas and votes
+human resource employee ideas
+hr ideas
+hr_ideas
+employee_ideas
+company ideas
+company votes
+    """,
+    'author': "Probuse Consulting Service Pvt. Ltd.",
+    'website': "www.probuse.com",
+    'category': 'Human Resources',
+    'price': 50.0,
+    'currency': 'EUR',
+    'version': '1.0',
+    'depends': ['hr'],
+    'data': [
+            'security/ir.model.access.csv',
+            'wizard/ideas_review.xml',
+            'views/employee_ideas.xml',
+            'report/voting_reports.xml',
+            'data/ideas_sequence.xml',
+            ],
+    'installable': True,
+    'application': False,
+}
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

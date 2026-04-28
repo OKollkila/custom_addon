@@ -1,0 +1,12 @@
+id,name,can_be_selected
+LEAD_SOURCE_HELPDESK,Helpdesk Ticket,true
+lead_source_digital,Digital,false
+lead_source_audit,Audit,false
+lead_source_corporate,Corporate,true
+lead_source_whatsapp,WhatsApp,true
+lead_source_x,X,true
+lead_source_corporate_lp,Corporate LP,true
+lead_source_blogger_influencer,Blogger/Influencer,true
+lead_source_insurance,Insurance,true
+lead_source_whatsapp_chatbot,WhatsApp Chatbot,false
+lead_source_whatsapp_checkout_survey_bad,WhatsApp Checkout Bad Survey,false

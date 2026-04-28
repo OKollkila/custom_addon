@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="0">
+        <!-- Create external ID for existing group with ID 45 -->
+        <record id="group_helpdesk_moderator" model="res.groups">
+            <field name="name">Helpdesk –Moderators</field>
+        </record>
+        <record id="group_helpdesk_refund" model="res.groups">
+            <field name="name">Helpdesk Refund</field>
+        </record>
+
+    </data>
+</odoo>

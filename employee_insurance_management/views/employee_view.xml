@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_employee_form_inherit_insurance" model="ir.ui.view">
+        <field name="name">employee.form.inherit.insurance</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <!-- <button name="action_create_insurance" type="object" string="Create Insurance" confirm="Are you sure you want create Insurance for Employee ?" class="oe_highlight"
+                      groups="employee_insurance_management.group_employee_insurance_officer"
+                      attrs="{'invisible': [('is_create_insurance','=',True)]}"/> -->
+                      <button name="action_create_insurance" type="object" string="Create Insurance" confirm="Are you sure you want create Insurance for Employee ?" class="oe_highlight"
+                      groups="employee_insurance_management.group_employee_insurance_officer"
+                      invisible="is_create_insurance"/>
+                </header>
+
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_inline oe_stat_button" name="action_button_insurance" type="object"
+                    icon="fa-pencil-square-o" string="Insurance" >
+                 </button>
+            </xpath>
+           <xpath expr="//page[last()]" position="after">
+                      <page string="Insurance" invisible="1">
+                       <group>
+                            <field name="insurance_ids" nolabel="1" invisible="1"/>
+                            <field name="is_create_insurance" invisible="1"/>
+                       </group>
+                      </page>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

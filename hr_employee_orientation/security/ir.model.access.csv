@@ -1,0 +1,11 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+hr_officer_orientation,hr_officer_orientation,model_hr_orientation,hr.group_hr_user,1,1,1,1
+hr_employee_orientation,hr_employee_orientation,model_hr_orientation,base.group_user,1,1,1,0
+hr_manager_orientation,hr_manager,model_hr_orientation,hr.group_hr_manager,1,1,1,1
+hr_officer_checklist,hr_officer_checklist,model_hr_orientation_checklist,hr.group_hr_user,1,1,1,1
+hr_employee_checklist,hr_employee_checklist_id,model_hr_orientation_checklist,base.group_user,1,1,1,0
+hr_manager_checklist,hr_manager_checklist_id,model_hr_orientation_checklist,hr.group_hr_manager,1,1,1,1
+hr_manager_checklist_config,hr_manager_checklist_config,model_hr_orientation_checklist_config,hr.group_hr_user,1,1,1,1
+hr_employee_checklist_config,hr_employee_checklist_config,model_hr_orientation_checklist_config,base.group_user,1,0,0,0
+hr_manager_main_checklist_config,hr_manager_main_checklist_config,model_main_checklist_config,hr.group_hr_user,1,1,1,1
+hr_employee_main_checklist_config,hr_employee_main_checklist_config,model_main_checklist_config,base.group_user,1,0,0,0

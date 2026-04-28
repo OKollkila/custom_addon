@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_workflow_level_user,workflow.level.user,model_workflow_level,base.group_user,1,0,0,0
+access_workflow_level_manager,workflow.level.manager,model_workflow_level,helpdesk.group_helpdesk_manager,1,1,1,1
+access_branch_workflow_line_user,clinizone.branch.workflow.line.user,model_clinizone_branch_workflow_line,base.group_user,1,0,0,0
+access_branch_workflow_line_manager,clinizone.branch.workflow.line.manager,model_clinizone_branch_workflow_line,helpdesk.group_helpdesk_manager,1,1,1,1

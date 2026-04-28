@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- <report 
+            id="action_report_hr_timesheet"
+            model="hr.employee" 
+            string="Print Timesheet Status"
+            report_type="qweb-pdf"
+            name="hr_timesheet_status_report.report_hr_timesheet"
+            file="hr_timesheet_status_report.report_hr_timesheet"
+            menu="False"
+            /> -->
+
+        <record id="action_report_hr_timesheet" model="ir.actions.report">
+            <field name="name">Print Timesheet Status</field>
+            <field name="model">hr.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_timesheet_status_report.report_hr_timesheet</field>
+            <field name="report_file">hr_timesheet_status_report.report_hr_timesheet</field>
+            <field name="binding_model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_hr_timesheet"> 
+            <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <h2 class="text-center">Employees Incomplete Timesheet Report</h2>
+                            <div class="row">
+                                <div class="col-6 ml-32">
+                                    <p>
+                                        <strong>Week Start Date:</strong>
+                                        <t t-if="start_time" ><span t-esc="start_time"/></t>
+                                    </p>
+                                </div>
+                                <div class="col-6 mr-64">
+                                    <p>
+                                        <strong>Week End Date:</strong>
+                                        <t t-if="end_time" ><span  t-esc="end_time"/></t>
+                                    </p>
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Manager</th>
+                                        <th class="text-right">Working Hours</th>
+                                        <th class="text-right">Timesheet Hours</th>
+                                        <th class="text-right">Missing Timeshee Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                      <tr t-foreach="get_hr_timesheet" t-as="line" style="page-break-inside: avoid;">
+                                        <td><span t-esc="line.name"/></td>
+                                        <td><span t-esc="line.parent_id.name"/></td>
+                                        <td class="text-right"><span t-esc="get_hr_timesheet[line]['consumed_hours']" t-options="{'widget': 'float_time'}"/></td>
+                                        <td class="text-right"><span t-esc="get_hr_timesheet[line]['working_hour']" t-options="{'widget': 'float_time'}"/></td>
+                                        <td class="text-right"><span t-esc="get_hr_timesheet[line]['missing_hours']" t-options="{'widget': 'float_time'}"/></td>
+                                      </tr>
+                                  </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+                </t>
+        </template>
+    </data>
+</odoo>

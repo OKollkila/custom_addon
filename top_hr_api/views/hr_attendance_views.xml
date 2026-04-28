@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit hr.attendance form view to add address field -->
+        <record id="hr_attendance_view_form_inherit_address" model="ir.ui.view">
+            <field name="name">hr.attendance.form.inherit.address</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add address field after the employee field -->
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="address_id" 
+                            string=" In Address"
+                            help="The address/location where the employee clocked in/out"/>
+                    <field name="out_address_id" 
+                            string="Out Address"
+                            help="The address/location where the employee clocked out"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Create new hr.attendance search view with address filter -->
+        <record id="hr_attendance_view_search_with_address" model="ir.ui.view">
+            <field name="name">hr.attendance.search.with.address</field>
+            <field name="model">hr.attendance</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Attendances">
+                    <field name="employee_id"/>
+                    <field name="address_id" string="Address"/>
+                     <field name="out_address_id" string="Out Address"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                    <separator/>
+                    <filter string="Today" name="today" domain="[('check_in', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('check_in', '&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                    <filter string="This Week" name="this_week" domain="[('check_in', '&gt;=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')), ('check_in', '&lt;=', (context_today() + datetime.timedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                    <filter string="Open" name="open" domain="[('check_out', '=', False)]"/>
+                    <filter string="Closed" name="closed" domain="[('check_out', '!=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Employee" name="employee" context="{'group_by': 'employee_id'}"/>
+                        <filter string="Address" name="address" context="{'group_by': 'address_id'}"/>
+                        <filter string="Out Address" name="out_address" context="{'group_by': 'out_address_id'}"/>
+                        <filter string="Day" name="day" context="{'group_by': 'check_in:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

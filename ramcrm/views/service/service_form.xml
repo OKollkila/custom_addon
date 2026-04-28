@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="view_service_form" model="ir.ui.view">
+            <field name="name">service.form</field>
+            <field name="model">clinizone.service</field>
+            <field name="arch" type="xml">
+                <form string="Branch">
+                    <sheet>
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="department_id"/>
+<field name="company_ids" widget="many2many_checkboxes"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

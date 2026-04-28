@@ -1,0 +1,6 @@
+id,name,sequence,fold,stage2,is_won
+lost,Lost,9999,1,lost,0
+stage_busy,Busy,100,0,touched,0
+stage_inquiry,Inquiry,100,0,touched,0
+stage_waiting_list,Waiting List,200,0,touched,0
+stage_satisfied,Satisfied,300,0,booked,1

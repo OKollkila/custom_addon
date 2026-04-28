@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "ram-helpdesk-api-collection",
+		"name": "RAM Helpdesk Tickets API",
+		"description": "API collection for retrieving Helpdesk tickets with RAM ID from Odoo.\n\n## Authentication\nAll endpoints require Bearer token authentication.\n\n## Setup\n1. Set the `base_url` variable to your Odoo instance URL\n2. Set the `api_token` variable to your configured API access token\n\n## Endpoints\n- GET /api/v1/helpdesk/tickets/ram - Get all RAM tickets with date filtering\n- GET /api/v1/helpdesk/tickets/ram/:id - Get a specific RAM ticket by ID",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8069",
+			"type": "string",
+			"description": "Your Odoo instance URL (e.g., http://localhost:8069 or https://your-odoo-domain.com)"
+		},
+		{
+			"key": "api_token",
+			"value": "YOUR_SECURE_API_TOKEN_HERE",
+			"type": "string",
+			"description": "API access token configured in Odoo System Parameters (top_ram_api.api_access_token)"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Get All RAM Tickets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"helpdesk",
+						"tickets",
+						"ram"
+					]
+				},
+				"description": "Retrieve all helpdesk tickets where ram_id is not empty.\n\n**Response includes:**\n- ram_id\n- invid\n- refund_reason\n- workflow_level\n- All related ticket data (stage, partner, user, dates, etc.)"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"body": "{\n    \"success\": true,\n    \"count\": 2,\n    \"date_from\": null,\n    \"date_to\": null,\n    \"tickets\": [\n        {\n            \"ram_id\": \"RAM-2026-001\",\n            \"invid\": \"INV-2026-00123\",\n            \"refund_reason\": \"Customer requested refund due to service issue\",\n            \"workflow_level\": \"2\",\n            \"workflow_level_display\": \"Level 2\",\n            \"id\": 1,\n            \"name\": \"Refund Request #001\",\n            \"description\": \"Customer is requesting a full refund\",\n            \"priority\": \"1\",\n            \"create_date\": \"2026-01-15T10:30:00\",\n            \"write_date\": \"2026-01-20T14:45:00\",\n            \"stage_id\": 2,\n            \"stage_name\": \"In Progress\",\n            \"ticket_type_id\": 28,\n            \"ticket_type_name\": \"Refund\",\n            \"team_id\": 1,\n            \"team_name\": \"Customer Support\",\n            \"partner_id\": 10,\n            \"partner_name\": \"John Doe\",\n            \"partner_email\": \"john.doe@example.com\",\n            \"partner_phone\": \"+1234567890\",\n            \"user_id\": 5,\n            \"user_name\": \"Support Agent\",\n            \"sla_deadline\": \"2026-01-25T17:00:00\",\n            \"sla_reached\": false,\n            \"rating_last_value\": 4.5,\n            \"tag_ids\": [\n                {\"id\": 1, \"name\": \"Urgent\"},\n                {\"id\": 3, \"name\": \"Refund\"}\n            ]\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get RAM Tickets with Date Filter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram?date_from=2026-01-01&date_to=2026-01-31",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"helpdesk",
+						"tickets",
+						"ram"
+					],
+					"query": [
+						{
+							"key": "date_from",
+							"value": "2026-01-01",
+							"description": "Start date filter (YYYY-MM-DD format)"
+						},
+						{
+							"key": "date_to",
+							"value": "2026-01-31",
+							"description": "End date filter (YYYY-MM-DD format)"
+						}
+					]
+				},
+				"description": "Retrieve helpdesk tickets with RAM ID, filtered by date range.\n\n**Query Parameters:**\n- `date_from` (optional): Start date in YYYY-MM-DD format\n- `date_to` (optional): End date in YYYY-MM-DD format"
+			},
+			"response": [
+				{
+					"name": "Success Response with Date Filter",
+					"originalRequest": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram?date_from=2026-01-01&date_to=2026-01-31"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"body": "{\n    \"success\": true,\n    \"count\": 1,\n    \"date_from\": \"2026-01-01\",\n    \"date_to\": \"2026-01-31\",\n    \"tickets\": [\n        {\n            \"ram_id\": \"RAM-2026-001\",\n            \"invid\": \"INV-2026-00123\",\n            \"refund_reason\": \"Customer requested refund\",\n            \"workflow_level\": \"2\",\n            \"workflow_level_display\": \"Level 2\",\n            \"id\": 1,\n            \"name\": \"Refund Request #001\",\n            \"create_date\": \"2026-01-15T10:30:00\",\n            \"stage_name\": \"In Progress\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Invalid Date Format Error",
+					"originalRequest": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram?date_from=01-01-2026"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"body": "{\n    \"success\": false,\n    \"error\": \"Invalid date_from format. Use YYYY-MM-DD\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get RAM Tickets (Only Start Date)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram?date_from=2026-01-01",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"helpdesk",
+						"tickets",
+						"ram"
+					],
+					"query": [
+						{
+							"key": "date_from",
+							"value": "2026-01-01",
+							"description": "Get all tickets from this date onwards"
+						}
+					]
+				},
+				"description": "Retrieve all tickets created from a specific date onwards."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single RAM Ticket by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"helpdesk",
+						"tickets",
+						"ram",
+						"1"
+					]
+				},
+				"description": "Retrieve a specific helpdesk ticket by its ID.\n\n**Path Parameters:**\n- `ticket_id`: The Odoo ticket ID (integer)\n\n**Note:** Only returns tickets that have a non-empty ram_id"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram/1"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"body": "{\n    \"success\": true,\n    \"ticket\": {\n        \"ram_id\": \"RAM-2026-001\",\n        \"invid\": \"INV-2026-00123\",\n        \"refund_reason\": \"Customer requested refund due to service issue\",\n        \"workflow_level\": \"2\",\n        \"workflow_level_display\": \"Level 2\",\n        \"id\": 1,\n        \"name\": \"Refund Request #001\",\n        \"description\": \"Customer is requesting a full refund\",\n        \"priority\": \"1\",\n        \"create_date\": \"2026-01-15T10:30:00\",\n        \"write_date\": \"2026-01-20T14:45:00\",\n        \"stage_id\": 2,\n        \"stage_name\": \"In Progress\",\n        \"ticket_type_id\": 28,\n        \"ticket_type_name\": \"Refund\",\n        \"team_id\": 1,\n        \"team_name\": \"Customer Support\",\n        \"partner_id\": 10,\n        \"partner_name\": \"John Doe\",\n        \"partner_email\": \"john.doe@example.com\",\n        \"partner_phone\": \"+1234567890\",\n        \"user_id\": 5,\n        \"user_name\": \"Support Agent\",\n        \"sla_deadline\": \"2026-01-25T17:00:00\",\n        \"sla_reached\": false,\n        \"rating_last_value\": 4.5,\n        \"tag_ids\": [\n            {\"id\": 1, \"name\": \"Urgent\"},\n            {\"id\": 3, \"name\": \"Refund\"}\n        ]\n    }\n}"
+				},
+				{
+					"name": "Ticket Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram/99999"
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"body": "{\n    \"success\": false,\n    \"error\": \"Ticket not found or has no RAM ID\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Authentication Error Examples",
+			"item": [
+				{
+					"name": "Missing Authorization Header",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"helpdesk",
+								"tickets",
+								"ram"
+							]
+						},
+						"description": "Example of request without Authorization header"
+					},
+					"response": [
+						{
+							"name": "401 Unauthorized",
+							"status": "Unauthorized",
+							"code": 401,
+							"body": "{\n    \"success\": false,\n    \"error\": \"Missing Authorization header. Use: Authorization: Bearer <token>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Invalid Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "invalid_token_here",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/helpdesk/tickets/ram",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"helpdesk",
+								"tickets",
+								"ram"
+							]
+						},
+						"description": "Example of request with invalid Bearer token"
+					},
+					"response": [
+						{
+							"name": "401 Unauthorized - Invalid Token",
+							"status": "Unauthorized",
+							"code": 401,
+							"body": "{\n    \"success\": false,\n    \"error\": \"Invalid Bearer token\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

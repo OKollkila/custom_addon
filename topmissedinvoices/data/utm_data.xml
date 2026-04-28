@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- UTM Source for Rejected Services -->
+        <record id="utm_source_rejected_services" model="utm.source">
+            <field name="name">Rejected Services</field>
+        </record>
+        
+        <!-- UTM Campaign for Rejected Services Follow-up -->
+        <record id="utm_campaign_rejected_services" model="utm.campaign">
+            <field name="name">Rejected Services Follow-up</field>
+        </record>
+    </data>
+</odoo>

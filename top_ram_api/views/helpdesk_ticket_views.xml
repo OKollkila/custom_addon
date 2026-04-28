@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Inherit Helpdesk Ticket Form View -->
+    <record id="helpdesk_ticket_view_form_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.inherit.ram.api</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Add workflow_level field after stage_id -->
+            <field name="stage_id" position="after">
+                <field name="workflow_level_id" options="{'no_create': True}" readonly="1"/>
+            </field>
+                        <field name="name" position="after">
+                        <field name="ram_id" invisible="1" />
+                            <field name="invid" invisible="0" />
+            </field>
+
+                 <field name="tag_ids" position="after">
+                        <field name="refund_reason" placeholder="Enter Reason details here..."/>
+            </field>
+                    <xpath expr="//header" position="inside">
+                        <button name="action_complete_level_4"
+                                string="Complete"
+                                type="object"
+                                class="oe_highlight"
+                                invisible="not is_level_4 or is_level_4_completed"/>
+                    </xpath>
+
+                    <xpath expr="//sheet" position="inside">
+                        <field name="is_level_4" invisible="1"/>
+                        <field name="is_level_4_completed" invisible="1"/>
+                        <field name="refund_processor_id" invisible="1"/>
+                     </xpath>
+
+                    <xpath expr="//header" position="inside">
+                        <button name="action_confirm_refund_sent"
+                                string="Confirm Refund"
+                                type="object"
+                                class="oe_highlight"
+                                groups="top_ram_api.group_helpdesk_refund_processor"
+                                invisible="not is_level_4 or not is_level_4_completed or is_refund_sent"/>
+                    </xpath>
+             <xpath expr="//field[@name='follow_up']" position="after">
+                <field name="refund_processor_id" readonly="1" options="{'no_open': True, 'no_create': True}" invisible="1" />
+            </xpath>
+
+        </field>
+
+    </record>
+
+    <record id="view_helpdesk_ticket_search_inherit_level4" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search.inherit.level4</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//search" position="inside">
+                <filter string="Level 4 - Completed"
+                        name="filter_level_4_completed"
+                        domain="[('is_level_4', '=', True), ('is_level_4_completed', '=', True)]"/>
+
+                <filter string="Level 4 - Pending"
+                        name="filter_level_4_pending"
+                        domain="[('is_level_4', '=', True), ('is_level_4_completed', '=', False)]"/>
+                 <filter string="done Refund" name="refund_sent" domain="[('is_refund_sent', '=', True)]"/>
+                 <filter string=" waiting Refund" name="waiting_refund" domain="[('is_refund_sent', '=', False), ('is_level_4_completed', '=', True)]"/>
+            </xpath>
+
+
+
+
+
+        </field>
+    </record>
+
+</odoo>
+

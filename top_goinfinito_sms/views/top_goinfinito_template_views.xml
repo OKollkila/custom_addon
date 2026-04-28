@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Goinfinito Template Form View -->
+    <record id="view_top_goinfinito_template_form" model="ir.ui.view">
+        <field name="name">top.goinfinito.template.form</field>
+        <field name="model">top.goinfinito.template</field>
+        <field name="arch" type="xml">
+            <form string="SMS Template">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="template_type"/>
+                            <field name="company_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Arabic Message">
+                            <field name="body_ar" nolabel="1" placeholder="Use # to represent ticket name"/>
+                        </group>
+                        <group string="English Message">
+                            <field name="body_en" nolabel="1" placeholder="Use # to represent ticket name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Goinfinito Template Tree View -->
+    <record id="view_top_goinfinito_template_tree" model="ir.ui.view">
+        <field name="name">top.goinfinito.template.tree</field>
+        <field name="model">top.goinfinito.template</field>
+        <field name="arch" type="xml">
+            <list string="SMS Templates">
+                <field name="name"/>
+                <field name="template_type"/>
+                <field name="company_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Goinfinito Template Search View -->
+    <record id="view_top_goinfinito_template_search" model="ir.ui.view">
+        <field name="name">top.goinfinito.template.search</field>
+        <field name="model">top.goinfinito.template</field>
+        <field name="arch" type="xml">
+            <search string="SMS Templates">
+                <field name="name"/>
+                <field name="template_type"/>
+                <field name="company_id"/>
+                <filter string="Ticket Created" name="ticket_created" domain="[('template_type', '=', 'ticket_created')]"/>
+                <filter string="Ticket Closed" name="ticket_closed" domain="[('template_type', '=', 'ticket_closed')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Goinfinito Template Action -->
+    <record id="action_top_goinfinito_template" model="ir.actions.act_window">
+        <field name="name">SMS Templates</field>
+        <field name="res_model">top.goinfinito.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_ticket_created': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create an SMS Template
+            </p>
+            <p>
+                Define SMS templates for ticket notifications. Use # to represent
+                the ticket name in the message body.
+            </p>
+        </field>
+    </record>
+</odoo>
+

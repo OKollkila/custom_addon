@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_above_amount_invoice"
+            name="Invoices Above Amount"
+            action="action_above_amount_invoice"
+            parent="crm.crm_menu_root"
+            sequence="20"/>
+    </data>
+</odoo>
+

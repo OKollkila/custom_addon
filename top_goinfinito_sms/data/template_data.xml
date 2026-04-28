@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Default Template: Ticket Created -->
+    <record id="template_ticket_created" model="top.goinfinito.template">
+        <field name="name">Ticket Created - Default</field>
+        <field name="template_type">ticket_created</field>
+        <field name="body_ar">عميلنا العزيز، تم تسجيل استفساركم/شكواكم رقم # وسوف يتم التواصل معكم خلال الـ72ساعة القادمة</field>
+        <field name="body_en">Dear customer, your inquiry/complaint number # has been registered, and we will contact you within the next 72 hours</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Default Template: Ticket Closed -->
+    <record id="template_ticket_closed" model="top.goinfinito.template">
+        <field name="name">Ticket Closed - Default</field>
+        <field name="template_type">ticket_closed</field>
+        <field name="body_ar">عميلنا العزيز، نود إفادتكم بأنه تم حل مشكلتكم/استفساركم رقم # ونتشرف دائمًا بخدمتكم</field>
+        <field name="body_en">Dear customer, we would like to inform you that your issue/inquiry number # has been resolved, and we are always honored to serve you</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>
+

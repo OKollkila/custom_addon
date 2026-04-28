@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <!-- Actions (defined first to avoid reference errors) -->
+        <record id="action_booked_appointment" model="ir.actions.act_window">
+            <field name="name">Booked Appointments</field>
+            <field name="res_model">cz.booked_appointment</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_today': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No booked appointments found
+                </p>
+                <p>
+                    Booked appointments will appear here after the scheduled action runs.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
+

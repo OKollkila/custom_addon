@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="menu_ram_cases" name="Ram Cases" sequence="2"/>
+    <menuitem id="menu_ram_cases_cases" name="Cases" parent="menu_ram_cases" action="action_ram_cases" sequence="10"/>
+    <menuitem id="menu_ram_cases_configuration" name="Configuration" parent="menu_ram_cases" action="action_ram_cases" sequence="20"/>
+    <menuitem id="menu_ram_case_source" name="Sources" parent="menu_ram_cases_configuration" action="action_case_source" sequence="2"/>
+</odoo>

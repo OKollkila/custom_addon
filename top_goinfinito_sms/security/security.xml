@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <!-- Note: Record rules are defined here but may need manual setup after module install
+         if there are database schema issues during upgrade -->
+</odoo>

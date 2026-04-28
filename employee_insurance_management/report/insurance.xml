@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <report 
+            id="action_report_employee_insurance"
+            string="Insurance" 
+            model="employee.insurance" 
+            report_type="qweb-pdf"
+            file="employee_insurance_management.employee_insurance_print_report_id" 
+            name="employee_insurance_management.employee_insurance_print_report_id"
+        /> -->
+        <record id="action_report_employee_insurance" model="ir.actions.report">
+            <field name="name">Insurance</field>
+            <field name="model">employee.insurance</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">employee_insurance_management.employee_insurance_print_report_id</field>
+            <field name="report_file">employee_insurance_management.employee_insurance_print_report_id</field>
+            <field name="binding_model_id" ref="model_employee_insurance"/>
+            <field name="binding_type">report</field>
+        </record>
+        <template id="employee_insurance_print_report_id">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <t t-call="web.html_container">
+                            <div class="page">
+                                <div class="row col-12">
+                                     <div class="col-6">
+                                     <h3>
+                                        <strong><span t-field="doc.name"/></strong>
+                                     </h3>
+                                 </div>
+                                 <div class="col-6 text-right">
+                                  <strong>Insurance Start: </strong>
+                                  <span t-field="doc.start_date"/><br/>
+                                  <strong>Insurance End: </strong>
+                                  <span t-field="doc.end_date"/>
+                                </div>
+
+                             </div>
+                         </div><br/>
+                            <table class="table">
+                               <tr style= "border-bottom:hidden;">
+                                   <td><strong>Insurance Number :</strong></td><td><span t-field="doc.policy_no"/></td>
+                                   
+                                   <td><strong>Insurance Holder: </strong></td><td><address t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/></td>
+                               </tr>
+                                 <tr style="border-bottom:hidden;" >                                  
+                                   <td><strong>Employee: </strong></td><td><span t-field="doc.employee_id" /><br/></td>
+                                   
+                                   <td><strong>Insurance Company:</strong> </td><td><address t-field="doc.policy_company_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/></td>
+                                </tr>
+                                <tr style="border-bottom:hidden;">
+                                   <td><strong>Insurance Issued Date: </strong></td><td><span t-field="doc.policy_taken" /><br/></td>
+                                   <td><strong>Contact Person: </strong></td><td><span t-field="doc.contact_person"/></td>
+                                </tr>
+                                <tr style="border-bottom:hidden;">
+                                  <td><strong>Insurance Amount: </strong></td><td> 
+                                  <span
+                                        t-field="doc.amount"
+                                        t-options='{"widget": "monetary", "display_currency": doc.currency_id}'
+                                    /><br/></td>
+
+                                  
+                                  <td><strong>Phone : </strong></td><td><span t-field="doc.phone" /><br/></td>
+                               
+                                </tr>
+                                 <tr style="border-bottom:hidden;">
+                                  <td></td><td></td>
+                                   <td><strong>Email : </strong></td><td><span t-field="doc.email" /><br/></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="table table-bordered">
+                            <tr>
+                                <th>Insurance Property</th>
+                                <th>Value</th>
+                            </tr>
+                            <t t-foreach="doc.property_line_ids" t-as="policy">
+                                <tr>
+                                    <td><span t-field="policy.property_id" /></td>
+                                    <td><span t-field="policy.value" /></td>
+                                </tr>
+                            </t>
+                         </table>
+                        <!-- </div> -->
+                    </t>
+                </t>
+               </t>
+        </template>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

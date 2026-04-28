@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_checkout,access_checkout,model_clinizone_checkout,base.group_user,1,0,0,0
+access_checkout_api,access_checkout_api,model_clinizone_checkout,cz_reviews.group_checkout_api,1,0,1,0
+access_checkout_mgr,access_checkout_mgr,model_clinizone_checkout,base.group_system,1,1,1,1
+access_prime_care_checkout_poll,access_prime_care_checkout_poll,model_cz_prime_care_checkout_poll,base.group_user,1,0,1,0
+access_prime_care_checkout_poll_admin,access_prime_care_checkout_poll_admin,model_cz_prime_care_checkout_poll,base.group_system,1,1,1,0

@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="menu_activity_pivot" name="Agent Activity Report"
+              parent="crm.crm_menu_report" action="action_activity_pivot" sequence="100"
+              groups="ramcrm.group_team_manager"/>
+    />
+</odoo>

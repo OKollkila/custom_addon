@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="view_medical_audit_tree" model="ir.ui.view">
+            <field name="name">medical_audit.tree</field>
+            <field name="model">clinizone.medical_audit</field>
+            <field name="arch" type="xml">
+                <list string="Medical Audit">
+                    <field name="visit_date"/>
+                    <field name="prime_care_branch_id"/>
+                    <field name="patient_name"/>
+                    <field name="mobile_no"/>
+                    <field name="doctor_name"/>
+                    <field name="chief_complaint"/>
+                    <field name="medical_history"/>
+                    <field name="doctor_note"/>
+                    <field name="treatment_plan"/>
+                    <field name="significant_sign"/>
+                    <field name="diagnosis"/>
+                    <field name="mrno"/>
+                    <field name="age"/>
+                    <field name="department"/>
+                    <field name="speciality"/>
+                    <field name="services"/>
+                    <field name="risk_factor" optional="hide"/>
+                    <field name="chief_complaint1" optional="hide"/>
+                    <field name="comorbidities" optional="hide"/>
+                    <field name="diagnosis2" optional="hide"/>
+                    <field name="diagnosis_accuracy" optional="hide"/>
+                    <field name="chief_complaint2" optional="hide"/>
+                    <field name="treatment_plan2" optional="hide"/>
+                    <field name="allergy" optional="hide"/>
+                    <field name="clinical_examination" optional="hide"/>
+                    <field name="history"/>
+                    <field name="services_requested" optional="hide"/>
+                    <field name="services_done" optional="hide"/>
+                    <field name="services_required" optional="hide"/>
+                    <field name="recommendation_for_clinical_variance" optional="hide"/>
+                    <field name="recommendation_for_leakage" optional="hide"/>
+                    <field name="recommendation_for_comprehensiveness" optional="hide"/>
+                    <field name="recommendation_for_ttp" optional="hide"/>
+                    <field name="recommendation_for_wellness" optional="hide"/>
+                    <field name="next_visit_date" optional="hide"/>
+                    <field name="long_term_plan" optional="hide"/>
+                    <field name="lttp_date" optional="hide"/>
+                    <field name="medical_audit_recommendations" optional="hide"/>
+                    <field name="lead_id" optional="hide"/>
+                    <field name="lttp_lead_id" optional="hide"/>
+                    <field name="create_date"/>
+                    <field name="create_uid"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

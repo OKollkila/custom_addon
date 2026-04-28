@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="helpdesk.helpdesk_ticket_action_main_my" model="ir.actions.act_window">
+        <field name="domain">['|', ('team_id.message_partner_ids.user_ids', 'in', [uid]), ('user_id', '=', uid)]</field>
+    </record>
+
+    <record id="helpdesk.helpdesk_ticket_action_main_tree" model="ir.actions.act_window">
+        <field name="domain">['|', ('team_id.message_partner_ids.user_ids', 'in', [uid]), ('user_id', '=', uid)]</field>
+    </record>
+
+     <record id="action_all_tickets_admin_only" model="ir.actions.act_window">
+        <field name="name">All Tickets (Admins Only)</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('admin_status', '=', 'Administrator')]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="menu_helpdesk_admin_tickets"
+        name="All Tickets (Admins Only)"
+        parent="helpdesk.menu_helpdesk_root"
+        sequence="30"
+        action="action_all_tickets_admin_only"
+        groups="helpdesk.group_helpdesk_manager,top_access_helpdask.group_helpdesk_moderator"/>
+
+
+
+
+</odoo>

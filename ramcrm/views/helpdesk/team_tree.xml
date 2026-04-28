@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="helpdesk_team_view_tree" model="ir.ui.view">
+            <field name="name">helpdesk.team.tree.inherited</field>
+            <field name="model">helpdesk.team</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_team_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="escalate_team_id"/>
+                    <field name="escalate_after_minutes"/>
+                    <field name="escalate_after_display"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,121 @@
+<odoo>
+    <data>
+        <record id="view_booked_appointment_list" model="ir.ui.view">
+            <field name="name">Booked Appointment List</field>
+            <field name="model">cz.booked_appointment</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Booked Appointments">
+                    <field name="date"/>
+                    <field name="appointment_date"/>
+                    <field name="patient_name"/>
+                    <field name="mrno"/>
+                    <field name="mobile_no"/>
+                    <field name="doctor_name"/>
+                    <field name="department"/>
+                    <field name="branch"/>
+                    <field name="appointment_status"/>
+                    <field name="confirmation_status"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_booked_appointment_form" model="ir.ui.view">
+            <field name="name">Booked Appointment Form</field>
+            <field name="model">cz.booked_appointment</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Booked Appointment">
+                    <header>
+                        <button name="action_create_leads" string="Create Lead" type="object" class="btn-primary" invisible="lead_id != False"/>
+                        <field name="appointment_status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Patient Information">
+                                <field name="patient_name"/>
+                                <field name="mrno"/>
+                                <field name="patient_id"/>
+                                <field name="mobile_no"/>
+                            </group>
+                            <group string="Appointment">
+                                <field name="appointment_id"/>
+                                <field name="appointment_date"/>
+                                <field name="appointment_time"/>
+                                <field name="booking_date"/>
+                                <field name="confirmation_status"/>
+                                <field name="date"/>
+                                <field name="lead_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Doctor &amp; Service">
+                                <field name="doctor_name"/>
+                                <field name="doctor_id"/>
+                                <field name="department"/>
+                                <field name="department_id"/>
+                                <field name="service_name"/>
+                                <field name="speciality"/>
+                            </group>
+                            <group string="Location">
+                                <field name="branch"/>
+                                <field name="branch_code"/>
+                                <field name="branch_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Other Details">
+                                <field name="visit_type"/>
+                                <field name="priority"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Reason" name="reason">
+                                <field name="reason" nolabel="1"/>
+                            </page>
+                            <page string="Notes" name="notes" invisible="notes == False">
+                                <field name="notes" nolabel="1"/>
+                            </page>
+                            <page string="Full Description" name="description">
+                                <field name="description" nolabel="1" readonly="1" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_booked_appointment_search" model="ir.ui.view">
+            <field name="name">Booked Appointment Search</field>
+            <field name="model">cz.booked_appointment</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Booked Appointments">
+                    <field name="patient_name"/>
+                    <field name="mrno"/>
+                    <field name="mobile_no"/>
+                    <field name="doctor_name"/>
+                    <field name="branch"/>
+                    <field name="department"/>
+                    <field name="appointment_status"/>
+                    <filter string="Today" name="today" 
+                            domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="This Week" name="week" 
+                            domain="[('date', '&gt;=', (context_today()-datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <filter string="No Lead" name="no_lead" domain="[('lead_id', '=', False)]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('confirmation_status', '=', 'Confirmed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                        <filter string="Appointment Date" name="group_appointment_date" context="{'group_by': 'appointment_date'}"/>
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'branch'}"/>
+                        <filter string="Department" name="group_department" context="{'group_by': 'department'}"/>
+                        <filter string="Doctor" name="group_doctor" context="{'group_by': 'doctor_name'}"/>
+                        <filter string="Status" name="group_status" context="{'group_by': 'appointment_status'}"/>
+                        <filter string="Confirmation" name="group_confirmation" context="{'group_by': 'confirmation_status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>
+

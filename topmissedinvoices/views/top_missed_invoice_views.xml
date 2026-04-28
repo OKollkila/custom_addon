@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record id="view_top_missed_invoice_tree" model="ir.ui.view">
+            <field name="name">top.missed.invoice.tree</field>
+            <field name="model">top.missed.invoice</field>
+            <field name="arch" type="xml">
+                <list string="Top Missed Invoices" default_order="invoice_date desc">
+                    <field name="invoice_id"/>
+                    <field name="patient_name"/>
+                    <field name="mobile_no"/>
+                    <field name="consultant_name"/>
+                    <field name="branch"/>
+                    <field name="department"/>
+                    <field name="total"/>
+                    <field name="invoice_date"/>
+                    <field name="lead_created"/>
+                    <field name="crm_lead_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_top_missed_invoice_form" model="ir.ui.view">
+            <field name="name">top.missed.invoice.form</field>
+            <field name="model">top.missed.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Top Missed Invoice">
+                    <header>
+                        <button name="create_crm_lead" type="object" string="Create CRM Lead" 
+                                class="btn-primary" invisible="lead_created == True"/>
+                        <button name="test_cron_manually" type="object" string="Test Cron Job" 
+                                class="btn-secondary"/>
+                        <field name="lead_created" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="patient_name" readonly="1"/>
+                            </h1>
+                            <h2>
+                                <field name="invoice_id" readonly="1"/>
+                            </h2>
+                        </div>
+                        
+                        <group>
+                            <group name="patient_info" string="Patient Information">
+                                <field name="patient_id"/>
+                                <field name="mrno"/>
+                                <field name="mobile_no"/>
+                                <field name="nationality"/>
+                                <field name="nationality_id"/>
+                            </group>
+                            <group name="crm_info" string="CRM Information">
+                                <field name="crm_lead_id" readonly="1"/>
+                                <field name="lead_created" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <group name="consultant_info" string="Consultant Information">
+                                <field name="consultant_name"/>
+                                <field name="consultant_id"/>
+                            </group>
+                            <group name="invoice_info" string="Invoice Information">
+                                <field name="invoice_status"/>
+                                <field name="approval_status"/>
+                                <field name="invoice_date"/>
+                                <field name="payment_mode"/>
+                                <field name="payment_type"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <group name="insurance_info" string="Insurance Information">
+                                <field name="insurance_company"/>
+                                <field name="insurance_tpa"/>
+                            </group>
+                            <group name="financial_info" string="Financial Information">
+                                <field name="total"/>
+                                <field name="balance"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Financial Details" name="financial_details">
+                                <group>
+                                    <group name="financial_summary" string="Financial Summary">
+                                        <field name="total"/>
+                                        <field name="balance"/>
+                                    </group>
+                                    <group name="payments" string="Payments">
+                                        <field name="payment_mode"/>
+                                        <field name="payment_type"/>
+                                    </group>
+                                </group>
+                            </page>
+                            
+                            <page string="Service Items" name="service_items">
+                                <field name="service_items" readonly="1" nolabel="1"/>
+                            </page>
+                            
+                            <page string="Description" name="description">
+                                <field name="description" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_top_missed_invoice_search" model="ir.ui.view">
+            <field name="name">top.missed.invoice.search</field>
+            <field name="model">top.missed.invoice</field>
+            <field name="arch" type="xml">
+                <search string="Search Top Missed Invoices">
+                    <field name="invoice_id"/>
+                    <field name="patient_name"/>
+                    <field name="patient_id"/>
+                    <field name="consultant_name"/>
+                    <field name="branch"/>
+                    <field name="department"/>
+                    <field name="mobile_no"/>
+                    
+                    <filter string="Lead Created" name="lead_created" domain="[('lead_created', '=', True)]"/>
+                    <filter string="No Lead Created" name="no_lead" domain="[('lead_created', '=', False)]"/>
+                    
+                    <separator/>
+                    <filter string="Today" name="today" domain="[('invoice_date', '>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                    <filter string="This Week" name="this_week" domain="[('invoice_date', '>=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d'))]"/>
+                    <filter string="This Month" name="this_month" domain="[('invoice_date', '>=', (context_today().replace(day=1)).strftime('%Y-%m-%d'))]"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Branch" name="group_branch" context="{'group_by': 'branch'}"/>
+                        <filter string="Department" name="group_department" context="{'group_by': 'department'}"/>
+                        <filter string="Consultant" name="group_consultant" context="{'group_by': 'consultant_name'}"/>
+                        <filter string="Lead Created" name="group_lead_created" context="{'group_by': 'lead_created'}"/>
+                        <filter string="Invoice Date" name="group_invoice_date" context="{'group_by': 'invoice_date:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_top_missed_invoice" model="ir.actions.act_window">
+            <field name="name">Top Missed Invoices</field>
+            <field name="res_model">top.missed.invoice</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_top_missed_invoice_search"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No rejected services found!
+                </p>
+                <p>
+                    This view shows rejected services fetched from the Prime Care API.
+                    You can create CRM leads from these records for follow-up.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_top_missed_invoices_root" 
+                  name="Top Missed Invoices" 
+                  sequence="10"/>
+        
+        <menuitem id="menu_top_missed_invoices" 
+                  name="Rejected Services" 
+                  parent="menu_top_missed_invoices_root" 
+                  action="action_top_missed_invoice" 
+                  sequence="10"/>
+
+        <!-- Server Action for Manual Processing -->
+        <record id="action_process_rejected_services" model="ir.actions.server">
+            <field name="name">Process Rejected Services</field>
+            <field name="model_id" ref="model_top_missed_invoice"/>
+            <field name="state">code</field>
+            <field name="code">
+# Process rejected services for today
+result = env['top.missed.invoice'].process_rejected_services()
+if result:
+    log("Processed %s records and created %s leads" % (result['records_created'], result['leads_created']))
+else:
+    log("No records processed")
+            </field>
+        </record>
+
+        <!-- Add server action to the action menu -->
+        <record id="action_top_missed_invoice_with_actions" model="ir.actions.act_window">
+            <field name="name">Top Missed Invoices</field>
+            <field name="res_model">top.missed.invoice</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_top_missed_invoice_search"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No rejected services found!
+                </p>
+                <p>
+                    This view shows rejected services fetched from the Prime Care API.
+                    You can create CRM leads from these records for follow-up.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scheduled action to process missed invoices for all branches -->
+    <record id="ir_cron_process_all_branches" model="ir.cron">
+        <field name="name">Process All Branches - Missed Invoices</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_fetch_missed_invoices()</field>
+        <field name="active">True</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now().replace(hour=3,minute=30,second=0,microsecond=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="priority">5</field>
+    </record>
+
+    <!-- Alternative scheduled action for manual testing (runs every hour) -->
+    <record id="ir_cron_test_branch_processing" model="ir.cron">
+        <field name="name">Test Branch Processing - Hourly</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="state">code</field>
+        <field name="code">model.visit_branch()</field>
+        <field name="active">False</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="nextcall" eval="(DateTime.now().replace(minute=0,second=0,microsecond=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="priority">10</field>
+    </record>
+</odoo>

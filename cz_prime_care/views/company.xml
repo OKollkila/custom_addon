@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="form_company" model="ir.ui.view">
+            <field name="name">Prime Care</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page string="Prime Care" name="prime_care">
+                        <group>
+                            <field name="prime_care_login_url"/>
+                            <field name="prime_care_checkouts_url"/>
+                            <field name="prime_care_username"/>
+                            <field name="prime_care_password"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
