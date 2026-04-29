@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="clinizone_dash_v2.MainTemplate" owl="1">
+        <div class="o_action_manager bg-light h-100 overflow-auto">
+            
+            <t t-if="state.selectedDept">
+                <div class="container-fluid py-4 animate__animated animate__fadeIn bg-white">
+                    <div class="d-flex align-items-center mb-5 border-bottom pb-3">
+                        <button class="btn btn-dark rounded-pill px-4 shadow-sm" t-on-click="backToMain">
+                            <i class="fa fa-chevron-left me-2"/> Back to Main
+                        </button>
+                        <h1 class="ms-4 fw-bolder text-dark mb-0"><t t-esc="state.selectedDept.display_name"/> Analysis</h1>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-4 p-4" style="background: #fcfcfc;">
+                                <h5 class="fw-bold mb-4 text-primary text-uppercase" style="letter-spacing:1px;">Department Overall Summary</h5>
+                                <div id="dept_main_total_chart" style="min-height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="fw-bold text-secondary mb-4 px-2">Breakdown by Lead Source</h4>
+                    
+                    <div class="row g-4">
+                        <t t-foreach="state.selectedDept.sources" t-as="source" t-key="source.name">
+                            <div class="col-12 col-xl-6">
+                                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 border">
+                                    <div class="card-header bg-light border-0 py-3 px-4">
+                                        <h5 class="mb-0 fw-bold text-dark"><i class="fa fa-link me-2 text-primary"/> <t t-esc="source.name"/></h5>
+                                    </div>
+                                    <div class="card-body p-3">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-8 border-end">
+                                                <div t-att-id="getSafeId('source_chart', source.name)" style="min-height: 250px;"></div>
+                                            </div>
+                                            <div class="col-md-4 ps-4">
+                                                <div class="d-flex flex-column gap-2">
+                                                    <div class="p-2 border-bottom d-flex justify-content-between">
+                                                        <span class="text-muted small">Total:</span>
+                                                        <b class="text-primary"><t t-esc="(source.untouched || 0) + (source.unreached || 0) + (source.reached || 0)"/></b>
+                                                    </div>
+                                                    <div class="p-2 border-bottom d-flex justify-content-between">
+                                                        <span class="text-muted small">Untouched:</span>
+                                                        <b><t t-esc="source.untouched || 0"/></b>
+                                                    </div>
+                                                    <div class="p-2 border-bottom d-flex justify-content-between">
+                                                        <span class="text-muted small">Unreached:</span>
+                                                        <b><t t-esc="source.unreached || 0"/></b>
+                                                    </div>
+                                                    <div class="p-2 border-bottom d-flex justify-content-between">
+                                                        <span class="text-muted small">Reached:</span>
+                                                        <b><t t-esc="source.reached || 0"/></b>
+                                                    </div>
+                                                    <div class="p-2 border-bottom d-flex justify-content-between bg-light-success rounded">
+                                                        <span class="text-success small fw-bold">Booked:</span>
+                                                        <b class="text-success"><t t-esc="source.booked || 0"/></b>
+                                                    </div>
+                                                    <div class="p-2 bg-danger text-white rounded shadow-sm text-center">
+                                                        <div class="small fw-bold opacity-75">CR%</div>
+                                                        <div class="fs-4 fw-bold"><t t-esc="source.cr_display"/>%</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+
+            <t t-else="">
+                <div class="d-flex align-items-center justify-content-between p-3 bg-white border-bottom shadow-sm sticky-top">
+                    <h4 class="mb-0 fw-bold text-primary">
+                        <i class="fa fa-pie-chart me-2"/>CliniZone Dashboard
+                    </h4>
+                    <button class="btn btn-sm btn-outline-primary rounded-pill px-3 shadow-sm" t-on-click="() => state.showFilters = !state.showFilters">
+                        <i t-attf-class="fa {{state.showFilters ? 'fa-chevron-up' : 'fa-sliders'}} me-1"/>
+                        <t t-if="state.showFilters">Hide Filters</t>
+                        <t t-else="">Show Filters</t>
+                    </button>
+                </div>
+
+                <t t-if="state.showFilters">
+                    <div class="o_control_panel p-3 border-bottom bg-view shadow-sm animate__animated animate__fadeInDown" style="animation-duration: 0.3s;">
+                        <div class="d-flex flex-wrap align-items-end gap-3">
+                            
+                            <div class="dropdown custom-filter-dropdown" style="min-width: 180px;">
+                                <label class="fw-bold mb-1 text-secondary small d-block"><i class="fa fa-map-marker me-1"/>Cities</label>
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start bg-white shadow-sm" type="button" data-bs-toggle="dropdown">
+                                    <t t-if="!state.selected.city_ids.length">All Cities</t>
+                                    <t t-else=""><t t-esc="state.selected.city_ids.length"/> Selected</t>
+                                </button>
+                                <ul class="dropdown-menu shadow p-2 w-100" style="max-height: 300px; overflow-y: auto;">
+                                    <t t-foreach="state.filterOptions.cities" t-as="ct" t-key="ct.id">
+                                        <li class="px-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" t-att-id="'city_'+ct.id" t-att-checked="state.selected.city_ids.includes(ct.id)" t-on-change="(ev) => this.toggleItem('city_ids', ct.id, ev)"/>
+                                                <label class="form-check-label" t-att-for="'city_'+ct.id"><t t-esc="ct.name"/></label>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown custom-filter-dropdown" style="min-width: 180px;">
+                                <label class="fw-bold mb-1 text-secondary small d-block"><i class="fa fa-building-o me-1"/>Companies</label>
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start bg-white shadow-sm" type="button" data-bs-toggle="dropdown">
+                                    <t t-if="!state.selected.company_ids.length">All Companies</t>
+                                    <t t-else=""><t t-esc="state.selected.company_ids.length"/> Selected</t>
+                                </button>
+                                <ul class="dropdown-menu shadow p-2 w-100" style="max-height: 300px; overflow-y: auto;">
+                                    <t t-foreach="state.filterOptions.companies" t-as="c" t-key="c.id">
+                                        <li class="px-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" t-att-id="'comp_'+c.id" t-att-checked="state.selected.company_ids.includes(c.id)" t-on-change="(ev) => this.toggleItem('company_ids', c.id, ev)"/>
+                                                <label class="form-check-label" t-att-for="'comp_'+c.id"><t t-esc="c.name"/></label>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown custom-filter-dropdown" style="min-width: 180px;">
+                                <label class="fw-bold mb-1 text-secondary small d-block"><i class="fa fa-sitemap me-1"/>Branches</label>
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle w-100 text-start bg-white shadow-sm" type="button" data-bs-toggle="dropdown">
+                                    <t t-if="!state.selected.branch_ids.length">All Branches</t>
+                                    <t t-else=""><t t-esc="state.selected.branch_ids.length"/> Selected</t>
+                                </button>
+                                <ul class="dropdown-menu shadow p-2 w-100" style="max-height: 300px; overflow-y: auto;">
+                                    <t t-foreach="state.filterOptions.branches" t-as="b" t-key="b.id">
+                                        <li class="px-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" t-att-id="'branch_'+b.id" t-att-checked="state.selected.branch_ids.includes(b.id)" t-on-change="(ev) => this.toggleItem('branch_ids', b.id, ev)"/>
+                                                <label class="form-check-label" t-att-for="'branch_'+b.id"><t t-esc="b.name"/></label>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </div>
+
+                            <div style="min-width: 150px;">
+                                <label class="fw-bold mb-1 text-secondary small">Period</label>
+                                <select class="form-select form-select-sm shadow-sm" t-on-change="onDatePresetChange">
+                                    <option value="this_month">This Month</option>
+                                    <option value="last_month">Last Month</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+                            </div>
+
+                            <t t-if="state.showCustomDate">
+                                <div class="d-flex gap-1">
+                                    <input type="date" class="form-control form-control-sm" t-att-value="state.selected.date_from" t-on-change="(ev) => state.selected.date_from = ev.target.value"/>
+                                    <input type="date" class="form-control form-control-sm" t-att-value="state.selected.date_to" t-on-change="(ev) => state.selected.date_to = ev.target.value"/>
+                                </div>
+                            </t>
+
+                            <button class="btn btn-primary btn-sm px-4 fw-bold shadow-sm" t-on-click="onApplyFilters" t-att-disabled="state.loading">
+                                <t t-if="state.loading"><i class="fa fa-spinner fa-spin me-1"/> Loading...</t>
+                                <t t-else=""><i class="fa fa-search me-1"/> Filter</t>
+                            </button>
+                        </div>
+                    </div>
+                </t>
+
+                <div class="o_content p-4">
+                    <t t-if="state.hasData">
+                        <div class="row g-3">
+                            <t t-foreach="state.stats" t-as="dept" t-key="dept.unique_id">
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow" style="border-radius: 20px; transition: transform 0.2s;">
+                                        <div class="card-header bg-white border-0 pt-4 pb-0 text-center position-relative">
+                                            <span t-attf-class="badge position-absolute top-0 end-0 m-3 px-2 py-1 {{dept.dashboard_type == 'SALES' ? 'bg-info text-white' : 'bg-warning text-dark'}}" style="font-size: 0.65rem; border-radius: 8px;">
+                                                <t t-esc="dept.dashboard_type"/>
+                                            </span>
+                                            
+                                            <h3 class="fw-bolder text-dark mb-1"><t t-esc="dept.display_name"/></h3>
+                                            <div class="text-muted fw-bold d-flex justify-content-center align-items-center gap-2" style="font-size: 1.1rem;">
+                                                TOTAL LEADS: <span class="text-primary"><t t-esc="dept.total_count"/></span>
+                                                <button class="btn btn-sm btn-light border-primary text-primary rounded-pill px-3 py-0" style="font-size: 0.8rem;" t-on-click="() => this.openDetails(dept)">
+                                                    Details <i class="fa fa-chevron-right ms-1"/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                       <div class="card-body px-2">
+                                            <div t-att-id="getSafeId('dept_chart', dept.unique_id)" 
+                                                style="width: 100%; min-height: 320px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                    
+                    <t t-else="">
+                        <div class="text-center mt-5 p-5 bg-white shadow rounded border border-dashed" style="border-radius: 20px;">
+                            <i class="fa fa-line-chart fa-4x text-muted mb-3 opacity-25"/>
+                            <h2 class="text-muted fw-bold">CliniZone Intelligence Dash</h2>
+                            <p class="text-secondary fs-5">Select filters to view department performance summary.</p>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>
